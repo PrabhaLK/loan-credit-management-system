@@ -24,7 +24,7 @@
 
                     <!-- Hospitalization dropdown menu -->
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hospitalization <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hospitalization<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Government Hospitalization</a></li>
                             <li><a href="#">Government Ayurvedic Hospitalization</a></li>
