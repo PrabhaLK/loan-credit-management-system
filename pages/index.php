@@ -61,7 +61,7 @@ $conn->close();
                             <ul class="dropdown-menu">
                                 <li><a href="./government-hos.php">Government Hospitalization</a></li>
                                 <li><a href="./gov-aryuvedic-hos.php">Government Ayurvedic Hospitalization</a></li>
-                                <li><a href="#">Private Hospitalization</a></li>
+                                <li><a href="./privet-host.php">Private Hospitalization</a></li>
                                 <li><a href="#">Private Ayurvedic Hospitalization</a></li>
                                 <li><a href="#">Heart Surgery - Dependent</a></li>
                             </ul>
