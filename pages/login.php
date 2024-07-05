@@ -4,6 +4,10 @@
   <title>Login</title>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Google Fonts  -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <!--  -->
   <link rel="icon" type="image/png" href="../asset/images/icons/favicon.ico" />
   <link rel="stylesheet" type="text/css" href="../asset/vendor/bootstrap/css/bootstrap.min.css" />
   <link rel="stylesheet" type="text/css" href="../asset/fonts/font-awesome-4.7.0/css/font-awesome.min.css" />
@@ -15,13 +19,19 @@
   <link rel="stylesheet" type="text/css" href="../asset/vendor/daterangepicker/daterangepicker.css" />
   <link rel="stylesheet" type="text/css" href="../asset/css/login/util.css" />
   <link rel="stylesheet" type="text/css" href="../asset/css/login/main.css" />
+  <style>
+    .txt-login{
+      font-family: poppins;
+      font-weight:bold;
+    }
+  </style>
 </head>
 <body>
   <div class="limiter">
     <div class="container-login100">
       <div class="wrap-login100">
-        <form class="login100-form validate-form" action="index.php" method="post">
-          <span class="login100-form-title p-b-26"> Login </span>
+        <form class="login100-form validate-form" method="POST" action="./index.php">
+          <span class="login100-form-title p-b-26 txt-login"> Login </span>
           <span class="login100-form-title p-b-48">
             <i class="zmdi zmdi-font"></i>
           </span>
@@ -42,7 +52,7 @@
           <div class="container-login100-form-btn">
             <div class="wrap-login100-form-btn">
               <div class="login100-form-bgbtn"></div>
-              <button type="submit" class="login100-form-btn">Login</button>
+              <button type="submit" class="login100-form-btn txt-login">Login</button>
             </div>
           </div>
         </form>
