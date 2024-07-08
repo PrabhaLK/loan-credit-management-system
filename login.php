@@ -30,7 +30,7 @@
   <div class="limiter">
     <div class="container-login100">
       <div class="wrap-login100">
-        <form class="login100-form validate-form" method="POST" action="./pages/index.php">
+        <form class="login100-form validate-form" method="POST" action="./functions/login_funct.php">
           <span class="login100-form-title p-b-26 txt-login"> Login </span>
           <span class="login100-form-title p-b-48">
             <i class="zmdi zmdi-font"></i>

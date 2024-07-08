@@ -1,7 +1,7 @@
 <?php
 include('../config/db.php');
 
-if(isset($_POST['submit'])){
+if (isset($_POST['submit'])) {
     $date = $_POST['numberOfDates'];
     $Rcharges = $_POST['charges'];
     $SMTratment = $_POST['treatment'];
@@ -20,7 +20,7 @@ if(isset($_POST['submit'])){
     $result = mysqli_query($conn, $query);
 
     // Check if query executed successfully
-    if($result){
+    if ($result) {
         echo "<script>alert('Data Inserted Successfully');</script>";
     } else {
         echo "<script>alert('There is an error');</script>";
@@ -34,6 +34,7 @@ if(isset($_POST['submit'])){
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,14 +47,18 @@ if(isset($_POST['submit'])){
         .Header {
             color: black;
             text-align: center;
-            padding: 15px;
+            padding: 30px;
             text-decoration: none;
             display: inline-block;
             font-size: 36px;
         }
 
-        .NumberOfDates, .userIncident, .userMedicalTest {
+        .NumberOfDates,
+        .userIncident,
+        .userMedicalTest {
             padding: 15px;
+
+
         }
 
         .index-table {
@@ -64,6 +69,16 @@ if(isset($_POST['submit'])){
         .total-price {
             padding-left: 60px;
             padding-right: 60px;
+        }
+
+        .total {
+            padding-left: 60px;
+            padding-right: 60px;
+            padding: 25px;
+        }
+
+        body {
+            background-image: url('../images/back.jpg');
         }
     </style>
 
@@ -83,8 +98,8 @@ if(isset($_POST['submit'])){
             document.getElementById('charges').value = roomCharges;
         }
 
-        
-                function incident(value) {
+
+        function incident(value) {
             // Validate surgical & medical treatment charges not exceeding 80000
             if (value > 80000) {
                 alert('Surgical & Medical Treatment charges cannot exceed Rs. 80,000. Please enter a valid amount.');
@@ -95,15 +110,15 @@ if(isset($_POST['submit'])){
         }
 
 
-       
 
-        function test(value){
+
+        function test(value) {
             // validation Medical Test charges not exceeding  40000
 
-            if (value >40000){
+            if (value > 40000) {
                 alert('Medical Test charges cannot exceed Rs. 40,000. Please enter a valid amount.');
                 document.getElementById('medicalT').value = 40000; // Set the value to 40000
-            }else{
+            } else {
                 document.getElementById('medicalT').value = value;
             }
         }
@@ -120,40 +135,41 @@ if(isset($_POST['submit'])){
         }
     </script>
 </head>
+
 <body>
     <div class="Header">
-        <h1>Government Hospitalization</h1>
+        Government Hospitalization
     </div>
     <form method="POST">
-    <!-- User input dates-->
-     
-    <div class="NumberOfDates">
-        <label for="inputEmail3" class="col-sm-2 control-label">Number of Dates</label>
-        <input type="Number" id="numberOfDates" name ="numberOfDates" onkeyup="room(this.value)" class="form-control" placeholder="Enter Dates">
-    </div>
+        <!-- User input dates-->
 
-    <!-- User input Incident Charges-->
-    
-    <div class="userIncident">
-    <label for="inputEmail3" class="col-sm-2 control-label">Surgical & Medical Treatment</label>
-    <input type="Number" class="form-control" onkeyup="incident(this.value)" placeholder="Enter Incident Charges">
-</div>
+        <div class="NumberOfDates">
+            <label for="inputEmail3" class="col-sm-2 control-label">Number of Dates</label>
+            <input type="Number" id="numberOfDates" style="width: 250px;" name="numberOfDates" onkeyup="room(this.value)" class="form-control" placeholder="Enter Dates">
+        </div>
+
+        <!-- User input Incident Charges-->
+
+        <div class="userIncident">
+            <label for="inputEmail3" class="col-sm-2 control-label">Surgical & Medical Treatment</label>
+            <input type="Number" class="form-control" style="width: 250px;" onkeyup="incident(this.value)" placeholder="Enter Incident Charges">
+        </div>
 
 
-    <!-- User input Medical Test Charges-->
-    <div class="userMedicalTest">
-        <label for="inputEmail3" class="col-sm-2 control-label">Medical Test</label>
-        <input type="Number" class="form-control" onkeyup="test(this.value)" placeholder="Enter Test Charges">
-    </div>
+        <!-- User input Medical Test Charges-->
+        <div class="userMedicalTest">
+            <label for="inputEmail3" class="col-sm-2 control-label">Medical Test</label>
+            <input type="Number" class="form-control" style="width: 250px;" onkeyup="test(this.value)" placeholder="Enter Test Charges">
+        </div>
 
-    <article class="index-table">
-        
-        <table class="table table-bordered">
-            <tr>
-                <td>NIC</td>
-                <td><input type="text" id="nic"></td>
-            </tr>
-            
+        <article class="index-table">
+
+            <table class="table table-bordered">
+                <tr>
+                    <td>NIC</td>
+                    <td><input type="text" id="nic"></td>
+                </tr>
+
                 <tr>
                     <td>Room Charges</td>
                     <td>Rs <input type="text" id="charges" name="charges"></td>
@@ -166,21 +182,26 @@ if(isset($_POST['submit'])){
                     <td>Medical Test</td>
                     <td>Rs <input type="text" id="medicalT" name="medicalT"></td>
                 </tr>
-                
-            
-        </table>
-        
-    </article>
 
-    <div class="total">
-        <button onclick="cal()" class="btn btn-primary" type="button">Calculate</button>
-        <button type="Submit" name="submit" class="btn btn-primary">Insert </button>
-        <label for="inputEmail3" class="col-sm-2 control-label">Total</label>
-        <input type="text" class="total-price" id="total">
 
-       
-    </div>
+            </table>
+
+        </article>
+
+        <div class="total">
+            <button onclick="cal()" class="btn btn-primary" type="button">Calculate</button>
+            <button type="Submit" name="submit" class="btn btn-success">Insert </button>
+            <div>
+                <label for="inputEmail3" class="total">Total</label>
+                <input type="text" class="total-price" id="total">
+            </div>
+
+
+
+
+        </div>
     </form>
-    
+
 </body>
+
 </html>
