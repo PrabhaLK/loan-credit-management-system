@@ -1,0 +1,54 @@
+
+
+Category name = "Hospitalization" Where The category  = 1 
+Category name = "Child Birth" Where The category  = 2
+Category name = "Heart" Where the category = 3
+Category name = "Cancer" Where the category = 4
+Category name = "Kidney" Where the category = 5
+Category name = "Brain" Where the category = 6
+Category name = "Knee" Where the category = 7
+Category name = "Hip" Where the category = 8
+Category name = "Hearing Aid" Where the category = 9
+Category name = "Spectacles" Where the category = 10
+Category name = "Death" Where the category = 11
+Category name = "Accident" Where the category = 12
+
+
+These are The category Names. in My DB. 
+ALTER TABLE `claim_info`
+ADD COLUMN `SubCategory 1 Name` varchar(255) DEFAULT NULL AFTER `SubCategory 1`;
+UPDATE `claim_info`
+SET `SubCategory 1 Name` = CASE
+    WHEN `Category` = 1 AND 'SubCategory 1' =  1 THEN 'Government Hospitalization'
+
+    ELSE NULL
+END;
+UPDATE `claim_info`
+SET `SubCategory 1 Name` = 
+    CASE 
+        WHEN `Category` = 1 AND `SubCategory 1` = 1 THEN 'Government Hospitalization'
+        WHEN `Category` = 1 AND `SubCategory 1` = 2 THEN 'Government Ayuvedic Hospitalization'
+        WHEN `Category` = 1 AND `SubCategory 1` = 3 THEN 'Private Hospitalization'
+        WHEN `Category` = 1 AND `SubCategory 1` = 4 THEN 'Private Ayuvedic Hospitalization'
+        WHEN `Category` = 1 AND `SubCategory 1` = 5 THEN 'Heart Surgery - Depenadant'
+        WHEN `Category` = 2 AND `SubCategory 1` = 1 THEN 'Government Hospital'
+        WHEN `Category` = 2 AND `SubCategory 1` = 2 THEN 'Private Hospital - Normal'
+        WHEN `Category` = 2 AND `SubCategory 1` = 3 THEN 'Private Hospital - Ceasar'
+        WHEN `Category` = 3 AND `SubCategory 1` = 1 THEN 'Heart Surgery'
+        WHEN `Category` = 3 AND `SubCategory 1` = 2 THEN 'Heart Surgery - Guarantee'
+        WHEN `Category` = 3 AND `SubCategory 1` = 3 THEN 'RF Ablation'
+        WHEN `Category` = 4 AND `SubCategory 1` = 0 THEN 'Cancer'
+        WHEN `Category` = 5 AND `SubCategory 1` = 1 THEN 'Kidney Surgery'
+        WHEN `Category` = 5 AND `SubCategory 1` = 2 THEN 'Kidney Surgery - Guarantee'
+        WHEN `Category` = 6 AND `SubCategory 1` = 1 THEN 'Brain Surgery'
+        WHEN `Category` = 6 AND `SubCategory 1` = 2 THEN 'Brain Surgery - Guarantee'
+        WHEN `Category` = 7 AND `SubCategory 1` = 0 THEN 'Knee'
+        WHEN `Category` = 8 AND `SubCategory 1` = 0 THEN 'Hip'
+        WHEN `Category` = 9 AND `SubCategory 1` = 0 THEN 'Hearing Aid'
+        WHEN `Category` = 10 AND `SubCategory 1` = 0 THEN 'Spectacles'
+        WHEN `Category` = 11 AND `SubCategory 1` = 0 THEN 'Natural Death'
+        WHEN `Category` = 11 AND `SubCategory 1` = 0 THEN 'Accidental Death'
+        WHEN `Category` = 12 AND `SubCategory 1` = 0 THEN 'Accident'
+        
+        ELSE NULL
+    END; 
