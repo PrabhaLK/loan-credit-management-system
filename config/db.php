@@ -2,12 +2,11 @@
 $servername = 'localhost';
 $username = 'root';
 $password = '';
-$dbName = 'insurance_As';
+$dbName = 'insurance_as';
 
 $conn = mysqli_connect($servername, $username, $password, $dbName);
 
-if (mysqli_connect_errno()) {
-    echo "failed to connect to the database";
-    exit();
+if ($conn->connect_error) {
+    die("Connection failed ".$dbConnector->connect_error);
 }
 // echo "Connection Success";

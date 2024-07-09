@@ -2,8 +2,8 @@
 [ FONT ]*/
 
 @font-face {
-  font-family: Poppins-Regular;
-  src: url("../fonts/poppins/Poppins-Regular.ttf");
+  font-family: Calibri;
+  src: url("../fonts/poppins/Calibri.ttf");
 }
 
 @font-face {
@@ -22,7 +22,7 @@
 }
 
 /*//////////////////////////////////////////////////////////////////
-[ RESTYLE TAG ]*/
+  [ RESTYLE TAG ]*/
 
 * {
   margin: 0px;
@@ -33,12 +33,12 @@
 body,
 html {
   height: 100%;
-  font-family: Poppins-Regular, sans-serif;
+  font-family: Calibri, sans-serif;
 }
 
 /*---------------------------------------------*/
 a {
-  font-family: Poppins-Regular;
+  font-family: Calibri;
   font-size: 14px;
   line-height: 1.7;
   color: #666666;
@@ -73,7 +73,7 @@ h6 {
 }
 
 p {
-  font-family: Poppins-Regular;
+  font-family: Calibri;
   font-size: 14px;
   line-height: 1.7;
   color: #666666;
@@ -170,23 +170,23 @@ iframe {
 }
 
 /*//////////////////////////////////////////////////////////////////
-[ Utility ]*/
+  [ Utility ]*/
 .txt1 {
-  font-family: Poppins-Regular;
+  font-family: Calibri;
   font-size: 13px;
   color: #666666;
   line-height: 1.5;
 }
 
 .txt2 {
-  font-family: Poppins-Regular;
+  font-family: Calibri;
   font-size: 13px;
   color: #333333;
   line-height: 1.5;
 }
 
 /*//////////////////////////////////////////////////////////////////
-[ login ]*/
+  [ login ]*/
 
 .limiter {
   width: 100%;
@@ -223,7 +223,7 @@ iframe {
 }
 
 /*------------------------------------------------------------------
-[ Form ]*/
+  [ Form ]*/
 
 .login100-form {
   width: 100%;
@@ -242,7 +242,7 @@ iframe {
 }
 
 /*------------------------------------------------------------------
-[ Input ]*/
+  [ Input ]*/
 
 .wrap-input100 {
   width: 100%;
@@ -252,7 +252,7 @@ iframe {
 }
 
 .input100 {
-  font-family: Poppins-Regular;
+  font-family: Calibri;
   font-size: 15px;
   color: #555555;
   line-height: 1.2;
@@ -297,7 +297,7 @@ iframe {
 }
 
 .focus-input100::after {
-  font-family: Poppins-Regular;
+  font-family: Calibri;
   font-size: 15px;
   color: #999999;
   line-height: 1.2;
@@ -372,7 +372,7 @@ iframe {
 }
 
 /*------------------------------------------------------------------
-[ Button ]*/
+  [ Button ]*/
 .container-login100-form-btn {
   display: -webkit-box;
   display: -webkit-flex;
@@ -420,7 +420,7 @@ iframe {
 }
 
 .login100-form-btn {
-  font-family: Poppins-Medium;
+  font-family: Calibri;
   font-size: 15px;
   color: #fff;
   line-height: 1.2;
@@ -443,7 +443,7 @@ iframe {
 }
 
 /*------------------------------------------------------------------
-[ Responsive ]*/
+  [ Responsive ]*/
 
 @media (max-width: 576px) {
   .wrap-login100 {
@@ -452,7 +452,7 @@ iframe {
 }
 
 /*------------------------------------------------------------------
-[ Alert validate ]*/
+  [ Alert validate ]*/
 
 .validate-input {
   position: relative;
@@ -475,7 +475,7 @@ iframe {
   right: 0px;
   pointer-events: none;
 
-  font-family: Poppins-Regular;
+  font-family: Calibri;
   color: #c80000;
   font-size: 13px;
   line-height: 1.4;
