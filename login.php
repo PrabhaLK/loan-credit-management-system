@@ -1,5 +1,9 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>Login</title>
   <meta charset="UTF-8" />
@@ -19,13 +23,15 @@
   <link rel="stylesheet" type="text/css" href="./asset/vendor/daterangepicker/daterangepicker.css" />
   <link rel="stylesheet" type="text/css" href="./asset/css/login/util.css" />
   <link rel="stylesheet" type="text/css" href="./asset/css/login/main.css" />
+
   <style>
-    .txt-login{
+    .txt-login {
       font-family: poppins;
-      font-weight:bold;
+      font-weight: bold;
     }
   </style>
 </head>
+
 <body>
   <div class="limiter">
     <div class="container-login100">
@@ -35,6 +41,14 @@
           <span class="login100-form-title p-b-48">
             <i class="zmdi zmdi-font"></i>
           </span>
+
+          <?php
+          // PHP code to display error message if login fails
+          if (isset($_SESSION['login_error'])) {
+            echo '<div class="alert alert-danger" role="alert">' . $_SESSION['login_error'] . '</div>';
+            unset($_SESSION['login_error']);
+          }
+          ?>
 
           <div class="wrap-input100 validate-input" data-validate="Valid NIC is required">
             <input class="input100" type="text" name="nic" />
@@ -72,4 +86,5 @@
   <script src="./asset/vendor/countdowntime/countdowntime.js"></script>
   <script src="./asset/js/login.js"></script>
 </body>
+
 </html>
