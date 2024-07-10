@@ -1,9 +1,6 @@
 <?php
-include_once '../config/db.php';
-
-$national_id = $_POST['nic'];
-$password = $_POST['pass'];
-
+session_start()
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,7 +19,8 @@ $password = $_POST['pass'];
     <div class="container">
         <nav class="navbar navbar-default">
             <div class="navbar-header">
-                <a href="" class="navbar-brand">Gold insurance </a>
+             <!-- Temporary Logout function implemented here  -->
+                <a href="../functions/logout_funct.php" class="navbar-brand"><?php echo $_SESSION["nic"] ?>Gold insurance </a>
             </div>
 
             <div id="navbar" class="navbar-collapse collapse">
