@@ -1,10 +1,35 @@
 <?php
+// Load database connection
 include_once '../config/db.php';
 
 $national_id = $_POST['nic'];
 $password = $_POST['pass'];
 
+$sql = "SELECT * FROM user_details WHERE NIC = ? AND password = ?";
+$stmt = $conn->prepare($sql);
+
+// Bind parameters
+$stmt->bind_param('ss', $national_id, $password);
+
+// Execute query
+$stmt->execute();
+
+// Get result
+$result = $stmt->get_result();
+if ($result->num_rows == 1) {
+    // Login successful
+    echo "Login successful!";
+    // Redirect user to dashboard or perform other actions
+} else {
+    // Login failed
+    header("Location: login.php");
+}
+
+// Close statement and connection
+$stmt->close();
+$conn->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,6 +40,7 @@ $password = $_POST['pass'];
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <link href="../asset/css/index/main.css" rel="stylesheet" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </head>
 
@@ -33,9 +59,9 @@ $password = $_POST['pass'];
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hospitalization <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Government Hospitalization</a></li>
-                                <li><a href="#">Government Ayurvedic Hospitalization</a></li>
-                                <li><a href="#">Private Hospitalization</a></li>
+                                <li><a href="./government-hos.php">Government Hospitalization</a></li>
+                                <li><a href="./gov-aryuvedic-hos.php">Government Ayurvedic Hospitalization</a></li>
+                                <li><a href="./privet-host.php">Private Hospitalization</a></li>
                                 <li><a href="#">Private Ayurvedic Hospitalization</a></li>
                                 <li><a href="#">Heart Surgery - Dependent</a></li>
                             </ul>
