@@ -29,7 +29,7 @@ session_start()
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hospitalization <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="./government-hos.php?type=Government Hospitalization">Government Hospitalization</a></li>
+                            <li><a href="./govt-hos.php?type=Government Hospitalization">Government Hospitalization</a></li>
                             <li><a href="./government-hos.php?type=Government Ayuvedic Hospitalization">Government Ayurvedic Hospitalization</a></li>
                             <li><a href="./government-hos.php?type=Private Hospitalization">Private Hospitalization</a></li>
                             <li><a href="./government-hos.php?type=Private Ayuvedic Hospitalization">Private Ayurvedic Hospitalization</a></li>

@@ -10,6 +10,7 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- boostrap css  -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.min.js">
 
     <title></title>
     <style>
@@ -24,7 +25,6 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
         }
 
         .right-up {
-
             height: 50%;
             padding-top: 10%;
             padding-right: 2%;
@@ -45,15 +45,67 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
             display: inline-block;
             font-size: 36px;
         }
+
+        .left-up {
+            height: 50%;
+            padding-top: 10%;
+            position: inherit;
+        }
     </style>
 </head>
 
-<body>
-    
+<body class="bg-dark">
     <div class="left-sec">
         <div class="Header">
             <?php echo ($type); ?>
         </div>
+        <div class="left-up">
+            <div class="container">
+                <div class="row my-4">
+                    <div class="col-lg-9 mx-auto">
+                        <div class="card shadow">
+                            <div class="card-header">
+                                <h4> Add Items </h4>
+                            </div>
+                            <div class="card-body p-4">
+                                <form action="#" method="POST" id="add_form">
+                                    <div id="show_item">
+                                        <div class="row">
+                                            <p>Number of Dates</p>
+                                            <div class="col-md-7 mb-3">
+                                                <input type="number" style="margin-left:37%" name="number_of_dates[]" id="" class="form-control" placeholder="Item_name" required>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <p>Surgical and Medical Treatments</p>
+                                            <div class="col-md-7 mb-3">
+                                                <input type="number" name="number_of_dates[]" id="" class="form-control" placeholder="Item_name" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 mb-3">
+                                            <button class="btn btn-success add_item_btn">Add More</button>
+                                        </div>
+                                        <div class="row">
+                                            <p>Surgical and Medical Treatments</p>
+                                            <div class="col-md-7 mb-3">
+                                                <input type="number" name="number_of_dates[]" id="" class="form-control" placeholder="Item_name" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 mb-3">
+                                            <button class="btn btn-success add_item_btn">Add More</button>
+                                        </div>
+                                        <div class="row my-auto">
+                                            <button class="btn btn-primary add_item_btn">Send Details</button>
+                                        </div>
+                                    </div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
     <div class="right-sec">
         <div class="right-up">
