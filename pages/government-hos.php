@@ -4,6 +4,9 @@ include('../config/db.php');
 // Get the type from the URL parameter
 $type = isset($_GET['type']) ? $_GET['type'] : '';
 
+// Include the category functions once to fetch necessary data
+include('../functions/category-functions.php');
+
 if (isset($_POST['submit'])) {
     $date = $_POST['numberOfDates'];
     $Rcharges = $_POST['charges'];
@@ -29,27 +32,7 @@ if (isset($_POST['submit'])) {
         echo "<script>alert('There is an error');</script>";
     }
 }
-//get the related field from the database according to the type. 
-$sql = "SELECT * FROM `claim_info` WHERE `SubCategory 1 Name` = 'Government Hospitalization'";
-$result = mysqli_query($conn, $sql);
 
-if ($result && mysqli_num_rows($result) > 0) {
-    $row = mysqli_fetch_assoc($result);
-    $ClaimID = $row['ClaimID'];
-    $Name = $row['Name'];
-    $Category = $row['Category'];
-    $CategoryName = $row['CategoryName'];
-    $SubCategory1 = $row['SubCategory 1'];
-    $SubCategory1Name = $row['SubCategory 1 Name'];
-    $SubCategory2 = $row['SubCategory 2'];
-    $PerDay = $row['PerDay'];
-    $PerIncident = $row['PerIncident'];
-    $PerYear = $row['PerYear'];
-    $PerLife = $row['PerLife'];
-    $ResetTime = $row['ResetTime'];
-} else {
-    echo "<script>alert('No data found for the specified type');</script>";
-}
 ?>
 
 <!DOCTYPE html>
@@ -114,20 +97,20 @@ if ($result && mysqli_num_rows($result) > 0) {
         }
 
         function incident(value) {
-            // Validate surgical & medical treatment charges not exceeding 80000
-            if (value > 80000) {
-                alert('Surgical & Medical Treatment charges cannot exceed Rs. 80,000. Please enter a valid amount.');
-                document.getElementById('treatment').value = 80000; // Set the value to 80000
+            // Validate surgical & medical treatment charges not exceeding incident Price
+            if (value > <?php echo ($IncidentPrice); ?>) {
+                alert('Surgical & Medical Treatment charges cannot exceed Rs.  <?php echo ($IncidentPrice); ?>. Please enter a valid amount.');
+                document.getElementById('treatment').value = <?php echo ($IncidentPrice); ?>;
             } else {
                 document.getElementById('treatment').value = value;
             }
         }
 
         function test(value) {
-            // validation Medical Test charges not exceeding  40000
-            if (value > 40000) {
-                alert('Medical Test charges cannot exceed Rs. 40,000. Please enter a valid amount.');
-                document.getElementById('medicalT').value = 40000; // Set the value to 40000
+            // validation Medical Test charges not exceeding test Incident Price
+            if (value > <?php echo ($TestIncident); ?>) {
+                alert('Medical Test charges cannot exceed Rs. <?php echo ($TestIncident); ?>.00 Please enter a valid amount.');
+                document.getElementById('medicalT').value = <?php echo ($TestIncident); ?>; // Set the value to 40000
             } else {
                 document.getElementById('medicalT').value = value;
             }
@@ -156,12 +139,12 @@ if ($result && mysqli_num_rows($result) > 0) {
         <!-- User input Incident Charges-->
         <div class="userIncident">
             <label for="treatment" class="col-sm-2 control-label">Surgical & Medical Treatment</label>
-            <input type="Number" class="form-control" style="width: 250px;" id="treatment" name="treatment" onkeyup="incident(this.value)" placeholder="Enter Incident Charges">
+            <input type="Number" class="form-control" style="width: 250px;" onkeyup="incident(this.value)" placeholder="Enter Incident Charges">
         </div>
         <!-- User input Medical Test Charges-->
         <div class="userMedicalTest">
             <label for="medicalT" class="col-sm-2 control-label">Medical Test</label>
-            <input type="Number" class="form-control" style="width: 250px;" id="medicalT" name="medicalT" onkeyup="test(this.value)" placeholder="Enter Test Charges">
+            <input type="Number" class="form-control" style="width: 250px;" onkeyup="test(this.value)" placeholder="Enter Test Charges">
         </div>
         <article class="index-table">
             <table class="table table-bordered">
