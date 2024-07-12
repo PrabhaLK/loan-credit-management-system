@@ -51,6 +51,10 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
             padding-top: 10%;
             position: inherit;
         }
+
+        body {
+            background-image: url('../images/back.jpg');
+        }
     </style>
 </head>
 
