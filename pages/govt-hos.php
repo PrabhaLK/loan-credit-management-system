@@ -68,6 +68,14 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
             console.log("jquery loaded");
             alert("jquery loaded");
 
+            function calculateTotal() {
+                let total = 0;
+                $("input[name='medical_price[]']").each(function() {
+                    total += parseFloat($(this).val()) || 0;
+                });
+                $("#total_cost").text(total.toFixed(2));
+            }
+
             $(".add_item_btn").click(function(e) {
                 e.preventDefault();
 
@@ -76,22 +84,29 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
 
                 // Append new item after the last occurrence of .row
                 $(lastRow).after(`<div class="row">
-                                    
                                     <div class="col-md-7 mb-3">
-                                        <input type="number" name="medical_price[]"  class="form-control sub-cat" placeholder="Item_name" required>
+                                        <input type="number" name="medical_price[]" class="form-control sub-cat" placeholder="Item_name" required>
                                     </div>
                                     <div class="col-md-2 mb-3">
                                         <button type="button" class="btn btn-danger remove_item_btn Remove-btn">Remove</button>
                                     </div>
                                 </div>`);
+                calculateTotal();
             });
 
             // Remove item functionality
             $(document).on('click', '.remove_item_btn', function(e) {
                 e.preventDefault();
                 $(this).closest('.row').remove();
+                calculateTotal();
             });
-            //ajax request to insert all form data. 
+
+            // Recalculate total on input change
+            $(document).on('input', "input[name='medical_price[]']", function() {
+                calculateTotal();
+            });
+
+            // Ajax request to insert all form data
             $("#add_form").submit(function(e) {
                 e.preventDefault();
                 $("#add_btn").val('Adding....');
@@ -104,6 +119,9 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                     }
                 });
             });
+
+            // Initial calculation
+            calculateTotal();
         });
     </script>
 
@@ -124,7 +142,6 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                             </div>
                             <div class="card-body p-4">
                                 <form method="POST" id="add_form">
-
                                     <div class="row">
                                         <p>Number of Dates</p>
                                         <div class="col-md-7 mb-3">
@@ -156,14 +173,16 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                                     <div class="row my-auto">
                                         <button type="submit" class="btn btn-primary">Send Details</button>
                                     </div>
+                                    <div class="row my-auto">
+                                        <h4>Total Cost: $<span id="total_cost">0.00</span></h4>
+                                    </div>
+                                </form>
                             </div>
-                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
     <div class="right-sec">
         <div class="right-up">
