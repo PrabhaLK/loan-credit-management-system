@@ -54,6 +54,14 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
         body {
             background-image: url('../images/back.jpg');
         }
+
+        .sub-cat {
+            margin-left: 79%;
+        }
+
+        .Remove-btn {
+            margin-left: 180%;
+        }
     </style>
     <script>
         $(document).ready(function() {
@@ -68,12 +76,12 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
 
                 // Append new item after the last occurrence of .row
                 $(lastRow).after(`<div class="row">
-                                    <p>Surgical and Medical Treatments</p>
+                                    
                                     <div class="col-md-7 mb-3">
-                                        <input type="number" name="medical_price[]" class="form-control" placeholder="Item_name" required>
+                                        <input type="number" name="medical_price[]"  class="form-control sub-cat" placeholder="Item_name" required>
                                     </div>
                                     <div class="col-md-2 mb-3">
-                                        <button type="button" class="btn btn-danger remove_item_btn">Remove</button>
+                                        <button type="button" class="btn btn-danger remove_item_btn Remove-btn">Remove</button>
                                     </div>
                                 </div>`);
             });
@@ -82,6 +90,19 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
             $(document).on('click', '.remove_item_btn', function(e) {
                 e.preventDefault();
                 $(this).closest('.row').remove();
+            });
+            //ajax request to insert all form data. 
+            $("#add_form").submit(function(e) {
+                e.preventDefault();
+                $("#add_btn").val('Adding....');
+                $.ajax({
+                    url: '../functions/sample.php',
+                    method: 'post',
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        console.log(response);
+                    }
+                });
             });
         });
     </script>
@@ -103,13 +124,14 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                             </div>
                             <div class="card-body p-4">
                                 <form method="POST" id="add_form">
-                                    <div id="show_item">
-                                        <div class="row">
-                                            <p>Number of Dates</p>
-                                            <div class="col-md-7 mb-3">
-                                                <input type="number" style="margin-left:37%" name="number_of_dates[]" id="" class="form-control" placeholder="Item_name" required>
-                                            </div>
+
+                                    <div class="row">
+                                        <p>Number of Dates</p>
+                                        <div class="col-md-7 mb-3">
+                                            <input type="number" style="margin-left:37%" name="number_of_dates[]" id="" class="form-control" placeholder="Item_name" required>
                                         </div>
+                                    </div>
+                                    <div id="show_item">
                                         <div class="row">
                                             <p>Surgical and Medical Treatments</p>
                                             <div class="col-md-7 mb-3">
@@ -119,6 +141,8 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                                         <div class="col-md-2 mb-3">
                                             <button type="button" class="btn btn-success add_item_btn">Add More</button>
                                         </div>
+                                    </div>
+                                    <div id="show_test">
                                         <div class="row">
                                             <p>Medical tests</p>
                                             <div class="col-md-7 mb-3">
@@ -126,19 +150,20 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                                             </div>
                                         </div>
                                         <div class="col-md-2 mb-3">
-                                            <button type="button" class="btn btn-success add_item_btn">Add More</button>
-                                        </div>
-                                        <div class="row my-auto">
-                                            <button type="submit" class="btn btn-primary">Send Details</button>
+                                            <button type="button" class="btn btn-success show_item_btn">Add More</button>
                                         </div>
                                     </div>
-                                </form>
+                                    <div class="row my-auto">
+                                        <button type="submit" class="btn btn-primary">Send Details</button>
+                                    </div>
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <div class="right-sec">
         <div class="right-up">
