@@ -8,11 +8,10 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- boostrap css  -->
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.min.js">
-
-    <title></title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Document</title>
     <style>
         .left-sec {
             width: 50%;
@@ -56,9 +55,40 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
             background-image: url('../images/back.jpg');
         }
     </style>
+    <script>
+        $(document).ready(function() {
+            console.log("jquery loaded");
+            alert("jquery loaded");
+
+            $(".add_item_btn").click(function(e) {
+                e.preventDefault();
+
+                // Find the last occurrence of .row inside #show_item
+                var lastRow = $("#show_item").find('.row').last();
+
+                // Append new item after the last occurrence of .row
+                $(lastRow).after(`<div class="row">
+                                    <p>Surgical and Medical Treatments</p>
+                                    <div class="col-md-7 mb-3">
+                                        <input type="number" name="medical_price[]" class="form-control" placeholder="Item_name" required>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <button type="button" class="btn btn-danger remove_item_btn">Remove</button>
+                                    </div>
+                                </div>`);
+            });
+
+            // Remove item functionality
+            $(document).on('click', '.remove_item_btn', function(e) {
+                e.preventDefault();
+                $(this).closest('.row').remove();
+            });
+        });
+    </script>
+
 </head>
 
-<body class="bg-dark">
+<body>
     <div class="left-sec">
         <div class="Header">
             <?php echo ($type); ?>
@@ -72,7 +102,7 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                                 <h4> Add Items </h4>
                             </div>
                             <div class="card-body p-4">
-                                <form action="#" method="POST" id="add_form">
+                                <form method="POST" id="add_form">
                                     <div id="show_item">
                                         <div class="row">
                                             <p>Number of Dates</p>
@@ -83,33 +113,32 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                                         <div class="row">
                                             <p>Surgical and Medical Treatments</p>
                                             <div class="col-md-7 mb-3">
-                                                <input type="number" name="number_of_dates[]" id="" class="form-control" placeholder="Item_name" required>
+                                                <input type="number" name="medical_price[]" id="" class="form-control" placeholder="Item_name" required>
                                             </div>
                                         </div>
                                         <div class="col-md-2 mb-3">
-                                            <button class="btn btn-success add_item_btn">Add More</button>
+                                            <button type="button" class="btn btn-success add_item_btn">Add More</button>
                                         </div>
                                         <div class="row">
-                                            <p>Surgical and Medical Treatments</p>
+                                            <p>Medical tests</p>
                                             <div class="col-md-7 mb-3">
-                                                <input type="number" name="number_of_dates[]" id="" class="form-control" placeholder="Item_name" required>
+                                                <input type="number" style="margin-left:47%" name="number_of_dates[]" id="" class="form-control" placeholder="Item_name" required>
                                             </div>
                                         </div>
                                         <div class="col-md-2 mb-3">
-                                            <button class="btn btn-success add_item_btn">Add More</button>
+                                            <button type="button" class="btn btn-success add_item_btn">Add More</button>
                                         </div>
                                         <div class="row my-auto">
-                                            <button class="btn btn-primary add_item_btn">Send Details</button>
+                                            <button type="submit" class="btn btn-primary">Send Details</button>
                                         </div>
                                     </div>
+                                </form>
                             </div>
-                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
     <div class="right-sec">
         <div class="right-up">
@@ -125,8 +154,8 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                                 <th>Updated On</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <!-- <?php if (count($users) > 0) : ?>  -->
+                        <!-- <tbody>
+                             <?php if (count($users) > 0) : ?>
                             <?php foreach ($users as $user) : ?>
                                 <tr>
                                     <td>bxjnjksnkjcn</td>
@@ -140,7 +169,7 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                                 <td colspan="6">No Users</td>
                             </tr>
                         <?php endif; ?>
-                        </tbody>
+                        </tbody>  -->
                     </table>
                 </div>
             </div>
@@ -149,10 +178,8 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
             <h4>Right up div</h4>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7HUiUbX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
 </body>
 
 </html>
