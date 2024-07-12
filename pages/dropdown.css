@@ -1,0 +1,96 @@
+.main-dropdown{
+    width: 250px;
+    position: absolute;
+    height: 90vh;
+    top: 50px;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.1);
+}
+h1{
+    text-align: center;
+    
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+
+html ,body{
+    height: 100vh;
+    background: linear-gradient(to top right);
+    background-image:url('../images/back.jpg');  
+    
+}
+
+.topOne{
+    position: relative;
+    list-style-type: none;
+}
+
+.topOne li a{
+    display: flex;
+    align-items: center;
+    font-family: Arial;
+    font-size: 1.15em;
+    text-decoration: none;
+    text-transform: capitalize;
+    color: #000;
+    padding: 10px 30px;
+    transition: .5s ease;
+    border-radius: 0 20px;
+}
+.topOne li a:hover{
+    background: rgba(0, 0, 0, 0.7);
+}
+.main-dropdown ul ul{
+    position:absolute;
+    left: 250px;
+    width: 250px;
+    display: none;
+    top:0 ;
+    background: rgba(155, 39, 176, 0.4);
+    border-radius: 5px;
+    box-shadow: 2px 2px 10px rgba(0, 0,0,.1);
+}
+
+.main-dropdown ul .first-list{
+    position: relative;
+
+}
+.main-dropdown ul .first-list:hover ul{
+    display: initial;
+}
+
+.main-dropdown ul .second-list{
+    position: relative;
+
+}
+.main-dropdown ul .second-list:hover ul{
+    display: initial;
+}
+
+.main-dropdown ul .third-list{
+    position: relative;
+
+}
+.main-dropdown ul .third-list:hover ul{
+    display: initial;
+}
+
+.main-dropdown ul .forth-list{
+    position: relative;
+
+}
+.main-dropdown ul .forth-list:hover ul{
+    display: initial;
+}
+.main-dropdown ul .fifth-list{
+    position: relative;
+
+}
+.main-dropdown ul .fifth-list:hover ul{
+    display: initial;
+}

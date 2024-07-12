@@ -13,22 +13,28 @@ session_start()
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <link href="../asset/css/index/main.css" rel="stylesheet" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+        <!-- custom stylesheet -->
+    <link rel="stylesheet" href ="dropdown.css">
+
+    
+
 </head>
 
 <body>
-    <div class="container">
-        <nav class="navbar navbar-default">
-            <div class="navbar-header">
-                <!-- Temporary Logout function implemented here  -->
-                <a href="../functions/logout_funct.php" class="navbar-brand"><?php echo $_SESSION["nic"] ?>Gold insurance </a>
-            </div>
 
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+            <h1>Dropdown List </h1>
+
+    <div class="container">
+        <nav class="main-dropdown">
+             
+           
+            <div id="navbar">
+                <ul class="topOne">
                     <!-- Hospitalization dropdown menu -->
-                    <li class="dropdown">
+                    <li class="first-list">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hospitalization <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
+                        <ul>
                             <li><a href="./govt-hos.php?type=Government Hospitalization">Government Hospitalization</a></li>
                             <li><a href="./government-hos.php?type=Government Ayuvedic Hospitalization">Government Ayurvedic Hospitalization</a></li>
                             <li><a href="./government-hos.php?type=Private Hospitalization">Private Hospitalization</a></li>
@@ -37,29 +43,29 @@ session_start()
                         </ul>
                     </li>
 
-                    <li>
+                    <li  class="second-list">
                         <a href="" class="dropdown-toggle" data-toggle="dropdown">Child Birth * 2<b class="caret"></b></a>
-                        <ul class="dropdown-menu">
+                        <ul>
                             <li><a href="#">Government Hospital</a></li>
                             <li><a href="#">Private Hospital-Normal</a></li>
                             <li><a href="#">Private Hospital-Ceaser</a></li>
                         </ul>
                     </li>
 
-                    <li>
+                    <li class="third-list">
                         <a href="" class="dropdown-toggle" data-toggle="dropdown">Heart<b class="caret"></b></a>
-                        <ul class="dropdown-menu">
+                        <ul >
                             <li><a href="#">Surgery</a></li>
                             <li><a href="#">Surgery Guarantee</a></li>
-                            <li><a href="#">RF Ablation</a></li>
+                            <li><a href="#">RF Ablation</a></li> 
                         </ul>
                     </li>
 
                     <li class="active"><a href="#">Cancer</a></li>
 
-                    <li>
+                    <li class="forth-list">
                         <a href="" class="dropdown-toggle" data-toggle="dropdown">Kidney<b class="caret"></b></a>
-                        <ul class="dropdown-menu">
+                        <ul >
                             <li><a href="#">Surgery</a></li>
                             <li><a href="#">Surgery Guarantee</a></li>
                         </ul>
@@ -73,11 +79,11 @@ session_start()
 
                     <li class="active"><a href="#">Spectacles</a></li>
 
-                    <li>
+                    <li class="fifth-list">
                         <a href="" class="dropdown-toggle" data-toggle="dropdown">Death<b class="caret"></b></a>
-                        <ul class="dropdown-menu">
+                        <ul>
                             <li><a href="#">Natural Death</a></li>
-                            <li><a href="#">Accident Death</a></li>
+                            <li><a href="#">Accident Death</a></li> 
                         </ul>
                     </li>
 
@@ -85,7 +91,13 @@ session_start()
                 </ul>
             </div>
         </nav>
+            
     </div>
+
+            <div >
+                
+                <a href="../functions/logout_funct.php" class="navbar-brand"><- Log in Page  </a>
+            </div>
 </body>
 
 </html>
