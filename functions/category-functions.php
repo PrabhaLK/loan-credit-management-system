@@ -1,10 +1,11 @@
 <?php
 include('../config/db.php');
 
+
 // Ensure the type is set
 if (!empty($type)) {
     // Fetch the necessary data based on the type
-    $sql = "SELECT * FROM `claim_info` WHERE `SubCategory 1 Name` = '$type'";
+    $sql = "SELECT * FROM `claim_info` WHERE `SubCategory 1 Name` = '$type' OR `CategoryName`= '$type'";
     $result = mysqli_query($conn, $sql);
 
     if ($result && mysqli_num_rows($result) > 0) {
@@ -16,6 +17,7 @@ if (!empty($type)) {
         $SubCategory1 = $row['SubCategory 1'];
         $SubCategory1Name = $row['SubCategory 1 Name'];
         $SubCategory2 = $row['SubCategory 2'];
+        $SubCategory2Name = $row['SubCategory 2 Name'];
         $PerDay = $row['PerDay'];
         $PerIncident = $row['PerIncident'];
         $PerYear = $row['PerYear'];

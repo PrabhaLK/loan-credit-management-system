@@ -14,21 +14,21 @@ session_start()
     <link href="../asset/css/index/main.css" rel="stylesheet" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
-        <!-- custom stylesheet -->
-    <link rel="stylesheet" href ="dropdown.css">
+    <!-- custom stylesheet -->
+    <link rel="stylesheet" href="dropdown.css">
 
-    
+
 
 </head>
 
 <body>
 
-            <h1>Dropdown List </h1>
+    <h1>Dropdown List </h1>
 
     <div class="container">
         <nav class="main-dropdown">
-             
-           
+
+
             <div id="navbar">
                 <ul class="topOne">
                     <!-- Hospitalization dropdown menu -->
@@ -43,21 +43,21 @@ session_start()
                         </ul>
                     </li>
 
-                    <li  class="second-list">
+                    <li class="second-list">
                         <a href="" class="dropdown-toggle" data-toggle="dropdown">Child Birth * 2<b class="caret"></b></a>
                         <ul>
-                            <li><a href="#">Government Hospital</a></li>
-                            <li><a href="#">Private Hospital-Normal</a></li>
+                            <li><a href="./govt-hos.php?type=Child Birth">Government Hospital</a></li>
+                            <li><a href="">Private Hospital-Normal</a></li>
                             <li><a href="#">Private Hospital-Ceaser</a></li>
                         </ul>
                     </li>
 
                     <li class="third-list">
                         <a href="" class="dropdown-toggle" data-toggle="dropdown">Heart<b class="caret"></b></a>
-                        <ul >
-                            <li><a href="#">Surgery</a></li>
+                        <ul>
+                            <li><a href="./govt-hos.php?type=Heart">Surgery</a></li>
                             <li><a href="#">Surgery Guarantee</a></li>
-                            <li><a href="#">RF Ablation</a></li> 
+                            <li><a href="#">RF Ablation</a></li>
                         </ul>
                     </li>
 
@@ -65,7 +65,7 @@ session_start()
 
                     <li class="forth-list">
                         <a href="" class="dropdown-toggle" data-toggle="dropdown">Kidney<b class="caret"></b></a>
-                        <ul >
+                        <ul>
                             <li><a href="#">Surgery</a></li>
                             <li><a href="#">Surgery Guarantee</a></li>
                         </ul>
@@ -83,7 +83,7 @@ session_start()
                         <a href="" class="dropdown-toggle" data-toggle="dropdown">Death<b class="caret"></b></a>
                         <ul>
                             <li><a href="#">Natural Death</a></li>
-                            <li><a href="#">Accident Death</a></li> 
+                            <li><a href="#">Accident Death</a></li>
                         </ul>
                     </li>
 
@@ -91,13 +91,13 @@ session_start()
                 </ul>
             </div>
         </nav>
-            
+
     </div>
 
-            <div >
-                
-                <a href="../functions/logout_funct.php" class="navbar-brand"><- Log in Page  </a>
-            </div>
+    <div>
+
+        <a href="../functions/logout_funct.php" class="navbar-brand"><- Log in Page </a>
+    </div>
 </body>
 
 </html>

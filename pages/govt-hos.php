@@ -1,7 +1,7 @@
 <?php
 // Include necessary files
 include('../config/db.php');  // Include database configuration if needed
-include('../functions/category-functions.php');  // Include category functions if needed
+// Include category functions if needed
 
 // Get the type from query parameter if available, default to empty string
 $type = isset($_GET['type']) ? $_GET['type'] : '';
@@ -204,7 +204,9 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
     </script>
 </head>
 
-<body>
+<body><?php
+        include('../functions/category-functions.php');
+        ?>
     <div class="container">
         <div class="row">
             <!-- Left Section for Form -->
@@ -221,7 +223,7 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                                         <h4> Add Items </h4>
                                     </div>
                                     <div class="card-body p-4">
-                                        <?php if ($type == "Government Hospitaliation") : ?>
+                                        <?php if ($SubCategory2Name == "RoomCharges") : ?>
                                             <!-- Form for adding items -->
                                             <form method="POST" id="add_form">
                                                 <div class="form-section row">
