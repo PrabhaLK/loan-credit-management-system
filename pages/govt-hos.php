@@ -195,6 +195,31 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                                                     <p>Number of Dates</p>
                                                     <input type="number" name="number_of_dates[]" class="form-control" placeholder="Number of Dates" required>
                                                 </div>
+                                                <!-- Add DatePicker date Period -->
+                                                <form>
+                                                    <div class="row">
+                                                        <!--Grid column-->
+                                                        <div class="col-md-6 mb-4">
+                                                            <div class="md-form">
+                                                                <!--The "from" Date Picker -->
+                                                                <input placeholder="Select starting date" type="date" id="startingDate" name="startingDate">
+                                                                <label for="startingDate">start</label>
+                                                            </div>
+                                                            <input class="btn btn-success" type="submit" value="SetDate">
+                                                        </div>
+                                                        <!--Grid column-->
+
+                                                        <!--Grid column-->
+                                                        <div class="col-md-6 mb-4">
+                                                            <div class="md-form">
+                                                                <!--The "to" Date Picker -->
+                                                                <input placeholder="Select ending date" type="date" id="endingDate" name="endingDate">
+                                                                <label for="endingDate">end</label>
+                                                            </div>
+                                                        </div>
+                                                        <!--Grid column-->
+                                                    </div>
+                                                </form>
                                             </div>
                                             <div id="show_item">
                                                 <div class="form-section row">
