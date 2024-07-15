@@ -1,6 +1,6 @@
 <?php
 include('../config/db.php');
-include('../dateprocess.php');
+
 $type = isset($_GET['type']) ? $_GET['type'] : '';
 ?>
 <!DOCTYPE html>
@@ -212,8 +212,13 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                                     <div class="row">
                                         <p>Number of Dates</p>
                                         <div class="col-md-7 mb-3">
-                                            <input type="number" style="margin-left:37%" name="number_of_dates[]" id="" class="form-control" placeholder="Item_name" required>
+                                            <input type="number" style="margin-left:37%" name="number_of_dates[]" id="" class="form-control" placeholder="Item_name" readonly>
                                         </div>
+                                        
+                                        
+                                        
+                                        
+                                        
                                         <!-- Add DatePicker date Period -->
                                         <form action="dateprocess.php">
                                             <div class="row">
@@ -232,7 +237,7 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                                                 <div class="col-md-6 mb-4">
                                                     <div class="md-form">
                                                         <!--The "to" Date Picker -->
-                                                        <input placeholder="Select ending date" type="date" id="endingDate" name="endingDate">
+                                                        <input placeholder="Select ending date" type="date" id="endingDate" name="endingDate" >
                                                         <label for="endingDate">end</label>
                                                     </div>
                                                 </div>
