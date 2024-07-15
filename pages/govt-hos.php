@@ -47,7 +47,6 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
 
         .left-up {
             height: 50%;
-            padding-top: 10%;
             position: inherit;
         }
 
@@ -76,6 +75,14 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                 $("#total_cost").text(total.toFixed(2));
             }
 
+            function calculateTestTotal() {
+                let testTotal = 0;
+                $("input[name='test_price[]']").each(function() {
+                    testTotal += parseFloat($(this).val()) || 0;
+                });
+                $("#test_total_cost").text(testTotal.toFixed(2));
+            }
+
             $(".add_item_btn").click(function(e) {
                 e.preventDefault();
 
@@ -94,6 +101,24 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                 calculateTotal();
             });
 
+            $(".add_test_btn").click(function(e) {
+                e.preventDefault();
+
+                // Find the last occurrence of .row inside #show_test
+                var lastTestRow = $("#show_test").find('.row').last();
+
+                // Append new test item after the last occurrence of .row
+                $(lastTestRow).after(`<div class="row">
+                                        <div class="col-md-7 mb-3">
+                                            <input type="number" name="test_price[]" class="form-control sub-cat" placeholder="Item_name" required>
+                                        </div>
+                                        <div class="col-md-2 mb-3">
+                                            <button type="button" class="btn btn-danger remove_test_btn Remove-btn">Remove</button>
+                                        </div>
+                                    </div>`);
+                calculateTestTotal();
+            });
+
             // Remove item functionality
             $(document).on('click', '.remove_item_btn', function(e) {
                 e.preventDefault();
@@ -101,9 +126,19 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                 calculateTotal();
             });
 
+            $(document).on('click', '.remove_test_btn', function(e) {
+                e.preventDefault();
+                $(this).closest('.row').remove();
+                calculateTestTotal();
+            });
+
             // Recalculate total on input change
             $(document).on('input', "input[name='medical_price[]']", function() {
                 calculateTotal();
+            });
+
+            $(document).on('input', "input[name='test_price[]']", function() {
+                calculateTestTotal();
             });
 
             // Ajax request to insert all form data
@@ -122,6 +157,7 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
 
             // Initial calculation
             calculateTotal();
+            calculateTestTotal();
         });
     </script>
 
@@ -152,7 +188,7 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                                         <div class="row">
                                             <p>Surgical and Medical Treatments</p>
                                             <div class="col-md-7 mb-3">
-                                                <input type="number" name="medical_price[]" id="" class="form-control" placeholder="Item_name" required>
+                                                <input type="number" style="margin-left:1%;" name="medical_price[]" id="" class="form-control" placeholder="Item_name" required>
                                             </div>
                                         </div>
                                         <div class="col-md-2 mb-3">
@@ -163,18 +199,21 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                                         <div class="row">
                                             <p>Medical tests</p>
                                             <div class="col-md-7 mb-3">
-                                                <input type="number" style="margin-left:47%" name="number_of_dates[]" id="" class="form-control" placeholder="Item_name" required>
+                                                <input type="number" style="margin-left:47%" name="test_price[]" id="" class="form-control" placeholder="Item_name" required>
                                             </div>
                                         </div>
                                         <div class="col-md-2 mb-3">
-                                            <button type="button" class="btn btn-success show_item_btn">Add More</button>
+                                            <button type="button" class="btn btn-success add_test_btn">Add More</button>
                                         </div>
                                     </div>
                                     <div class="row my-auto">
                                         <button type="submit" class="btn btn-primary">Send Details</button>
                                     </div>
                                     <div class="row my-auto">
-                                        <h4>Total Cost: $<span id="total_cost">0.00</span></h4>
+                                        <h4>Total Cost of Treatments: $<span id="total_cost">0.00</span></h4>
+                                    </div>
+                                    <div class="row my-auto">
+                                        <h4>Total Cost of Tests: $<span id="test_total_cost">0.00</span></h4>
                                     </div>
                                 </form>
                             </div>
