@@ -1,5 +1,6 @@
 <?php
 include('../config/db.php');
+include('../dateprocess.php');
 $type = isset($_GET['type']) ? $_GET['type'] : '';
 ?>
 <!DOCTYPE html>
@@ -168,6 +169,26 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
             // Initial calculation
             calculateTotal();
             calculateTestTotal();
+
+            // Date calculation function
+            function calculateDaysBetweenDates(startDate, endDate) {
+                const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+                const firstDate = new Date(startDate);
+                const secondDate = new Date(endDate);
+
+                const diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
+                return diffDays;
+            }
+
+            // Listen to date change events
+            $("#startingDate, #endingDate").on('change', function() {
+                const startDate = $("#startingDate").val();
+                const endDate = $("#endingDate").val();
+                if (startDate && endDate) {
+                    const numberOfDays = calculateDaysBetweenDates(startDate, endDate);
+                    $("input[name='number_of_dates[]']").val(numberOfDays);
+                }
+            });
         });
     </script>
 
@@ -193,6 +214,31 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                                         <div class="col-md-7 mb-3">
                                             <input type="number" style="margin-left:37%" name="number_of_dates[]" id="" class="form-control" placeholder="Item_name" required>
                                         </div>
+                                        <!-- Add DatePicker date Period -->
+                                        <form action="dateprocess.php">
+                                            <div class="row">
+                                                <!--Grid column-->
+                                                <div class="col-md-6 mb-4">
+                                                    <div class="md-form">
+                                                        <!--The "from" Date Picker -->
+                                                        <input placeholder="Select starting date" type="date" id="startingDate" name="startingDate">
+                                                        <label for="startingDate">start</label>
+                                                    </div>
+                                                    <input class="btn btn-success" type="submit" value="SetDate">
+                                                </div>
+                                                <!--Grid column-->
+
+                                                <!--Grid column-->
+                                                <div class="col-md-6 mb-4">
+                                                    <div class="md-form">
+                                                        <!--The "to" Date Picker -->
+                                                        <input placeholder="Select ending date" type="date" id="endingDate" name="endingDate">
+                                                        <label for="endingDate">end</label>
+                                                    </div>
+                                                </div>
+                                                <!--Grid column-->
+                                            </div>
+                                        </form>
                                     </div>
                                     <div id="show_item">
                                         <div class="row">
