@@ -10,8 +10,9 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <title>Document</title>
+    <title><?php echo ($type); ?></title>
     <style>
         .left-sec {
             width: 50%;
@@ -73,6 +74,7 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                     total += parseFloat($(this).val()) || 0;
                 });
                 $("#total_cost").text(total.toFixed(2));
+                updateTable();
             }
 
             function calculateTestTotal() {
@@ -81,6 +83,14 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                     testTotal += parseFloat($(this).val()) || 0;
                 });
                 $("#test_total_cost").text(testTotal.toFixed(2));
+                updateTable();
+            }
+
+            function updateTable() {
+                let totalCost = $("#total_cost").text();
+                let testTotalCost = $("#test_total_cost").text();
+                $("#total_cost_td").text(`Rs ${totalCost}`);
+                $("#test_total_cost_td").text(`Rs ${testTotalCost}`);
             }
 
             $(".add_item_btn").click(function(e) {
@@ -210,10 +220,10 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                                         <button type="submit" class="btn btn-primary">Send Details</button>
                                     </div>
                                     <div class="row my-auto">
-                                        <h4>Total Cost of Treatments: $<span id="total_cost">0.00</span></h4>
+                                        <h4>Total Cost of Treatments: Rs <span id="total_cost">0.00</span></h4>
                                     </div>
                                     <div class="row my-auto">
-                                        <h4>Total Cost of Tests: $<span id="test_total_cost">0.00</span></h4>
+                                        <h4>Total Cost of Tests: Rs <span id="test_total_cost">0.00</span></h4>
                                     </div>
                                 </form>
                             </div>
@@ -227,42 +237,37 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
         <div class="right-up">
             <div class="card">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped">
+                    <table class="table table-bordered table-striped" id="result_table">
                         <thead>
                             <tr>
                                 <th>First Name</th>
                                 <th>Last Name</th>
                                 <th>Email</th>
-                                <th>Created On</th>
-                                <th>Updated On</th>
+                                <th>Total Cost of Treatments</th>
+                                <th>Total Cost of Tests</th>
                             </tr>
                         </thead>
-                        <!-- <tbody>
-                             <?php if (count($users) > 0) : ?>
-                            <?php foreach ($users as $user) : ?>
-                                <tr>
-                                    <td>bxjnjksnkjcn</td>
-                                    <td>bxjnjksnkjcn</td>
-                                    <td>bxjnjksnkjcn</td>
-                                    <td>bxjnjksnkjcn</td>
-                                </tr>
-                            <?php endforeach; ?>
-                        <?php else : ?>
+                        <tbody>
                             <tr>
-                                <td colspan="6">No Users</td>
+                                <td>John</td>
+                                <td>Doe</td>
+                                <td>johndoe@example.com</td>
+                                <td id="total_cost_td">Rs 0.00</td>
+                                <td id="test_total_cost_td">Rs 0.00</td>
                             </tr>
-                        <?php endif; ?>
-                        </tbody>  -->
+                            <!-- Data will be appended here by jQuery -->
+                        </tbody>
                     </table>
                 </div>
             </div>
         </div>
-        <div class="right-down">
+        <!-- <div class="right-down">
             <h4>Right up div</h4>
-        </div>
+        </div> -->
     </div>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7HUiUbX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.umd.min.js"></script>
 </body>
 
 </html>
