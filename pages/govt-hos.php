@@ -1,6 +1,5 @@
 <?php
 include('../config/db.php');
-include('../dateprocess.php');
 $type = isset($_GET['type']) ? $_GET['type'] : '';
 ?>
 <!DOCTYPE html>
