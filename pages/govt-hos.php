@@ -70,8 +70,8 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
 
 
 
-             // Calculate room charges
-        
+            // Calculate room charges
+
 
             // Function to calculate total medical costs
             function calculateTotal() {
@@ -115,7 +115,7 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                     const numberOfDays = calculateDaysBetweenDates(startDate, endDate);
                     $("input[name='number_of_dates[]']").val(numberOfDays);
 
-                    
+
                 }
             });
 
@@ -215,7 +215,7 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
         include('../functions/category-functions.php');
 
 
-        
+
         ?>
     <div class="container">
         <div class="row">
@@ -232,34 +232,26 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                                     <div class="card-header">
                                         <h4> Add Items </h4>
                                     </div>
-                                <form method="POST" id="add_form">
-                                    <div class="card-body p-4">
-                                        <!-- Section for adding govenment host method-->
-                                        <?php if ($SubCategory1Name == "Government Hospitalization") : 
-                                             include('./method/gove-host-meth.php');?>
-                                        <?php endif ?>
+                                    <form method="POST" id="add_form">
+                                        <div class="card-body p-4">
+                                            <!-- Section for adding govenment host method-->
+                                            <?php if ($SubCategory1Name == "Government Hospitalization") :
+                                                include('./method/gove-host-meth.php'); ?>
+                                            <?php endif ?>
 
 
 
-                                        <!-- Section for adding Heart Surgery - Guarantee Bill Cost -->
-                                        <?php if ($SubCategory1Name == "Heart Surgery - Guarantee") :  
-                                            include('./method/hart-meth.php');?>
-                                        <?php endif ?> 
+                                            <!-- Section for adding Heart Surgery - Guarantee Bill Cost -->
+                                            <?php if ($SubCategory1Name == "Heart Surgery - Guarantee") :
+                                                include('./method/hart-meth.php'); ?>
+                                            <?php endif ?>
 
 
-                                        <!-- Section for adding governemnt Ayurvedic Bill Cost -->
-                                        <?php if ($SubCategory1Name == "Government Ayuvedic Hospitalization") :  
-                                            include('./method/gov-ayur-meth.php');?>
-                                        <?php endif ?> 
+                                            <!-- Section for adding governemnt Ayurvedic Bill Cost -->
+                                            <?php if ($SubCategory1Name == "Government Ayuvedic Hospitalization") :
+                                                include('./method/gov-ayur-meth.php'); ?>
+                                            <?php endif ?>
 
-                                                
-                                              
-
-                                             
-
-
-                                           
-                                            
                                             <!-- Submit Button -->
                                             <div class="row my-4">
                                                 <div class="col-md-12">
@@ -275,58 +267,58 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                                                     <h4>Total Cost of Tests: Rs <span id="test_total_cost">0.00</span></h4>
                                                 </div>
                                             </div>
-                                            </form>
+                                    </form>
 
-                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Right Section for Displaying Results -->
-            <div class="col-md-6 right-sec">
+        </div>
+        <!-- Right Section for Displaying Results -->
+        <div class="col-md-6 right-sec">
 
 
             <!-- Display Current Date                                -->
             <div>
-            <b>The date : <?php echo date("m/d/y"); ?></b>
-            </div>                               
-            
-            
+                <b>The date : <?php echo date("m/d/y"); ?></b>
+            </div>
 
-            
-                <div class="card">
-                    <div class="table-responsive">
-                        <!-- Table for displaying results -->
-                        <table class="table table-bordered table-striped" id="result_table">
-                            <thead>
-                                <tr>
-                                    
-                                    <th>Discription</th>
-                                    <th>Total Bill Cost</th>
-                                
-                                    <th>Total Cost of Room Charges</th>
-                                    <th>Total Cost of Treatments</th>
-                                    <th>Total Cost of Tests</th>
-                                </tr>    
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <!-- Sample row for displaying data -->
-                                    <td>John</td>
-                                    <td>Doe</td>
-                                    <td>johndoe@example.com</td>
-                                    <td id="total_cost_td">Rs 0.00</td>
-                                    <td id="test_total_cost_td">Rs 0.00</td>
-                                </tr>
-                                <!-- Data will be dynamically appended here by jQuery -->
-                            </tbody>
-                        </table>
-                    </div>
+
+
+
+            <div class="card">
+                <div class="table-responsive">
+                    <!-- Table for displaying results -->
+                    <table class="table table-bordered table-striped" id="result_table">
+                        <thead>
+                            <tr>
+
+                                <th>Discription</th>
+                                <th>Total Bill Cost</th>
+
+                                <th>Total Cost of Room Charges</th>
+                                <th>Total Cost of Treatments</th>
+                                <th>Total Cost of Tests</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <!-- Sample row for displaying data -->
+                                <td>John</td>
+                                <td>Doe</td>
+                                <td>johndoe@example.com</td>
+                                <td id="total_cost_td">Rs 0.00</td>
+                                <td id="test_total_cost_td">Rs 0.00</td>
+                            </tr>
+                            <!-- Data will be dynamically appended here by jQuery -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <!-- Bootstrap JS, Popper.js, MDB UI Kit, and SweetAlert2 CDN Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7HUiUbX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
