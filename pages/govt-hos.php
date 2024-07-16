@@ -68,6 +68,11 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                 return diffDays;
             }
 
+
+
+             // Calculate room charges
+        
+
             // Function to calculate total medical costs
             function calculateTotal() {
                 let total = 0;
@@ -109,6 +114,8 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
 
                     const numberOfDays = calculateDaysBetweenDates(startDate, endDate);
                     $("input[name='number_of_dates[]']").val(numberOfDays);
+
+                    
                 }
             });
 
@@ -206,6 +213,9 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
 
 <body><?php
         include('../functions/category-functions.php');
+
+
+        
         ?>
     <div class="container">
         <div class="row">
@@ -299,18 +309,26 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
             </div>
             <!-- Right Section for Displaying Results -->
             <div class="col-md-6 right-sec">
+
+            <div></div>                               
+            
+            <b>The date : <?php echo date("m/d/y"); ?></b>
+
+            
                 <div class="card">
                     <div class="table-responsive">
                         <!-- Table for displaying results -->
                         <table class="table table-bordered table-striped" id="result_table">
                             <thead>
                                 <tr>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Email</th>
+                                    
+                                    <th>Discription</th>
+                                    <th>Total Bill Cost</th>
+                                
+                                    <th>Total Cost of Room Charges</th>
                                     <th>Total Cost of Treatments</th>
                                     <th>Total Cost of Tests</th>
-                                </tr>
+                                </tr>    
                             </thead>
                             <tbody>
                                 <tr>
