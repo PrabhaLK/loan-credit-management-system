@@ -124,10 +124,20 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
 
             // Function to update the total costs in the table
             function updateTable() {
-                const totalCost = calculateTotal();
-                const testTotalCost = calculateTestTotal();
-                $("#total_cost_td").text(`Rs ${totalCost}`);
-                $("#test_total_cost_td").text(`Rs ${testTotalCost}`);
+                const totalCost = parseFloat(calculateTotal());
+                const testTotalCost = parseFloat(calculateTestTotal());
+                const totalSum = totalCost + testTotalCost;
+                $("#total_cost").text(totalCost.toFixed(2));
+                $("#test_total_cost").text(testTotalCost.toFixed(2));
+                $("#InitialCost").text(totalSum.toFixed(2));
+
+                // Update the total bill cost in the result table
+                $("#result_table tbody tr").each(function() {
+                    const row = $(this);
+                    row.find("#total_cost").text('Rs ' + totalCost.toFixed(2));
+                    row.find("#test_total_cost").text('Rs ' + testTotalCost.toFixed(2));
+                    row.find("#InitialCost").text('Rs ' + totalSum.toFixed(2));
+                });
             }
 
             // Event listener for adding medical items
@@ -202,6 +212,24 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
 
             // Initial calculation of totals on page load
             updateTable();
+
+            // Function to validate number inputs
+            function validateNumberInput(element) {
+                element.value = element.value.replace(/[^0-9.]/g, ''); // Remove any non-numeric characters
+                if (element.value < 0) {
+                    element.value = 0; // Ensure no negative values
+                }
+            }
+
+            // Event listener for number input validation
+            $(document).on('input', '.validate-number', function() {
+                validateNumberInput(this);
+            });
+
+            // Apply validation on initial load for any pre-existing inputs
+            $('.validate-number').each(function() {
+                validateNumberInput(this);
+            });
         });
     </script>
 </head>
@@ -639,7 +667,7 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                                                 </div>
                                             </div>
 
-                                            <!-- Section for adding  medical items -->
+                                            <!-- Section for adding medical items -->
                                             <div id="show_item">
                                                 <div class="form-section row">
                                                     <div class="col-md-8">
@@ -1049,23 +1077,27 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                     <table class="table table-bordered table-striped" id="result_table">
                         <thead>
                             <tr>
-
-                                <th>Discription</th>
-                                <th>Total Bill Cost</th>
-
-                                <th>Total Cost of Room Charges</th>
-                                <th>Total Cost of Treatments</th>
-                                <th>Total Cost of Tests</th>
+                                <th>Description</th>
+                                <th>Maximum Limit (Should Not Exceed Than)</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <?php
+                            if ($result->num_rows > 0) {
+                                // Output data of each row
+                                while ($row = $result->fetch_assoc()) {
+                                    echo '<tr>
+                                            <td>' . htmlspecialchars($row['Name']) . '</td>
+                                            <td class="text-right h5" id="test_total_cost">Rs 0.00</td> <!-- Placeholder for total cost -->
+                                          </tr>';
+                                }
+                            } else {
+                                echo '<tr><td colspan="2">No records found</td></tr>';
+                            }
+                            ?>
                             <tr>
-                                <!-- Sample row for displaying data -->
-                                <td>John</td>
-                                <td>Doe</td>
-                                <td>johndoe@example.com</td>
-                                <td id="total_cost_td">Rs 0.00</td>
-                                <td id="test_total_cost_td">Rs 0.00</td>
+                                <th class="h5 "><b>Total Cost of Claim:</b></th>
+                                <td class="h5 text-right"><b><span id="InitialCost"> Rs 0.00</span></b></td>
                             </tr>
                             <!-- Data will be dynamically appended here by jQuery -->
                         </tbody>
