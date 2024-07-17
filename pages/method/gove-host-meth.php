@@ -59,6 +59,6 @@
         <h4>Total Cost of Tests: Rs <span id="test_total_cost">0.00</span></h4>
     </div>
     <!-- <div class="col-md-12">
-                                                    
+                                                    <h4>Total Cost of Claim: Rs <span id="InitialCost">0.00</span></h4>
                                                 </div> -->
 </div>
