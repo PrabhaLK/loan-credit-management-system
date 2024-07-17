@@ -639,7 +639,7 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                                                 </div>
                                             </div>
 
-                                            <!-- Section for adding medical items -->
+                                            <!-- Section for adding  medical items -->
                                             <div id="show_item">
                                                 <div class="form-section row">
                                                     <div class="col-md-8">
