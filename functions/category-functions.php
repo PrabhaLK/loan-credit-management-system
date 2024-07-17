@@ -42,4 +42,8 @@ if (!empty($type)) {
         $row = mysqli_fetch_assoc($result); // Fetch the result row
         $TestIncident = $row['PerIncident'];
     }
+
+
+   
+    
 }

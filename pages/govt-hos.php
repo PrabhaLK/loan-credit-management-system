@@ -70,8 +70,8 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
 
 
 
-             // Calculate room charges
-        
+            // Calculate room charges
+
 
             // Function to calculate total medical costs
             function calculateTotal() {
@@ -115,7 +115,7 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                     const numberOfDays = calculateDaysBetweenDates(startDate, endDate);
                     $("input[name='number_of_dates[]']").val(numberOfDays);
 
-                    
+
                 }
             });
 
@@ -215,7 +215,7 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
         include('../functions/category-functions.php');
 
 
-        
+
         ?>
     <div class="container">
         <div class="row">
@@ -232,50 +232,89 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                                     <div class="card-header">
                                         <h4> Add Items </h4>
                                     </div>
-                                <form method="POST" id="add_form">
+
                                     <div class="card-body p-4">
                                         <!-- Section for adding govenment host method-->
-                                        <?php if ($SubCategory1Name == "Government Hospitalization") : 
-                                             include('./method/gove-host-meth.php');?>
+                                        <?php if ($SubCategory1Name == "Government Hospitalization") :
+                                            include('./method/gove-host-meth.php'); ?>
                                         <?php endif ?>
 
 
 
                                         <!-- Section for adding Heart Surgery - Guarantee Bill Cost -->
-                                        <?php if ($SubCategory1Name == "Heart Surgery - Guarantee") :  
-                                            include('./method/hart-meth.php');?>
-                                        <?php endif ?> 
+                                        <?php if ($SubCategory1Name == "Heart Surgery - Guarantee") :
+                                            include('./method/hart-meth.php'); ?>
+                                        <?php endif ?>
 
 
+                                  
+                                  
                                         <!-- Section for adding governemnt Ayurvedic Bill Cost -->
-                                        <?php if ($SubCategory1Name == "Government Ayuvedic Hospitalization") :  
-                                            include('./method/gov-ayur-meth.php');?>
-                                        <?php endif ?> 
+                                        <?php if ($SubCategory1Name == "Government Ayuvedic Hospitalization") :
+                                            include('./method/gov-ayur-meth.php'); ?>
+                                        <?php endif ?>
 
-                                                
-                                              
+                                        <!-- Section for adding Private Ayurvedic Bill Cost -->
+                                        <?php if ($SubCategory1Name == "Private Hospitalization") :
+                                            include('./method/privt-meth.php'); ?>
+                                        <?php endif ?>
 
-                                             
+                                        <!-- Section for adding Death Bill Cost -->
+                                        <?php if ($SubCategory1Name == "Natural Death") :
+                                            include('./method/death-meth.php'); ?>
+                                        <?php endif ?>
 
+                                        <!-- Section for adding Private Ayurvedic  Bill Cost -->
+                                        <?php if ($SubCategory1Name == "Private Ayuvedic Hospitalization") :
+                                            include('./method/privt-ayur-meth.php'); ?>
+                                        <?php endif ?>
 
-                                           
-                                            
-                                            <!-- Submit Button -->
-                                            <div class="row my-4">
-                                                <div class="col-md-12">
-                                                    <button type="submit" class="btn btn-primary" id="add_btn">Send Details</button>
+                                        <!-- Section for adding Cancer hospital  Bill Cost -->
+                                        <?php if ($SubCategory1Name == "Cancer") :
+                                            include('./method/cancer-meth.php'); ?>
+                                        <?php endif ?>
+
+                                        <!-- Section for adding Cancer hospital  Bill Cost -->
+                                        <?php if ($SubCategory1Name == "Spectacles") :
+                                            // include('./method/spectacels-meth.php');
+                                        ?>
+
+                                            <form method="POST" id="add_form">
+
+                                                <!-- Section for adding Cancer bill -->
+                                                <div id="show_test">
+                                                    <div class="form-section row">
+                                                        <div class="col-md-8">
+                                                            <p>Cancer Hospital Bill</p>
+                                                            <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for Cancer hospital Bill" required>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <button type="button" class="btn btn-success add_test_btn">Add More</button>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <!-- Total Costs Section -->
-                                            <div class="total-costs row">
-                                                <div class="col-md-12">
-                                                    <h4>Total Cost of Treatments: Rs <span id="total_cost">0.00</span></h4>
+                                                <!-- Submit Button -->
+                                                <div class="row my-4">
+                                                    <div class="col-md-12">
+                                                        <button type="submit" class="btn btn-primary" id="add_btn">Send Details</button>
+                                                    </div>
                                                 </div>
-                                                <div class="col-md-12">
-                                                    <h4>Total Cost of Tests: Rs <span id="test_total_cost">0.00</span></h4>
+                                                <!-- Total Costs Section -->
+                                                <div class="total-costs row">
+                                                    <div class="col-md-12">
+                                                        <h4>Total Cost of Treatments: Rs <span id="total_cost">0.00</span></h4>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <h4>Total Cost of Tests: Rs <span id="test_total_cost">0.00</span></h4>
+                                                    </div>
                                                 </div>
-                                            </div>
+
                                             </form>
+                                        <?php endif ?>
+
+
+
+
 
                                     </div>
                                 </div>
@@ -288,28 +327,28 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
             <div class="col-md-6 right-sec">
 
 
-            <!-- Display Current Date                                -->
-            <div>
-            <b>The date : <?php echo date("m/d/y"); ?></b>
-            </div>                               
-            
-            
+                <!-- Display Current Date                                -->
+                <div>
+                    <b>The date : <?php echo date("m/d/y"); ?></b>
+                </div>
 
-            
+
+
+
                 <div class="card">
                     <div class="table-responsive">
                         <!-- Table for displaying results -->
                         <table class="table table-bordered table-striped" id="result_table">
                             <thead>
                                 <tr>
-                                    
+
                                     <th>Discription</th>
                                     <th>Total Bill Cost</th>
-                                
+
                                     <th>Total Cost of Room Charges</th>
                                     <th>Total Cost of Treatments</th>
                                     <th>Total Cost of Tests</th>
-                                </tr>    
+                                </tr>
                             </thead>
                             <tbody>
                                 <tr>
