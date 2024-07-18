@@ -13,6 +13,7 @@ session_start()
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <link href="../asset/css/index/main.css" rel="stylesheet" />
+    
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
     <!-- custom stylesheet -->
@@ -45,10 +46,8 @@ session_start()
         <img class="logo" src="../images/logo.png" alt="Logo">
     </div>
 
-    
-
     <h1>Dropdown List</h1>
-
+    <!-- <?php echo $_SESSION["nic"] ?> -->
     <div class="container">
         <nav class="main-dropdown">
             <div id="navbar">
@@ -114,7 +113,6 @@ session_start()
             </div>
         </nav>
     </div>
-
     <div>
         <a href="../functions/logout_funct.php" class="navbar-brand"><- Log in Page</a>
     </div>

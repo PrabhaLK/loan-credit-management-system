@@ -1,10 +1,10 @@
 <?php
 // Include necessary files
 include('../config/db.php');  // Include database configuration if needed
-// Include category functions if needed
 
 // Get the type from query parameter if available, default to empty string
 $type = isset($_GET['type']) ? $_GET['type'] : '';
+session_start()
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,6 +55,7 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
             max-height: 50vh;
             overflow-y: auto;
         }
+
         .logo-container {
             position: absolute;
             top: 10px;
@@ -66,7 +67,6 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
             width: 300px;
             height: auto;
         }
-        
     </style>
     <script>
         $(document).ready(function() {
@@ -159,7 +159,7 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                 $(lastRow).after(`
                     <div class="form-section row">
                         <div class="col-md-8">
-                            <input type="number" name="medical_price[]" class="form-control" placeholder="Item price" required>
+                            <input type="number" name="medical_price[]" class="form-control" placeholder="Add More" required>
                         </div>
                         <div class="col-md-4">
                             <button type="button" class="btn btn-danger remove_item_btn">Remove</button>
@@ -250,7 +250,7 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
         include('../functions/category-functions.php');
         ?>
 
-        <!-- NITF logo added -->
+    <!-- NITF logo added -->
     <div class="logo-container">
         <img class="logo" src="../images/logo.png" alt="Logo">
     </div>
@@ -260,10 +260,11 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
             <div class="col-md-6 left-sec">
                 <div class="Header">
                     <?php echo ($type); ?>
+                    <!-- <?php echo ($usr_NIC) ?> -->
                 </div>
                 <div class="left-up">
                     <div class="container">
-                        
+
                         <div class="row my-4">
                             <div class="col-lg-12 mx-auto">
                                 <div class="card shadow">
@@ -558,8 +559,8 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
 
                                     </form>
 
-                                    <?php endif ?>        
-                                    <!-- Section for adding Death Bill Cost -->
+                                <?php endif ?>
+                                <!-- Section for adding Death Bill Cost -->
                                 <?php if ($SubCategory1Name == "Kidney Surgery") : ?>
                                     <!-- Section for adding test items -->
                                     <div id="show_test">
@@ -592,8 +593,8 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                                     </form>
 
 
-                                    <?php endif ?>        
-                                    <!-- Section for adding Death Bill Cost -->
+                                <?php endif ?>
+                                <!-- Section for adding Death Bill Cost -->
                                 <?php if ($SubCategory1Name == "Kidney Surgery - Guarantee") : ?>
                                     <!-- Section for adding test items -->
                                     <div id="show_test">
@@ -626,7 +627,7 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                                     </form>
                                 <?php endif ?>
 
-                               
+
 
                                 <!-- Section for adding Death Bill Cost -->
                                 <?php if ($SubCategory1Name == "Natural Death") : ?>
@@ -784,7 +785,7 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                                     </form>
 
 
-                                    <?php endif ?>
+                                <?php endif ?>
 
                                 <!-- Section for adding knee hospital  Bill Cost -->
                                 <?php if ($SubCategory1Name == "Knee") :
@@ -823,7 +824,7 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
 
                                     </form>
 
-                                    <?php endif ?>
+                                <?php endif ?>
 
                                 <!-- Section for adding Accident Cost -->
                                 <?php if ($SubCategory1Name == "Accident") :
@@ -861,9 +862,9 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                                         </div>
 
                                     </form>
-                                    
 
-                                    <?php endif ?>
+
+                                <?php endif ?>
 
                                 <!-- Section for adding Accident Death Cost -->
                                 <?php if ($SubCategory1Name == "Accidental Death") :
@@ -902,7 +903,7 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
 
                                     </form>
 
-                                    <?php endif ?>
+                                <?php endif ?>
 
                                 <!-- Section for adding Hip Cost -->
                                 <?php if ($SubCategory1Name == "Hip") :
@@ -941,7 +942,7 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
 
                                     </form>
 
-                                    <?php endif ?>
+                                <?php endif ?>
 
                                 <!-- Section for adding RF Ablation Cost -->
                                 <?php if ($SubCategory1Name == "RF Ablation") :
@@ -980,7 +981,7 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
 
                                     </form>
 
-                                    <?php endif ?>
+                                <?php endif ?>
 
                                 <!-- Section for adding Accident Death Cost -->
                                 <?php if ($SubCategory1Name == "Hearing Aid") :
@@ -1018,7 +1019,7 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                                         </div>
 
                                     </form>
-                                    
+
                                 <?php endif ?>
 
                                 <!-- Section for adding Cancer hospital  Bill Cost -->
@@ -1101,13 +1102,23 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                         </thead>
                         <tbody>
                             <?php
-                            if ($result->num_rows > 0) {
+                            if (isset($result) && $result->num_rows > 0) {
                                 // Output data of each row
                                 while ($row = $result->fetch_assoc()) {
-                                    echo '<tr>
-                                            <td>' . htmlspecialchars($row['Name']) . '</td>
-                                            <td class="text-right h5" id="test_total_cost">Rs 0.00</td> <!-- Placeholder for total cost -->
-                                          </tr>';
+                                    echo '<tr>';
+                                    echo '<td>' . htmlspecialchars($row['Name']) . '</td>';
+
+                                    // Fetch user details within the same loop if needed
+                                    if (isset($result_usr) && $result_usr->num_rows > 0) {
+                                        // Reset the pointer of result_usr
+                                        mysqli_data_seek($result_usr, 0);
+                                        while ($row_usr = $result_usr->fetch_assoc()) {
+                                            echo '<td>' . htmlspecialchars($row_usr['Name']) . '</td>';
+                                        }
+                                    } else {
+                                        echo '<td>No user records found</td>';
+                                    }
+                                    echo '</tr>';
                                 }
                             } else {
                                 echo '<tr><td colspan="2">No records found</td></tr>';

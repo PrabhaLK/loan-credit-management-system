@@ -35,3 +35,6 @@
 
 </body>
 </html>
+
+<td class="text-right h5" id="test_total_cost">Rs 0.00</td> <!-- Placeholder for total cost -->
+</tr>';
