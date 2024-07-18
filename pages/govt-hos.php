@@ -55,6 +55,18 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
             max-height: 50vh;
             overflow-y: auto;
         }
+        .logo-container {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 10px;
+        }
+
+        .logo {
+            width: 300px;
+            height: auto;
+        }
+        
     </style>
     <script>
         $(document).ready(function() {
@@ -237,6 +249,11 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
 <body><?php
         include('../functions/category-functions.php');
         ?>
+
+        <!-- NITF logo added -->
+    <div class="logo-container">
+        <img class="logo" src="../images/logo.png" alt="Logo">
+    </div>
     <div class="container">
         <div class="row">
             <!-- Left Section for Form -->
@@ -246,6 +263,7 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                 </div>
                 <div class="left-up">
                     <div class="container">
+                        
                         <div class="row my-4">
                             <div class="col-lg-12 mx-auto">
                                 <div class="card shadow">

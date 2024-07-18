@@ -1,6 +1,7 @@
 <?php
 session_start()
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,18 +18,39 @@ session_start()
     <!-- custom stylesheet -->
     <link rel="stylesheet" href="dropdown.css">
 
+    <style>
+        body {
+            overflow: hidden;
+        }
 
+        .logo-container {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 10px;
+        }
+
+        .logo {
+            width: 300px;
+            height: auto;
+        }
+    </style>
 
 </head>
 
 <body>
 
-    <h1>Dropdown List </h1>
+    <!-- NITF logo added -->
+    <div class="logo-container">
+        <img class="logo" src="../images/logo.png" alt="Logo">
+    </div>
+
+    
+
+    <h1>Dropdown List</h1>
 
     <div class="container">
         <nav class="main-dropdown">
-
-
             <div id="navbar">
                 <ul class="topOne">
                     <!-- Hospitalization dropdown menu -->
@@ -91,12 +113,10 @@ session_start()
                 </ul>
             </div>
         </nav>
-
     </div>
 
     <div>
-
-        <a href="../functions/logout_funct.php" class="navbar-brand"><- Log in Page </a>
+        <a href="../functions/logout_funct.php" class="navbar-brand"><- Log in Page</a>
     </div>
 </body>
 
