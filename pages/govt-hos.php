@@ -1,19 +1,16 @@
-<?php
-// Include necessary files
-include('../config/db.php');  // Include database configuration if needed
-
-// Get the type from query parameter if available, default to empty string
-$type = isset($_GET['type']) ? $_GET['type'] : '';
-session_start()
-?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+    <?php
+    include('../config/db.php');  // Include database configuration if needed
+    $type = isset($_GET['type']) ? $_GET['type'] : '';
+    session_start();
+    ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.min.css" rel="stylesheet" />
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -68,29 +65,26 @@ session_start()
             height: auto;
         }
     </style>
-
 </head>
 
-<body><?php
-        include('../functions/category-functions.php');
-        ?>
+<body>
+    <?php
+
+    include('../functions/category-functions.php');
+    ?>
     <script>
         $(document).ready(function() {
-            // const perDayRoomCharge = 3000; // Room charge per day
             const perDayRoomCharge = <?php echo $PerDay; ?>;
-            // Room charge per day
+            const maxRoomCharge = <?php echo $PerIncident; ?>;
 
-            // Function to calculate days between two dates
             function calculateDaysBetweenDates(startDate, endDate) {
-                const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+                const oneDay = 24 * 60 * 60 * 1000;
                 const firstDate = new Date(startDate);
                 const secondDate = new Date(endDate);
-
                 const diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
                 return diffDays;
             }
 
-            // Function to calculate total medical costs
             function calculateTotal() {
                 let total = 0;
                 $("input[name='medical_price[]']").each(function() {
@@ -99,7 +93,6 @@ session_start()
                 return total.toFixed(2);
             }
 
-            // Function to calculate total test costs
             function calculateTestTotal() {
                 let testTotal = 0;
                 $("input[name='test_price[]']").each(function() {
@@ -108,17 +101,32 @@ session_start()
                 return testTotal.toFixed(2);
             }
 
-            // New function to calculate room charges based on the number of days
             function calculateRoomCharges(numberOfDays) {
-                return (numberOfDays * perDayRoomCharge).toFixed(2);
+                const charges = numberOfDays * perDayRoomCharge;
+                console.log("Number of Days:", numberOfDays);
+                console.log("Per Day Room Charge:", perDayRoomCharge);
+                console.log("Calculated Room Charges:", charges);
+                return charges.toFixed(2);
             }
 
-            // Event listener for date changes
+            function validateRoomCharges(roomCharges) {
+                if (roomCharges > maxRoomCharge) {
+                    Swal.fire({
+                        title: "Room Charges Limit Exceeded",
+                        text: "Room charges cannot be more than Rs <?php echo $PerIncident; ?>;.00 Please adjust the dates.",
+                        icon: "error"
+                    });
+                    $("#startingDate, #endingDate").val('');
+                    $("input[name='number_of_dates[]']").val('');
+                    return false;
+                }
+                return true;
+            }
+
             $("#startingDate, #endingDate").on('change', function() {
                 const startDate = $("#startingDate").val();
                 const endDate = $("#endingDate").val();
 
-                // Validate if start date is ahead of end date
                 if (startDate && endDate) {
                     const start = new Date(startDate);
                     const end = new Date(endDate);
@@ -135,14 +143,17 @@ session_start()
                     }
 
                     const numberOfDays = calculateDaysBetweenDates(startDate, endDate);
-                    $("input[name='number_of_dates[]']").val(numberOfDays);
+                    const roomCharges = parseFloat(calculateRoomCharges(numberOfDays));
 
-                    // Update table to include room charges
+                    if (!validateRoomCharges(roomCharges)) {
+                        return;
+                    }
+
+                    $("input[name='number_of_dates[]']").val(numberOfDays);
                     updateTable();
                 }
             });
 
-            // Initial setup for existing dates if any
             const startDate = $("#startingDate").val();
             const endDate = $("#endingDate").val();
             if (startDate && endDate) {
@@ -150,30 +161,42 @@ session_start()
                 $("input[name='number_of_dates[]']").val(numberOfDays);
             }
 
-            // Function to update the total costs in the table
             function updateTable() {
                 const totalCost = parseFloat(calculateTotal());
                 const testTotalCost = parseFloat(calculateTestTotal());
                 const numberOfDays = parseInt($("input[name='number_of_dates[]']").val()) || 0;
-                const roomCharges = parseFloat(calculateRoomCharges(numberOfDays)); // New room charges calculation
+                const roomCharges = parseFloat(calculateRoomCharges(numberOfDays));
                 const totalSum = totalCost + testTotalCost + roomCharges;
 
-                $("#total_cost").text(totalCost.toFixed(2));
-                $("#test_total_cost").text(testTotalCost.toFixed(2));
-                $("#room_charges").text(roomCharges.toFixed(2)); // New room charges display
-                $("#InitialCost").text(totalSum.toFixed(2));
+                console.log("Total Cost:", totalCost);
+                console.log("Test Total Cost:", testTotalCost);
+                console.log("Room Charges:", roomCharges);
+                console.log("Total Sum:", totalSum);
 
-                // Update the total bill cost in the result table
-                $("#result_table tbody tr").each(function() {
-                    const row = $(this);
-                    row.find("#total_cost").text('Rs ' + totalCost.toFixed(2));
-                    row.find("#test_total_cost").text('Rs ' + testTotalCost.toFixed(2));
-                    row.find("#room_charges").text('Rs ' + roomCharges.toFixed(2)); // New room charges display
-                    row.find("#InitialCost").text('Rs ' + totalSum.toFixed(2));
-                });
+                // Ensure these values are numbers before using toFixed
+                if (!isNaN(totalCost) && !isNaN(testTotalCost) && !isNaN(roomCharges)) {
+                    $("#total_cost").text(totalCost.toFixed(2));
+                    $("#test_total_cost").text(testTotalCost.toFixed(2));
+                    $("#room_charges").text(roomCharges.toFixed(2));
+                    $("#InitialCost").text(totalSum.toFixed(2));
+
+                    // Update hidden inputs
+                    $("input[name='total_room_charges']").val(roomCharges);
+                    $("input[name='total_treatments']").val(totalCost);
+                    $("input[name='total_tests']").val(testTotalCost);
+
+                    $("#result_table tbody tr").each(function() {
+                        const row = $(this);
+                        row.find("#total_cost").text('Rs ' + totalCost.toFixed(2));
+                        row.find("#test_total_cost").text('Rs ' + testTotalCost.toFixed(2));
+                        row.find("#room_charges").text('Rs ' + roomCharges.toFixed(2));
+                        row.find("#InitialCost").text('Rs ' + totalSum.toFixed(2));
+                    });
+                } else {
+                    console.error("One or more values are not valid numbers.");
+                }
             }
 
-            // Event listener for adding medical items
             $(".add_item_btn").click(function(e) {
                 e.preventDefault();
                 var lastRow = $("#show_item").find('.form-section').last();
@@ -189,7 +212,6 @@ session_start()
                 updateTable();
             });
 
-            // Event listener for adding test items
             $(".add_test_btn").click(function(e) {
                 e.preventDefault();
                 var lastTestRow = $("#show_test").find('.form-section').last();
@@ -205,59 +227,73 @@ session_start()
                 updateTable();
             });
 
-            // Event listener for removing medical items
             $(document).on('click', '.remove_item_btn', function(e) {
                 e.preventDefault();
                 $(this).closest('.form-section').remove();
                 updateTable();
             });
 
-            // Event listener for removing test items
             $(document).on('click', '.remove_test_btn', function(e) {
                 e.preventDefault();
                 $(this).closest('.form-section').remove();
                 updateTable();
             });
 
-            // Event listener for input change in medical prices
             $(document).on('input', "input[name='medical_price[]']", function() {
                 updateTable();
             });
 
-            // Event listener for input change in test prices
             $(document).on('input', "input[name='test_price[]']", function() {
                 updateTable();
             });
 
-            // Event listener for form submission
             $("#add_form").submit(function(e) {
                 e.preventDefault();
                 $("#add_btn").val('Adding....');
                 const numberOfDates = $("#number_of_dates").val();
-                const totalMedicalCost = calculateTotal();
-                const totalTestCost = calculateTestTotal();
-                const roomCharges = calculateRoomCharges(numberOfDates); // New room charges calculation
-                const totalSum = parseFloat(totalMedicalCost) + parseFloat(totalTestCost) + parseFloat(roomCharges);
+                const totalMedicalCost = parseFloat(calculateTotal());
+                const totalTestCost = parseFloat(calculateTestTotal());
+                const roomCharges = parseFloat(calculateRoomCharges(numberOfDates));
+                const totalSum = totalMedicalCost + totalTestCost + roomCharges;
 
-                $.ajax({
-                    url: '../functions/sample.php',
-                    method: 'post',
-                    data: {
-                        number_of_dates: numberOfDates,
-                        total_medical_cost: totalMedicalCost,
-                        total_test_cost: totalTestCost,
-                        room_charges: roomCharges,
-                        total_sum: totalSum
-                    },
-                    success: function(response) {
-                        console.log(response);
-                        $("#add_btn").val('Send Details');
-                        // Handle the response as needed
-                    }
-                });
+                console.log("Submit - Total Medical Cost:", totalMedicalCost);
+                console.log("Submit - Total Test Cost:", totalTestCost);
+                console.log("Submit - Room Charges:", roomCharges);
+                console.log("Submit - Total Sum:", totalSum);
+
+                // Ensure these values are numbers before using toFixed
+                if (!isNaN(totalMedicalCost) && !isNaN(totalTestCost) && !isNaN(roomCharges)) {
+                    // Update hidden inputs
+                    $("input[name='total_room_charges']").val(roomCharges);
+                    $("input[name='total_treatments']").val(totalMedicalCost);
+                    $("input[name='total_tests']").val(totalTestCost);
+
+                    $.ajax({
+                        url: '../functions/sample.php',
+                        method: 'post',
+                        data: {
+                            number_of_dates: numberOfDates,
+                            total_medical_cost: totalMedicalCost.toFixed(2),
+                            total_test_cost: totalTestCost.toFixed(2),
+                            room_charges: roomCharges.toFixed(2),
+                            total_sum: totalSum.toFixed(2),
+                            type: '<?php echo $type; ?>',
+                            nic: '<?php echo $_SESSION['nic']; ?>'
+                        },
+                        success: function(response) {
+                            console.log("Room Charges:", roomCharges);
+                            console.log("Total Cost:", totalMedicalCost);
+                            console.log(response);
+                            $("#add_btn").val('Send Details');
+                        }
+                    });
+                } else {
+                    console.error("One or more values are not valid numbers.");
+                    $("#add_btn").val('Send Details');
+                }
             });
 
-            // Initial calculation of totals on page load
+            // Initial update to set the table correctly on page load
             updateTable();
         });
     </script>
@@ -272,11 +308,9 @@ session_start()
             <div class="col-md-6 left-sec">
                 <div class="Header">
                     <?php echo ($type); ?>
-
                 </div>
                 <div class="left-up">
                     <div class="container">
-
                         <div class="row my-4">
                             <div class="col-lg-12 mx-auto">
                                 <div class="card shadow">
@@ -285,10 +319,12 @@ session_start()
                                     </div>
                                     <form method="POST" id="add_form">
                                         <div class="card-body p-4">
-                                            <!-- Section for adding govenment host method-->
+                                            <!-- Hidden Inputs for Form Data -->
+                                            <input type="hidden" name="total_room_charges">
+                                            <input type="hidden" name="total_treatments">
+                                            <input type="hidden" name="total_tests">
+                                            <!-- Section for adding government host method -->
                                             <?php if ($SubCategory1Name == "Government Hospitalization") : ?>
-
-                                                <!-- include('./method/gove-host-meth.php'); ?> -->
                                                 <div class="form-section row">
                                                     <div class="col-md-8">
                                                         <p>Number of Dates</p>
@@ -352,16 +388,11 @@ session_start()
                                                     <div class="col-md-12">
                                                         <h4>Total Cost of Tests: Rs <span id="test_total_cost">0.00</span></h4>
                                                     </div>
-                                                    <!-- <div class="col-md-12">
-                                                    <h4>Total Cost of Claim: Rs <span id="InitialCost">0.00</span></h4>
-                                                </div> -->
                                                 </div>
                                     </form>
                                 <?php endif ?>
                                 <!-- Section for adding Heart Surgery - Guarantee Bill Cost -->
                                 <?php if ($SubCategory1Name == "Heart Surgery - Guarantee") : ?>
-                                    <!--// include('./method/hart-meth.php'); ?> -->
-
                                     <div class="form-section row">
                                         <!-- Section for adding Surgery Bill Cost -->
                                         <div id="show_item">
@@ -375,7 +406,6 @@ session_start()
                                                 </div>
                                             </div>
                                         </div>
-
                                         <!-- Section for adding RF Ablation cost -->
                                         <div id="show_item">
                                             <div class="form-section row">
@@ -406,6 +436,7 @@ session_start()
                                     </div>
                                     </form>
                                 <?php endif ?>
+
 
                                 <!-- Section for adding governemnt Ayurvedic Bill Cost -->
                                 <?php if ($SubCategory1Name == "Government Ayuvedic Hospitalization") : ?>
