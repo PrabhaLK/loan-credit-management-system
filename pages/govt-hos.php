@@ -68,8 +68,18 @@ session_start()
             height: auto;
         }
     </style>
+
+</head>
+
+<body><?php
+        include('../functions/category-functions.php');
+        ?>
     <script>
         $(document).ready(function() {
+            // const perDayRoomCharge = 3000; // Room charge per day
+            const perDayRoomCharge = <?php echo $PerDay; ?>;
+            // Room charge per day
+
             // Function to calculate days between two dates
             function calculateDaysBetweenDates(startDate, endDate) {
                 const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
@@ -79,7 +89,6 @@ session_start()
                 const diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
                 return diffDays;
             }
-            // Calculate room charges
 
             // Function to calculate total medical costs
             function calculateTotal() {
@@ -97,6 +106,11 @@ session_start()
                     testTotal += parseFloat($(this).val()) || 0;
                 });
                 return testTotal.toFixed(2);
+            }
+
+            // New function to calculate room charges based on the number of days
+            function calculateRoomCharges(numberOfDays) {
+                return (numberOfDays * perDayRoomCharge).toFixed(2);
             }
 
             // Event listener for date changes
@@ -123,6 +137,8 @@ session_start()
                     const numberOfDays = calculateDaysBetweenDates(startDate, endDate);
                     $("input[name='number_of_dates[]']").val(numberOfDays);
 
+                    // Update table to include room charges
+                    updateTable();
                 }
             });
 
@@ -138,9 +154,13 @@ session_start()
             function updateTable() {
                 const totalCost = parseFloat(calculateTotal());
                 const testTotalCost = parseFloat(calculateTestTotal());
-                const totalSum = totalCost + testTotalCost;
+                const numberOfDays = parseInt($("input[name='number_of_dates[]']").val()) || 0;
+                const roomCharges = parseFloat(calculateRoomCharges(numberOfDays)); // New room charges calculation
+                const totalSum = totalCost + testTotalCost + roomCharges;
+
                 $("#total_cost").text(totalCost.toFixed(2));
                 $("#test_total_cost").text(testTotalCost.toFixed(2));
+                $("#room_charges").text(roomCharges.toFixed(2)); // New room charges display
                 $("#InitialCost").text(totalSum.toFixed(2));
 
                 // Update the total bill cost in the result table
@@ -148,6 +168,7 @@ session_start()
                     const row = $(this);
                     row.find("#total_cost").text('Rs ' + totalCost.toFixed(2));
                     row.find("#test_total_cost").text('Rs ' + testTotalCost.toFixed(2));
+                    row.find("#room_charges").text('Rs ' + roomCharges.toFixed(2)); // New room charges display
                     row.find("#InitialCost").text('Rs ' + totalSum.toFixed(2));
                 });
             }
@@ -157,14 +178,14 @@ session_start()
                 e.preventDefault();
                 var lastRow = $("#show_item").find('.form-section').last();
                 $(lastRow).after(`
-                    <div class="form-section row">
-                        <div class="col-md-8">
-                            <input type="number" name="medical_price[]" class="form-control" placeholder="Add More" required>
-                        </div>
-                        <div class="col-md-4">
-                            <button type="button" class="btn btn-danger remove_item_btn">Remove</button>
-                        </div>
-                    </div>`);
+            <div class="form-section row">
+                <div class="col-md-8">
+                    <input type="number" name="medical_price[]" class="form-control" placeholder="Add More" required>
+                </div>
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-danger remove_item_btn">Remove</button>
+                </div>
+            </div>`);
                 updateTable();
             });
 
@@ -173,14 +194,14 @@ session_start()
                 e.preventDefault();
                 var lastTestRow = $("#show_test").find('.form-section').last();
                 $(lastTestRow).after(`
-                    <div class="form-section row">
-                        <div class="col-md-8">
-                            <input type="number" name="test_price[]" class="form-control" placeholder="Test price" required>
-                        </div>
-                        <div class="col-md-4">
-                            <button type="button" class="btn btn-danger remove_test_btn">Remove</button>
-                        </div>
-                    </div>`);
+            <div class="form-section row">
+                <div class="col-md-8">
+                    <input type="number" name="test_price[]" class="form-control" placeholder="Test price" required>
+                </div>
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-danger remove_test_btn">Remove</button>
+                </div>
+            </div>`);
                 updateTable();
             });
 
@@ -212,43 +233,34 @@ session_start()
             $("#add_form").submit(function(e) {
                 e.preventDefault();
                 $("#add_btn").val('Adding....');
+                const numberOfDates = $("#number_of_dates").val();
+                const totalMedicalCost = calculateTotal();
+                const totalTestCost = calculateTestTotal();
+                const roomCharges = calculateRoomCharges(numberOfDates); // New room charges calculation
+                const totalSum = parseFloat(totalMedicalCost) + parseFloat(totalTestCost) + parseFloat(roomCharges);
+
                 $.ajax({
                     url: '../functions/sample.php',
                     method: 'post',
-                    data: $(this).serialize(),
+                    data: {
+                        number_of_dates: numberOfDates,
+                        total_medical_cost: totalMedicalCost,
+                        total_test_cost: totalTestCost,
+                        room_charges: roomCharges,
+                        total_sum: totalSum
+                    },
                     success: function(response) {
                         console.log(response);
+                        $("#add_btn").val('Send Details');
+                        // Handle the response as needed
                     }
                 });
             });
 
             // Initial calculation of totals on page load
             updateTable();
-
-            // Function to validate number inputs
-            function validateNumberInput(element) {
-                element.value = element.value.replace(/[^0-9.]/g, ''); // Remove any non-numeric characters
-                if (element.value < 0) {
-                    element.value = 0; // Ensure no negative values
-                }
-            }
-
-            // Event listener for number input validation
-            $(document).on('input', '.validate-number', function() {
-                validateNumberInput(this);
-            });
-
-            // Apply validation on initial load for any pre-existing inputs
-            $('.validate-number').each(function() {
-                validateNumberInput(this);
-            });
         });
     </script>
-</head>
-
-<body><?php
-        include('../functions/category-functions.php');
-        ?>
 
     <!-- NITF logo added -->
     <div class="logo-container">
@@ -260,7 +272,7 @@ session_start()
             <div class="col-md-6 left-sec">
                 <div class="Header">
                     <?php echo ($type); ?>
-                    <!-- <?php echo ($usr_NIC) ?> -->
+
                 </div>
                 <div class="left-up">
                     <div class="container">
@@ -332,7 +344,7 @@ session_start()
                                                 <!-- Total Costs Section -->
                                                 <div class="total-costs row">
                                                     <div class="col-md-12">
-                                                        <h4>Total Cost of Treatments: Rs <span id="total_cost">0.00</span></h4>
+                                                        <h4>Total Room Charges: Rs <span id="room_charges">0.00</span></h4>
                                                     </div>
                                                     <div class="col-md-12">
                                                         <h4>Total Cost of Treatments: Rs <span id="total_cost">0.00</span></h4>
@@ -595,7 +607,6 @@ session_start()
 
                                     </form>
 
-
                                 <?php endif ?>
                                 <!-- Section for adding Death Bill Cost -->
                                 <?php if ($SubCategory1Name == "Kidney Surgery - Guarantee") : ?>
@@ -629,8 +640,6 @@ session_start()
 
                                     </form>
                                 <?php endif ?>
-
-
 
                                 <!-- Section for adding Death Bill Cost -->
                                 <?php if ($SubCategory1Name == "Natural Death") : ?>
@@ -787,7 +796,6 @@ session_start()
 
                                     </form>
 
-
                                 <?php endif ?>
 
                                 <!-- Section for adding knee hospital  Bill Cost -->
@@ -865,7 +873,6 @@ session_start()
                                         </div>
 
                                     </form>
-
 
                                 <?php endif ?>
 
@@ -1100,7 +1107,7 @@ session_start()
                         <thead>
                             <tr>
                                 <th>Description</th>
-                                <th>Maximum Limit (Should Not Exceed Than)</th>
+                                <th>Maximum Limit Per Incident (Should Not Exceed Than)</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -1110,21 +1117,23 @@ session_start()
                                 while ($row = $result->fetch_assoc()) {
                                     echo '<tr>';
                                     echo '<td>' . htmlspecialchars($row['Name']) . '</td>';
+                                    echo '<td class=" text-right">' . htmlspecialchars($row['PerIncident']) . '.00' . '</td>';
 
-                                    // Fetch user details within the same loop if needed
-                                    if (isset($result_usr) && $result_usr->num_rows > 0) {
-                                        // Reset the pointer of result_usr
-                                        mysqli_data_seek($result_usr, 0);
-                                        while ($row_usr = $result_usr->fetch_assoc()) {
-                                            echo '<td>' . htmlspecialchars($row_usr['Name']) . '</td>';
-                                        }
-                                    } else {
-                                        echo '<td>No user records found</td>';
-                                    }
-                                    echo '</tr>';
+                                    //     // Fetch user details within the same loop if needed
+                                    //     if (isset($resultLimit) && $resultLimit->num_rows > 0) {
+                                    //         // Reset the pointer of result_usr
+                                    //         mysqli_data_seek($resultLimit, 0);
+                                    //         while ($row_incident = $resultLimit->fetch_assoc()) {
+                                    //             echo '<td>' . htmlspecialchars($PerIncidentLimit) . '</td>';
+                                    //         }
+                                    //     } else {
+                                    //         echo '<td>No user records found</td>';
+                                    //     }
+                                    //     echo '</tr>';
+                                    // }
+                                    // } else {
+                                    //     echo '<tr><td colspan="2">No records found</td></tr>';
                                 }
-                            } else {
-                                echo '<tr><td colspan="2">No records found</td></tr>';
                             }
                             ?>
                             <tr>

@@ -45,11 +45,11 @@ if (!empty($type)) {
     $result = mysqli_query($conn, $sql);
 
     // Get user info from the database according to the session
-    $sql_usr = "SELECT * FROM `user_details` WHERE `NIC` = '{$_SESSION['nic']}'";
-    $result_usr = mysqli_query($conn, $sql_usr);
-    if ($result_usr && mysqli_num_rows($result_usr) > 0) {
-        $row_usr = mysqli_fetch_assoc($result_usr);
-        $usr_NIC = $row_usr['NIC'];
-        $usr_Name = $row_usr['Name'];
-    }
+    // $sql_usr = "SELECT * FROM `user_details` WHERE `NIC` = '{$_SESSION['nic']}'";
+    // $result_usr = mysqli_query($conn, $sql_usr);
+    // if ($result_usr && mysqli_num_rows($result_usr) > 0) {
+    //     $row_usr = mysqli_fetch_assoc($result_usr);
+    //     $usr_NIC = $row_usr['NIC'];
+    //     $usr_Name = $row_usr['Name'];
+    // }
 }
