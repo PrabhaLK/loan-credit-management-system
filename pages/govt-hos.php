@@ -276,20 +276,38 @@
                         success: function(response) {
                             console.log("Response:", response);
                             $("#add_btn").val('Send Details');
+                            Swal.fire({
+                                title: 'Data has Been Added.',
+                                icon: "success",
+                                toast: true,
+                                timer: 3000,
+                                position: 'top-right',
+                                timerProgressBar: true,
+                                showConfirmButton: false
+                            });
+                            setTimeout(function() {
+                                window.location.reload();
+                            }, 4000); // Reloads page after the data entry.
                         }
                     });
                 } else {
                     console.error("One or more values are not valid numbers.");
+                    Swal.fire({
+                        title: 'Data insert Failed.',
+                        icon: "error",
+                        toast: true,
+                        timer: 3000,
+                        position: 'top-right',
+                        timerProgressBar: true,
+                        showConfirmButton: false
+                    });
                     $("#add_btn").val('Send Details');
                 }
             });
-
             // Initial update to set the values
             updateTable();
         });
     </script>
-
-
 
     <!-- NITF logo added -->
     <div class="logo-container">
@@ -430,7 +448,6 @@
                                     </form>
                                 <?php endif ?>
 
-
                                 <!-- Section for adding governemnt Ayurvedic Bill Cost -->
                                 <?php if ($SubCategory1Name == "Government Ayuvedic Hospitalization") : ?>
 
@@ -456,61 +473,20 @@
                                                 </div>
                                             </div>
 
-                                            <!-- Section for adding medical items -->
-                                            <div id="show_item">
-                                                <div class="form-section row">
-                                                    <div class="col-md-8">
-                                                        <p>Surgical and Medical Treatments</p>
-                                                        <input type="number" name="medical_price[]" class="form-control" placeholder="Treatment price" required>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <button type="button" class="btn btn-success add_item_btn">Add More</button>
-                                                    </div>
-                                                </div>
 
-                                                <!-- Section for adding test items -->
-                                                <div id="show_test">
-                                                    <div class="form-section row">
-                                                        <div class="col-md-8">
-                                                            <p>Medical tests</p>
-                                                            <input type="number" name="test_price[]" class="form-control" placeholder="Test price" required>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <button type="button" class="btn btn-success add_test_btn">Add More</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <!-- Section for adding medical items -->
-                                                <div id="show_item">
-                                                    <div class="form-section row">
-                                                        <div class="col-md-8">
-                                                            <p>Consultant Fee</p>
-                                                            <input type="number" name="consultant_price[]" class="form-control" placeholder="Consultant price" required>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <button type="button" class="btn btn-success add_item_btn">Add More</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div><!-- Submit Button -->
-                                            <div class="row my-4">
-                                                <div class="col-md-12">
-                                                    <button type="submit" class="btn btn-primary" id="add_btn">Send Details</button>
-                                                </div>
-                                            </div>
-                                            <!-- Total Costs Section -->
-                                            <div class="total-costs row">
-                                                <div class="col-md-12">
-                                                    <h4>Total Cost of Treatments: Rs <span id="total_cost">0.00</span></h4>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <h4>Total Cost of Tests: Rs <span id="test_total_cost">0.00</span></h4>
-                                                </div>
-                                            </div>
                                         </div>
 
+                                    </div><!-- Submit Button -->
+                                    <div class="row my-4">
+                                        <div class="col-md-12">
+                                            <button type="submit" class="btn btn-primary" id="add_btn">Send Details</button>
+                                        </div>
+                                    </div>
+                                    <!-- Total Costs Section -->
+                                    <div class="total-costs row">
+                                        <div class="col-md-12">
+                                            <h4>Total Room Charges: Rs <span id="room_charges">0.00</span></h4>
+                                        </div>
                                     </div>
                                     </form>
                                 <?php endif ?>
@@ -595,7 +571,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     </form>
 
                                 <?php endif ?>

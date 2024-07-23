@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     ], true));
 
     // Insert data into the database
-    $query = "INSERT INTO temp (`nic`, `type`, `total_room_charges`, `total_treatments`, `total_tests`) VALUES (?, ?, ?, ?, ?)";
+    $query = "INSERT INTO temp (`nic`, `type`, `total_room_charges`, `total_treatments`, `total_tests`,`total_cost`) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($query);
 
     if ($stmt === false) {
@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         die("Prepare failed: " . $conn->error);
     }
 
-    $stmt->bind_param("ssddd", $nic, $type, $roomCharges, $totalMedicalCost, $totalTestCost);
+    $stmt->bind_param("ssdddd", $nic, $type, $roomCharges, $totalMedicalCost, $totalTestCost, $totalSum);
 
     if ($stmt->execute()) {
         echo "Data inserted successfully";
