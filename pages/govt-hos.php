@@ -74,14 +74,14 @@
     ?>
     <script>
         $(document).ready(function() {
-            const perDayRoomCharge = <?php echo $PerDay; ?>;
-            const maxRoomCharge = <?php echo $PerIncident; ?>;
+            const perDayRoomCharge = parseFloat(<?php echo $PerDay; ?>);
+            const maxRoomCharge = parseFloat(<?php echo $PerIncident; ?>);
 
             function calculateDaysBetweenDates(startDate, endDate) {
                 const oneDay = 24 * 60 * 60 * 1000;
                 const firstDate = new Date(startDate);
                 const secondDate = new Date(endDate);
-                const diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
+                const diffDays = Math.round(Math.abs((secondDate - firstDate) / oneDay));
                 return diffDays;
             }
 
@@ -103,9 +103,6 @@
 
             function calculateRoomCharges(numberOfDays) {
                 const charges = numberOfDays * perDayRoomCharge;
-                console.log("Number of Days:", numberOfDays);
-                console.log("Per Day Room Charge:", perDayRoomCharge);
-                console.log("Calculated Room Charges:", charges);
                 return charges.toFixed(2);
             }
 
@@ -113,7 +110,7 @@
                 if (roomCharges > maxRoomCharge) {
                     Swal.fire({
                         title: "Room Charges Limit Exceeded",
-                        text: "Room charges cannot be more than Rs <?php echo $PerIncident; ?>;.00 Please adjust the dates.",
+                        text: "Room charges cannot be more than Rs <?php echo $PerIncident; ?>.00. Please adjust the dates.",
                         icon: "error"
                     });
                     $("#startingDate, #endingDate").val('');
@@ -154,33 +151,25 @@
                 }
             });
 
-            const startDate = $("#startingDate").val();
-            const endDate = $("#endingDate").val();
-            if (startDate && endDate) {
-                const numberOfDays = calculateDaysBetweenDates(startDate, endDate);
-                $("input[name='number_of_dates[]']").val(numberOfDays);
-            }
-
             function updateTable() {
                 const totalCost = parseFloat(calculateTotal());
                 const testTotalCost = parseFloat(calculateTestTotal());
-                const numberOfDays = parseInt($("input[name='number_of_dates[]']").val()) || 0;
+                const numberOfDays = parseInt($("input[name='number_of_dates[]']").val(), 10) || 0;
                 const roomCharges = parseFloat(calculateRoomCharges(numberOfDays));
                 const totalSum = totalCost + testTotalCost + roomCharges;
 
+                // Log values to debug
                 console.log("Total Cost:", totalCost);
                 console.log("Test Total Cost:", testTotalCost);
                 console.log("Room Charges:", roomCharges);
                 console.log("Total Sum:", totalSum);
 
-                // Ensure these values are numbers before using toFixed
                 if (!isNaN(totalCost) && !isNaN(testTotalCost) && !isNaN(roomCharges)) {
                     $("#total_cost").text(totalCost.toFixed(2));
                     $("#test_total_cost").text(testTotalCost.toFixed(2));
                     $("#room_charges").text(roomCharges.toFixed(2));
                     $("#InitialCost").text(totalSum.toFixed(2));
 
-                    // Update hidden inputs
                     $("input[name='total_room_charges']").val(roomCharges);
                     $("input[name='total_treatments']").val(totalCost);
                     $("input[name='total_tests']").val(testTotalCost);
@@ -201,14 +190,14 @@
                 e.preventDefault();
                 var lastRow = $("#show_item").find('.form-section').last();
                 $(lastRow).after(`
-            <div class="form-section row">
-                <div class="col-md-8">
-                    <input type="number" name="medical_price[]" class="form-control" placeholder="Add More" required>
-                </div>
-                <div class="col-md-4">
-                    <button type="button" class="btn btn-danger remove_item_btn">Remove</button>
-                </div>
-            </div>`);
+                <div class="form-section row">
+                    <div class="col-md-8">
+                        <input type="number" name="medical_price[]" class="form-control" placeholder="Add More" required>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" class="btn btn-danger remove_item_btn">Remove</button>
+                    </div>
+                </div>`);
                 updateTable();
             });
 
@@ -216,14 +205,14 @@
                 e.preventDefault();
                 var lastTestRow = $("#show_test").find('.form-section').last();
                 $(lastTestRow).after(`
-            <div class="form-section row">
-                <div class="col-md-8">
-                    <input type="number" name="test_price[]" class="form-control" placeholder="Test price" required>
-                </div>
-                <div class="col-md-4">
-                    <button type="button" class="btn btn-danger remove_test_btn">Remove</button>
-                </div>
-            </div>`);
+                <div class="form-section row">
+                    <div class="col-md-8">
+                        <input type="number" name="test_price[]" class="form-control" placeholder="Test price" required>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" class="btn btn-danger remove_test_btn">Remove</button>
+                    </div>
+                </div>`);
                 updateTable();
             });
 
@@ -250,40 +239,42 @@
             $("#add_form").submit(function(e) {
                 e.preventDefault();
                 $("#add_btn").val('Adding....');
-                const numberOfDates = $("#number_of_dates").val();
+                const numberOfDates = parseInt($("input[name='number_of_dates[]']").val(), 10) || 0;
                 const totalMedicalCost = parseFloat(calculateTotal());
                 const totalTestCost = parseFloat(calculateTestTotal());
                 const roomCharges = parseFloat(calculateRoomCharges(numberOfDates));
                 const totalSum = totalMedicalCost + totalTestCost + roomCharges;
 
+                // Log values to debug
+                console.log("Submit - Number of Dates:", numberOfDates);
                 console.log("Submit - Total Medical Cost:", totalMedicalCost);
                 console.log("Submit - Total Test Cost:", totalTestCost);
                 console.log("Submit - Room Charges:", roomCharges);
                 console.log("Submit - Total Sum:", totalSum);
 
-                // Ensure these values are numbers before using toFixed
                 if (!isNaN(totalMedicalCost) && !isNaN(totalTestCost) && !isNaN(roomCharges)) {
-                    // Update hidden inputs
                     $("input[name='total_room_charges']").val(roomCharges);
                     $("input[name='total_treatments']").val(totalMedicalCost);
                     $("input[name='total_tests']").val(totalTestCost);
 
+                    const requestData = {
+                        number_of_dates: numberOfDates,
+                        total_medical_cost: totalMedicalCost.toFixed(2),
+                        total_test_cost: totalTestCost.toFixed(2),
+                        room_charges: roomCharges.toFixed(2),
+                        total_sum: totalSum.toFixed(2),
+                        type: '<?php echo $type; ?>',
+                        nic: '<?php echo $_SESSION['nic']; ?>'
+                    };
+
+                    console.log("AJAX request data:", requestData);
+
                     $.ajax({
                         url: '../functions/sample.php',
                         method: 'post',
-                        data: {
-                            number_of_dates: numberOfDates,
-                            total_medical_cost: totalMedicalCost.toFixed(2),
-                            total_test_cost: totalTestCost.toFixed(2),
-                            room_charges: roomCharges.toFixed(2),
-                            total_sum: totalSum.toFixed(2),
-                            type: '<?php echo $type; ?>',
-                            nic: '<?php echo $_SESSION['nic']; ?>'
-                        },
+                        data: requestData,
                         success: function(response) {
-                            console.log("Room Charges:", roomCharges);
-                            console.log("Total Cost:", totalMedicalCost);
-                            console.log(response);
+                            console.log("Response:", response);
                             $("#add_btn").val('Send Details');
                         }
                     });
@@ -293,10 +284,12 @@
                 }
             });
 
-            // Initial update to set the table correctly on page load
+            // Initial update to set the values
             updateTable();
         });
     </script>
+
+
 
     <!-- NITF logo added -->
     <div class="logo-container">
