@@ -642,530 +642,524 @@
                                                     <label for="endingDate">End Date</label>
                                                 </div>
                                             </div>
-
-
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div><!-- Submit Button -->
-                    <div class="row my-4">
-                        <div class="col-md-12">
-                            <button type="submit" class="btn btn-primary" id="add_btn">Send Details</button>
-                        </div>
-                    </div>
-                    <!-- Total Costs Section -->
-                    <div class="total-costs row">
-                        <div class="col-md-12">
-                            <h4>Total Room Charges: Rs <span id="room_charges">0.00</span></h4>
-                        </div>
-                    </div>
-                    </form>
-                <?php endif ?>
-                <!-- Section for adding Private Ayurvedic Bill Cost -->
-                <!-- Section for adding Death Bill Cost -->
-                <?php if ($SubCategory1Name == "Kidney Surgery") : ?>
-                    <!-- Section for adding test items -->
-                    <div id="show_test">
-                        <div class="form-section row">
-                            <div class="col-md-8">
-                                <p>Kidney Surgery</p>
-                                <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for Kidney Surgery Bill Cost" required>
-                            </div>
-                            <div class="col-md-4">
-                                <button type="button" class="btn btn-success add_test_btn">Add More</button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Submit Button -->
-                    <div class="row my-4">
-                        <div class="col-md-12">
-                            <button type="submit" class="btn btn-primary" id="add_btn">Send Details</button>
-                        </div>
-                    </div>
-                    <!-- Total Costs Section -->
-                    <div class="total-costs row">
-                        <div class="col-md-12">
-                            <h4>Total Cost of Treatments: Rs <span id="total_cost">0.00</span></h4>
-                        </div>
-                        <div class="col-md-12">
-                            <h4>Total Cost of Tests: Rs <span id="test_total_cost">0.00</span></h4>
-                        </div>
-                    </div>
-
-                    </form>
-
-                <?php endif ?>
-                <!-- Section for adding Death Bill Cost -->
-                <?php if ($SubCategory1Name == "Kidney Surgery - Guarantee") : ?>
-                    <!-- Section for adding test items -->
-                    <div id="show_test">
-                        <div class="form-section row">
-                            <div class="col-md-8">
-                                <p>Kidney Surgery - Guarantee</p>
-                                <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for Kidney Surgery - Guarantee Bill Cost" required>
-                            </div>
-                            <div class="col-md-4">
-                                <button type="button" class="btn btn-success add_test_btn">Add More</button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Submit Button -->
-                    <div class="row my-4">
-                        <div class="col-md-12">
-                            <button type="submit" class="btn btn-primary" id="add_btn">Send Details</button>
-                        </div>
-                    </div>
-                    <!-- Total Costs Section -->
-                    <div class="total-costs row">
-                        <div class="col-md-12">
-                            <h4>Total Cost of Treatments: Rs <span id="total_cost">0.00</span></h4>
-                        </div>
-                        <div class="col-md-12">
-                            <h4>Total Cost of Tests: Rs <span id="test_total_cost">0.00</span></h4>
-                        </div>
-                    </div>
-
-                    </form>
-                <?php endif ?>
-
-                <!-- Section for adding Death Bill Cost -->
-                <?php if ($SubCategory1Name == "Natural Death") : ?>
-                    <!-- Section for adding test items -->
-                    <div id="show_test">
-                        <div class="form-section row">
-                            <div class="col-md-8">
-                                <p>Natural Death</p>
-                                <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for Natural Death" required>
-                            </div>
-                            <div class="col-md-4">
-                                <button type="button" class="btn btn-success add_test_btn">Add More</button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Submit Button -->
-                    <div class="row my-4">
-                        <div class="col-md-12">
-                            <button type="submit" class="btn btn-primary" id="add_btn">Send Details</button>
-                        </div>
-                    </div>
-                    <!-- Total Costs Section -->
-                    <div class="total-costs row">
-                        <div class="col-md-12">
-                            <h4>Total Cost of Treatments: Rs <span id="total_cost">0.00</span></h4>
-                        </div>
-                        <div class="col-md-12">
-                            <h4>Total Cost of Tests: Rs <span id="test_total_cost">0.00</span></h4>
-                        </div>
-                    </div>
-
-                    </form>
-                <?php endif ?>
-
-                <!-- Section for adding Private Ayurvedic  Bill Cost -->
-                <?php if ($SubCategory1Name == "Private Ayuvedic Hospitalization") : ?>
-                    <div class="form-section row">
-                        <div class="col-md-8">
-                            <p>Number of Dates</p>
-
-                            <!-- Input for number of dates (readonly) -->
-                            <input type="number" name="number_of_dates[]" class="form-control" placeholder="Number of Dates" max="10" required readonly>
-                        </div>
-                        <!-- Date Pickers for selecting date period -->
-                        <div class="row">
-                            <div class="col-md-6 mb-4">
-                                <div class="md-form">
-                                    <input placeholder="Select starting date" type="date" id="startingDate" name="startingDate">
-                                    <label for="startingDate">Start Date</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-4">
-                                <div class="md-form">
-                                    <input placeholder="Select ending date" type="date" id="endingDate" name="endingDate">
-                                    <label for="endingDate">End Date</label>
-                                </div>
-                            </div>
-
-                            <!-- Section for adding medical items -->
-                            <div id="show_item">
-                                <div class="form-section row">
-                                    <div class="col-md-8">
-                                        <p>Surgical and Medical Treatments</p>
-                                        <input type="number" name="medical_price[]" class="form-control" placeholder="Treatment price" required>
+                                    <!-- Submit Button -->
+                                    <div class="row my-4">
+                                        <div class="col-md-12">
+                                            <button type="submit" class="btn btn-primary" id="add_btn">Send Details</button>
+                                        </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <button type="button" class="btn btn-success add_item_btn">Add More</button>
+                                    <!-- Total Costs Section -->
+                                    <div class="total-costs row">
+                                        <div class="col-md-12">
+                                            <h4>Total Room Charges: Rs <span id="room_charges">0.00</span></h4>
+                                        </div>
                                     </div>
-                                </div>
+                                    </form>
+                                <?php endif ?>
+                                <!-- Section for adding Private Ayurvedic Bill Cost -->
+                                <!-- Section for adding Death Bill Cost -->
+                                <?php if ($SubCategory1Name == "Kidney Surgery") : ?>
+                                    <!-- Section for adding test items -->
+                                    <div id="show_test">
+                                        <div class="form-section row">
+                                            <div class="col-md-8">
+                                                <p>Kidney Surgery</p>
+                                                <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for Kidney Surgery Bill Cost" required>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <button type="button" class="btn btn-success add_test_btn">Add More</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Submit Button -->
+                                    <div class="row my-4">
+                                        <div class="col-md-12">
+                                            <button type="submit" class="btn btn-primary" id="add_btn">Send Details</button>
+                                        </div>
+                                    </div>
+                                    <!-- Total Costs Section -->
+                                    <div class="total-costs row">
+                                        <div class="col-md-12">
+                                            <h4>Total Cost of Treatments: Rs <span id="total_cost">0.00</span></h4>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <h4>Total Cost of Tests: Rs <span id="test_total_cost">0.00</span></h4>
+                                        </div>
+                                    </div>
 
-                                <!-- Section for adding test items -->
-                                <div id="show_test">
+                                    </form>
+
+                                <?php endif ?>
+                                <!-- Section for adding Death Bill Cost -->
+                                <?php if ($SubCategory1Name == "Kidney Surgery - Guarantee") : ?>
+                                    <!-- Section for adding test items -->
+                                    <div id="show_test">
+                                        <div class="form-section row">
+                                            <div class="col-md-8">
+                                                <p>Kidney Surgery - Guarantee</p>
+                                                <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for Kidney Surgery - Guarantee Bill Cost" required>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <button type="button" class="btn btn-success add_test_btn">Add More</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Submit Button -->
+                                    <div class="row my-4">
+                                        <div class="col-md-12">
+                                            <button type="submit" class="btn btn-primary" id="add_btn">Send Details</button>
+                                        </div>
+                                    </div>
+                                    <!-- Total Costs Section -->
+                                    <div class="total-costs row">
+                                        <div class="col-md-12">
+                                            <h4>Total Cost of Treatments: Rs <span id="total_cost">0.00</span></h4>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <h4>Total Cost of Tests: Rs <span id="test_total_cost">0.00</span></h4>
+                                        </div>
+                                    </div>
+
+                                    </form>
+                                <?php endif ?>
+
+                                <!-- Section for adding Death Bill Cost -->
+                                <?php if ($SubCategory1Name == "Natural Death") : ?>
+                                    <!-- Section for adding test items -->
+                                    <div id="show_test">
+                                        <div class="form-section row">
+                                            <div class="col-md-8">
+                                                <p>Natural Death</p>
+                                                <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for Natural Death" required>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <button type="button" class="btn btn-success add_test_btn">Add More</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Submit Button -->
+                                    <div class="row my-4">
+                                        <div class="col-md-12">
+                                            <button type="submit" class="btn btn-primary" id="add_btn">Send Details</button>
+                                        </div>
+                                    </div>
+                                    <!-- Total Costs Section -->
+                                    <div class="total-costs row">
+                                        <div class="col-md-12">
+                                            <h4>Total Cost of Treatments: Rs <span id="total_cost">0.00</span></h4>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <h4>Total Cost of Tests: Rs <span id="test_total_cost">0.00</span></h4>
+                                        </div>
+                                    </div>
+
+                                    </form>
+                                <?php endif ?>
+
+                                <!-- Section for adding Private Ayurvedic  Bill Cost -->
+                                <?php if ($SubCategory1Name == "Private Ayuvedic Hospitalization") : ?>
                                     <div class="form-section row">
                                         <div class="col-md-8">
-                                            <p>Medical tests</p>
-                                            <input type="number" name="test_price[]" class="form-control" placeholder="Test price" required>
+                                            <p>Number of Dates</p>
+
+                                            <!-- Input for number of dates (readonly) -->
+                                            <input type="number" name="number_of_dates[]" class="form-control" placeholder="Number of Dates" max="10" required readonly>
                                         </div>
-                                        <div class="col-md-4">
-                                            <button type="button" class="btn btn-success add_test_btn">Add More</button>
+                                        <!-- Date Pickers for selecting date period -->
+                                        <div class="row">
+                                            <div class="col-md-6 mb-4">
+                                                <div class="md-form">
+                                                    <input placeholder="Select starting date" type="date" id="startingDate" name="startingDate">
+                                                    <label for="startingDate">Start Date</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-4">
+                                                <div class="md-form">
+                                                    <input placeholder="Select ending date" type="date" id="endingDate" name="endingDate">
+                                                    <label for="endingDate">End Date</label>
+                                                </div>
+                                            </div>
+
+                                            <!-- Section for adding medical items -->
+                                            <div id="show_item">
+                                                <div class="form-section row">
+                                                    <div class="col-md-8">
+                                                        <p>Surgical and Medical Treatments</p>
+                                                        <input type="number" name="medical_price[]" class="form-control" placeholder="Treatment price" required>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <button type="button" class="btn btn-success add_item_btn">Add More</button>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Section for adding test items -->
+                                                <div id="show_test">
+                                                    <div class="form-section row">
+                                                        <div class="col-md-8">
+                                                            <p>Medical tests</p>
+                                                            <input type="number" name="test_price[]" class="form-control" placeholder="Test price" required>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <button type="button" class="btn btn-success add_test_btn">Add More</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Section for adding medical items -->
+                                                <div id="show_item">
+                                                    <div class="form-section row">
+                                                        <div class="col-md-8">
+                                                            <p>Consultant Fee</p>
+                                                            <input type="number" name="consultant_price[]" class="form-control" placeholder="Consultant price" required>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <button type="button" class="btn btn-success add_item_btn">Add More</button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
                                         </div>
+                                        <!-- Submit Button -->
+                                        <div class="row my-4">
+                                            <div class="col-md-12">
+                                                <button type="submit" class="btn btn-primary" id="add_btn">Send Details</button>
+                                            </div>
+                                        </div>
+                                        <!-- Total Costs Section -->
+                                        <div class="total-costs row">
+                                            <div class="col-md-12">
+                                                <h4>Total Cost of Treatments: Rs <span id="total_cost">0.00</span></h4>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <h4>Total Cost of Tests: Rs <span id="test_total_cost">0.00</span></h4>
+                                            </div>
+                                        </div>
+
                                     </div>
-                                </div>
+                                    </form>
+                                <?php endif ?>
 
-                                <!-- Section for adding medical items -->
-                                <div id="show_item">
-                                    <div class="form-section row">
-                                        <div class="col-md-8">
-                                            <p>Consultant Fee</p>
-                                            <input type="number" name="consultant_price[]" class="form-control" placeholder="Consultant price" required>
+                                <!-- Section for adding Cancer hospital  Bill Cost -->
+                                <?php if ($SubCategory1Name == "Cancer") :
+                                    // include('./method/cancer-meth.php'); 
+                                ?>
+
+                                    <form method="POST" id="add_form">
+
+                                        <!-- Section for adding Cancer bill -->
+                                        <div id="show_test">
+                                            <div class="form-section row">
+                                                <div class="col-md-8">
+                                                    <p>Cancer Hospital Bill</p>
+                                                    <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for Cancer hospital Bill" required>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <button type="button" class="btn btn-success add_test_btn">Add More</button>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <button type="button" class="btn btn-success add_item_btn">Add More</button>
+                                        <!-- Submit Button -->
+                                        <div class="row my-4">
+                                            <div class="col-md-12">
+                                                <button type="submit" class="btn btn-primary" id="add_btn">Send Details</button>
+                                            </div>
                                         </div>
-                                    </div>
+                                        <!-- Total Costs Section -->
+                                        <div class="total-costs row">
+                                            <div class="col-md-12">
+                                                <h4>Total Cost of Treatments: Rs <span id="total_cost">0.00</span></h4>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <h4>Total Cost of Tests: Rs <span id="test_total_cost">0.00</span></h4>
+                                            </div>
+                                        </div>
 
-                                </div>
-                            </div>
+                                    </form>
 
-                        </div>
-                        <!-- Submit Button -->
-                        <div class="row my-4">
-                            <div class="col-md-12">
-                                <button type="submit" class="btn btn-primary" id="add_btn">Send Details</button>
-                            </div>
-                        </div>
-                        <!-- Total Costs Section -->
-                        <div class="total-costs row">
-                            <div class="col-md-12">
-                                <h4>Total Cost of Treatments: Rs <span id="total_cost">0.00</span></h4>
-                            </div>
-                            <div class="col-md-12">
-                                <h4>Total Cost of Tests: Rs <span id="test_total_cost">0.00</span></h4>
-                            </div>
-                        </div>
+                                <?php endif ?>
 
-                    </div>
-                    </form>
-                <?php endif ?>
+                                <!-- Section for adding knee hospital  Bill Cost -->
+                                <?php if ($SubCategory1Name == "Knee") :
+                                    // include('./method/cancer-meth.php'); 
+                                ?>
 
-                <!-- Section for adding Cancer hospital  Bill Cost -->
-                <?php if ($SubCategory1Name == "Cancer") :
-                    // include('./method/cancer-meth.php'); 
-                ?>
+                                    <form method="POST" id="add_form">
 
-                    <form method="POST" id="add_form">
+                                        <!-- Section for adding Knee bill -->
+                                        <div id="show_test">
+                                            <div class="form-section row">
+                                                <div class="col-md-8">
+                                                    <p>Knee Hospital Bill</p>
+                                                    <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for Knee hospital Bill" required>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <button type="button" class="btn btn-success add_test_btn">Add More</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Submit Button -->
+                                        <div class="row my-4">
+                                            <div class="col-md-12">
+                                                <button type="submit" class="btn btn-primary" id="add_btn">Send Details</button>
+                                            </div>
+                                        </div>
+                                        <!-- Total Costs Section -->
+                                        <div class="total-costs row">
+                                            <div class="col-md-12">
+                                                <h4>Total Cost of Treatments: Rs <span id="total_cost">0.00</span></h4>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <h4>Total Cost of Tests: Rs <span id="test_total_cost">0.00</span></h4>
+                                            </div>
+                                        </div>
 
-                        <!-- Section for adding Cancer bill -->
-                        <div id="show_test">
-                            <div class="form-section row">
-                                <div class="col-md-8">
-                                    <p>Cancer Hospital Bill</p>
-                                    <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for Cancer hospital Bill" required>
-                                </div>
-                                <div class="col-md-4">
-                                    <button type="button" class="btn btn-success add_test_btn">Add More</button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Submit Button -->
-                        <div class="row my-4">
-                            <div class="col-md-12">
-                                <button type="submit" class="btn btn-primary" id="add_btn">Send Details</button>
-                            </div>
-                        </div>
-                        <!-- Total Costs Section -->
-                        <div class="total-costs row">
-                            <div class="col-md-12">
-                                <h4>Total Cost of Treatments: Rs <span id="total_cost">0.00</span></h4>
-                            </div>
-                            <div class="col-md-12">
-                                <h4>Total Cost of Tests: Rs <span id="test_total_cost">0.00</span></h4>
-                            </div>
-                        </div>
+                                    </form>
 
-                    </form>
+                                <?php endif ?>
 
-                <?php endif ?>
+                                <!-- Section for adding Accident Cost -->
+                                <?php if ($SubCategory1Name == "Accident") :
+                                    // include('./method/cancer-meth.php'); 
+                                ?>
 
-                <!-- Section for adding knee hospital  Bill Cost -->
-                <?php if ($SubCategory1Name == "Knee") :
-                    // include('./method/cancer-meth.php'); 
-                ?>
+                                    <form method="POST" id="add_form">
 
-                    <form method="POST" id="add_form">
+                                        <!-- Section for adding Cancer bill -->
+                                        <div id="show_test">
+                                            <div class="form-section row">
+                                                <div class="col-md-8">
+                                                    <p>Accident Bill</p>
+                                                    <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for Accident " required>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <button type="button" class="btn btn-success add_test_btn">Add More</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Submit Button -->
+                                        <div class="row my-4">
+                                            <div class="col-md-12">
+                                                <button type="submit" class="btn btn-primary" id="add_btn">Send Details</button>
+                                            </div>
+                                        </div>
+                                        <!-- Total Costs Section -->
+                                        <div class="total-costs row">
+                                            <div class="col-md-12">
+                                                <h4>Total Cost of Treatments: Rs <span id="total_cost">0.00</span></h4>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <h4>Total Cost of Tests: Rs <span id="test_total_cost">0.00</span></h4>
+                                            </div>
+                                        </div>
 
-                        <!-- Section for adding Knee bill -->
-                        <div id="show_test">
-                            <div class="form-section row">
-                                <div class="col-md-8">
-                                    <p>Knee Hospital Bill</p>
-                                    <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for Knee hospital Bill" required>
-                                </div>
-                                <div class="col-md-4">
-                                    <button type="button" class="btn btn-success add_test_btn">Add More</button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Submit Button -->
-                        <div class="row my-4">
-                            <div class="col-md-12">
-                                <button type="submit" class="btn btn-primary" id="add_btn">Send Details</button>
-                            </div>
-                        </div>
-                        <!-- Total Costs Section -->
-                        <div class="total-costs row">
-                            <div class="col-md-12">
-                                <h4>Total Cost of Treatments: Rs <span id="total_cost">0.00</span></h4>
-                            </div>
-                            <div class="col-md-12">
-                                <h4>Total Cost of Tests: Rs <span id="test_total_cost">0.00</span></h4>
-                            </div>
-                        </div>
+                                    </form>
 
-                    </form>
+                                <?php endif ?>
 
-                <?php endif ?>
+                                <!-- Section for adding Accident Death Cost -->
+                                <?php if ($SubCategory1Name == "Accidental Death") :
+                                    // include('./method/cancer-meth.php'); 
+                                ?>
 
-                <!-- Section for adding Accident Cost -->
-                <?php if ($SubCategory1Name == "Accident") :
-                    // include('./method/cancer-meth.php'); 
-                ?>
+                                    <form method="POST" id="add_form">
 
-                    <form method="POST" id="add_form">
+                                        <!-- Section for adding Cancer bill -->
+                                        <div id="show_test">
+                                            <div class="form-section row">
+                                                <div class="col-md-8">
+                                                    <p>Accidental Death Bill</p>
+                                                    <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for Accidental Death" required>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <button type="button" class="btn btn-success add_test_btn">Add More</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Submit Button -->
+                                        <div class="row my-4">
+                                            <div class="col-md-12">
+                                                <button type="submit" class="btn btn-primary" id="add_btn">Send Details</button>
+                                            </div>
+                                        </div>
+                                        <!-- Total Costs Section -->
+                                        <div class="total-costs row">
+                                            <div class="col-md-12">
+                                                <h4>Total Cost of Treatments: Rs <span id="total_cost">0.00</span></h4>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <h4>Total Cost of Tests: Rs <span id="test_total_cost">0.00</span></h4>
+                                            </div>
+                                        </div>
 
-                        <!-- Section for adding Cancer bill -->
-                        <div id="show_test">
-                            <div class="form-section row">
-                                <div class="col-md-8">
-                                    <p>Accident Bill</p>
-                                    <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for Accident " required>
-                                </div>
-                                <div class="col-md-4">
-                                    <button type="button" class="btn btn-success add_test_btn">Add More</button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Submit Button -->
-                        <div class="row my-4">
-                            <div class="col-md-12">
-                                <button type="submit" class="btn btn-primary" id="add_btn">Send Details</button>
-                            </div>
-                        </div>
-                        <!-- Total Costs Section -->
-                        <div class="total-costs row">
-                            <div class="col-md-12">
-                                <h4>Total Cost of Treatments: Rs <span id="total_cost">0.00</span></h4>
-                            </div>
-                            <div class="col-md-12">
-                                <h4>Total Cost of Tests: Rs <span id="test_total_cost">0.00</span></h4>
-                            </div>
-                        </div>
+                                    </form>
 
-                    </form>
+                                <?php endif ?>
 
-                <?php endif ?>
+                                <!-- Section for adding Hip Cost -->
+                                <?php if ($SubCategory1Name == "Hip") :
+                                    // include('./method/cancer-meth.php'); 
+                                ?>
 
-                <!-- Section for adding Accident Death Cost -->
-                <?php if ($SubCategory1Name == "Accidental Death") :
-                    // include('./method/cancer-meth.php'); 
-                ?>
+                                    <form method="POST" id="add_form">
 
-                    <form method="POST" id="add_form">
+                                        <!-- Section for adding Hearing Aid bill -->
+                                        <div id="show_test">
+                                            <div class="form-section row">
+                                                <div class="col-md-8">
+                                                    <p>Hip Bill</p>
+                                                    <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for Hip" required>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <button type="button" class="btn btn-success add_test_btn">Add More</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Submit Button -->
+                                        <div class="row my-4">
+                                            <div class="col-md-12">
+                                                <button type="submit" class="btn btn-primary" id="add_btn">Send Details</button>
+                                            </div>
+                                        </div>
+                                        <!-- Total Costs Section -->
+                                        <div class="total-costs row">
+                                            <div class="col-md-12">
+                                                <h4>Total Cost of Treatments: Rs <span id="total_cost">0.00</span></h4>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <h4>Total Cost of Tests: Rs <span id="test_total_cost">0.00</span></h4>
+                                            </div>
+                                        </div>
 
-                        <!-- Section for adding Cancer bill -->
-                        <div id="show_test">
-                            <div class="form-section row">
-                                <div class="col-md-8">
-                                    <p>Accidental Death Bill</p>
-                                    <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for Accidental Death" required>
-                                </div>
-                                <div class="col-md-4">
-                                    <button type="button" class="btn btn-success add_test_btn">Add More</button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Submit Button -->
-                        <div class="row my-4">
-                            <div class="col-md-12">
-                                <button type="submit" class="btn btn-primary" id="add_btn">Send Details</button>
-                            </div>
-                        </div>
-                        <!-- Total Costs Section -->
-                        <div class="total-costs row">
-                            <div class="col-md-12">
-                                <h4>Total Cost of Treatments: Rs <span id="total_cost">0.00</span></h4>
-                            </div>
-                            <div class="col-md-12">
-                                <h4>Total Cost of Tests: Rs <span id="test_total_cost">0.00</span></h4>
-                            </div>
-                        </div>
+                                    </form>
 
-                    </form>
+                                <?php endif ?>
 
-                <?php endif ?>
+                                <!-- Section for adding RF Ablation Cost -->
+                                <?php if ($SubCategory1Name == "RF Ablation") :
+                                    // include('./method/cancer-meth.php'); 
+                                ?>
 
-                <!-- Section for adding Hip Cost -->
-                <?php if ($SubCategory1Name == "Hip") :
-                    // include('./method/cancer-meth.php'); 
-                ?>
+                                    <form method="POST" id="add_form">
 
-                    <form method="POST" id="add_form">
+                                        <!-- Section for adding Hearing Aid bill -->
+                                        <div id="show_test">
+                                            <div class="form-section row">
+                                                <div class="col-md-8">
+                                                    <p>RF Ablation Bill</p>
+                                                    <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for RF Ablation" required>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <button type="button" class="btn btn-success add_test_btn">Add More</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Submit Button -->
+                                        <div class="row my-4">
+                                            <div class="col-md-12">
+                                                <button type="submit" class="btn btn-primary" id="add_btn">Send Details</button>
+                                            </div>
+                                        </div>
+                                        <!-- Total Costs Section -->
+                                        <div class="total-costs row">
+                                            <div class="col-md-12">
+                                                <h4>Total Cost of Treatments: Rs <span id="total_cost">0.00</span></h4>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <h4>Total Cost of Tests: Rs <span id="test_total_cost">0.00</span></h4>
+                                            </div>
+                                        </div>
 
-                        <!-- Section for adding Hearing Aid bill -->
-                        <div id="show_test">
-                            <div class="form-section row">
-                                <div class="col-md-8">
-                                    <p>Hip Bill</p>
-                                    <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for Hip" required>
-                                </div>
-                                <div class="col-md-4">
-                                    <button type="button" class="btn btn-success add_test_btn">Add More</button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Submit Button -->
-                        <div class="row my-4">
-                            <div class="col-md-12">
-                                <button type="submit" class="btn btn-primary" id="add_btn">Send Details</button>
-                            </div>
-                        </div>
-                        <!-- Total Costs Section -->
-                        <div class="total-costs row">
-                            <div class="col-md-12">
-                                <h4>Total Cost of Treatments: Rs <span id="total_cost">0.00</span></h4>
-                            </div>
-                            <div class="col-md-12">
-                                <h4>Total Cost of Tests: Rs <span id="test_total_cost">0.00</span></h4>
-                            </div>
-                        </div>
+                                    </form>
 
-                    </form>
+                                <?php endif ?>
 
-                <?php endif ?>
+                                <!-- Section for adding Accident Death Cost -->
+                                <?php if ($SubCategory1Name == "Hearing Aid") :
+                                    // include('./method/cancer-meth.php'); 
+                                ?>
 
-                <!-- Section for adding RF Ablation Cost -->
-                <?php if ($SubCategory1Name == "RF Ablation") :
-                    // include('./method/cancer-meth.php'); 
-                ?>
+                                    <form method="POST" id="add_form">
 
-                    <form method="POST" id="add_form">
+                                        <!-- Section for adding Hearing Aid bill -->
+                                        <div id="show_test">
+                                            <div class="form-section row">
+                                                <div class="col-md-8">
+                                                    <p>Hearing Aid Bill</p>
+                                                    <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for Hearing Aid" required>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <button type="button" class="btn btn-success add_test_btn">Add More</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Submit Button -->
+                                        <div class="row my-4">
+                                            <div class="col-md-12">
+                                                <button type="submit" class="btn btn-primary" id="add_btn">Send Details</button>
+                                            </div>
+                                        </div>
+                                        <!-- Total Costs Section -->
+                                        <div class="total-costs row">
+                                            <div class="col-md-12">
+                                                <h4>Total Cost of Treatments: Rs <span id="total_cost">0.00</span></h4>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <h4>Total Cost of Tests: Rs <span id="test_total_cost">0.00</span></h4>
+                                            </div>
+                                        </div>
 
-                        <!-- Section for adding Hearing Aid bill -->
-                        <div id="show_test">
-                            <div class="form-section row">
-                                <div class="col-md-8">
-                                    <p>RF Ablation Bill</p>
-                                    <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for RF Ablation" required>
-                                </div>
-                                <div class="col-md-4">
-                                    <button type="button" class="btn btn-success add_test_btn">Add More</button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Submit Button -->
-                        <div class="row my-4">
-                            <div class="col-md-12">
-                                <button type="submit" class="btn btn-primary" id="add_btn">Send Details</button>
-                            </div>
-                        </div>
-                        <!-- Total Costs Section -->
-                        <div class="total-costs row">
-                            <div class="col-md-12">
-                                <h4>Total Cost of Treatments: Rs <span id="total_cost">0.00</span></h4>
-                            </div>
-                            <div class="col-md-12">
-                                <h4>Total Cost of Tests: Rs <span id="test_total_cost">0.00</span></h4>
-                            </div>
-                        </div>
+                                    </form>
 
-                    </form>
+                                <?php endif ?>
 
-                <?php endif ?>
+                                <!-- Section for adding Cancer hospital  Bill Cost -->
+                                <?php if ($SubCategory1Name == "Spectacles") :
+                                    // include('./method/spectacels-meth.php');
+                                ?>
+                                    <form method="POST" id="add_form">
+                                        <div id="show_test">
+                                            <div class="form-section row">
+                                                <div class="col-md-8">
+                                                    <p>Sectacels Bill Cost</p>
+                                                    <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter Spectacles Bill Cost" required>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <button type="button" class="btn btn-success add_test_btn">Add More</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Submit Button -->
+                                        <div class="row my-4">
+                                            <div class="col-md-12">
+                                                <button type="submit" class="btn btn-primary" id="add_btn">Send Details</button>
+                                            </div>
+                                        </div>
+                                        <!-- Total Costs Section -->
+                                        <div class="total-costs row">
+                                            <div class="col-md-12">
+                                                <h4>Total Cost of Treatments: Rs <span id="total_cost">0.00</span></h4>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <h4>Total Cost of Tests: Rs <span id="test_total_cost">0.00</span></h4>
+                                            </div>
+                                        </div>
 
-                <!-- Section for adding Accident Death Cost -->
-                <?php if ($SubCategory1Name == "Hearing Aid") :
-                    // include('./method/cancer-meth.php'); 
-                ?>
+                                    </form>
 
-                    <form method="POST" id="add_form">
+                                <?php endif ?>
 
-                        <!-- Section for adding Hearing Aid bill -->
-                        <div id="show_test">
-                            <div class="form-section row">
-                                <div class="col-md-8">
-                                    <p>Hearing Aid Bill</p>
-                                    <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for Hearing Aid" required>
-                                </div>
-                                <div class="col-md-4">
-                                    <button type="button" class="btn btn-success add_test_btn">Add More</button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Submit Button -->
-                        <div class="row my-4">
-                            <div class="col-md-12">
-                                <button type="submit" class="btn btn-primary" id="add_btn">Send Details</button>
-                            </div>
-                        </div>
-                        <!-- Total Costs Section -->
-                        <div class="total-costs row">
-                            <div class="col-md-12">
-                                <h4>Total Cost of Treatments: Rs <span id="total_cost">0.00</span></h4>
-                            </div>
-                            <div class="col-md-12">
-                                <h4>Total Cost of Tests: Rs <span id="test_total_cost">0.00</span></h4>
-                            </div>
-                        </div>
-
-                    </form>
-
-                <?php endif ?>
-
-                <!-- Section for adding Cancer hospital  Bill Cost -->
-                <?php if ($SubCategory1Name == "Spectacles") :
-                    // include('./method/spectacels-meth.php');
-                ?>
-                    <form method="POST" id="add_form">
-                        <div id="show_test">
-                            <div class="form-section row">
-                                <div class="col-md-8">
-                                    <p>Sectacels Bill Cost</p>
-                                    <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter Spectacles Bill Cost" required>
-                                </div>
-                                <div class="col-md-4">
-                                    <button type="button" class="btn btn-success add_test_btn">Add More</button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Submit Button -->
-                        <div class="row my-4">
-                            <div class="col-md-12">
-                                <button type="submit" class="btn btn-primary" id="add_btn">Send Details</button>
-                            </div>
-                        </div>
-                        <!-- Total Costs Section -->
-                        <div class="total-costs row">
-                            <div class="col-md-12">
-                                <h4>Total Cost of Treatments: Rs <span id="total_cost">0.00</span></h4>
-                            </div>
-                            <div class="col-md-12">
-                                <h4>Total Cost of Tests: Rs <span id="test_total_cost">0.00</span></h4>
-                            </div>
-                        </div>
-
-                    </form>
-
-                <?php endif ?>
-
-                <!-- Submit Button -->
-                <!-- <div class="row my-4">
+                                <!-- Submit Button -->
+                                <!-- <div class="row my-4">
                                             <div class="col-md-12">
                                                 <button type="submit" class="btn btn-primary" id="add_btn">Send Details</button>
                                             </div>
                                         </div> -->
-                <!-- Total Costs Section -->
-                <!-- <div class="total-costs row">
+                                <!-- Total Costs Section -->
+                                <!-- <div class="total-costs row">
                                             <div class="col-md-12">
                                                 <h4>Total Cost of Treatments: Rs <span id="total_cost">0.00</span></h4>
                                             </div>
@@ -1176,66 +1170,66 @@
 
                                         </form> -->
 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    <!-- Right Section for Displaying Results -->
-    <div class="col-md-6 right-sec">
+        <!-- Right Section for Displaying Results -->
+        <div class="col-md-6 right-sec">
 
-        <!-- Display Current Date                                -->
-        <div>
-            <b>The date : <?php echo date("m/d/y"); ?></b>
-        </div>
-        <div class="card">
-            <div class="table-responsive">
-                <!-- Table for displaying results -->
-                <table class="table table-bordered table-striped" id="result_table">
-                    <thead>
-                        <tr>
-                            <th>Description</th>
-                            <th>Maximum Limit Per Incident (Should Not Exceed Than)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        if (isset($result) && $result->num_rows > 0) {
-                            // Output data of each row
-                            while ($row = $result->fetch_assoc()) {
-                                echo '<tr>';
-                                echo '<td>' . htmlspecialchars($row['Name']) . '</td>';
-                                echo '<td class=" text-right">' . htmlspecialchars($row['PerIncident']) . '.00' . '</td>';
+            <!-- Display Current Date                                -->
+            <div>
+                <b>The date : <?php echo date("m/d/y"); ?></b>
+            </div>
+            <div class="card">
+                <div class="table-responsive">
+                    <!-- Table for displaying results -->
+                    <table class="table table-bordered table-striped" id="result_table">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Maximum Limit Per Incident (Should Not Exceed Than)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            if (isset($result) && $result->num_rows > 0) {
+                                // Output data of each row
+                                while ($row = $result->fetch_assoc()) {
+                                    echo '<tr>';
+                                    echo '<td>' . htmlspecialchars($row['Name']) . '</td>';
+                                    echo '<td class=" text-right">' . htmlspecialchars($row['PerIncident']) . '.00' . '</td>';
 
-                                //     // Fetch user details within the same loop if needed
-                                //     if (isset($resultLimit) && $resultLimit->num_rows > 0) {
-                                //         // Reset the pointer of result_usr
-                                //         mysqli_data_seek($resultLimit, 0);
-                                //         while ($row_incident = $resultLimit->fetch_assoc()) {
-                                //             echo '<td>' . htmlspecialchars($PerIncidentLimit) . '</td>';
-                                //         }
-                                //     } else {
-                                //         echo '<td>No user records found</td>';
-                                //     }
-                                //     echo '</tr>';
-                                // }
-                                // } else {
-                                //     echo '<tr><td colspan="2">No records found</td></tr>';
+                                    //     // Fetch user details within the same loop if needed
+                                    //     if (isset($resultLimit) && $resultLimit->num_rows > 0) {
+                                    //         // Reset the pointer of result_usr
+                                    //         mysqli_data_seek($resultLimit, 0);
+                                    //         while ($row_incident = $resultLimit->fetch_assoc()) {
+                                    //             echo '<td>' . htmlspecialchars($PerIncidentLimit) . '</td>';
+                                    //         }
+                                    //     } else {
+                                    //         echo '<td>No user records found</td>';
+                                    //     }
+                                    //     echo '</tr>';
+                                    // }
+                                    // } else {
+                                    //     echo '<tr><td colspan="2">No records found</td></tr>';
+                                }
                             }
-                        }
-                        ?>
-                        <tr>
-                            <th class="h5 "><b>Total Cost of Claim:</b></th>
-                            <td class="h5 text-right"><b><span id="InitialCost"> Rs 0.00</span></b></td>
-                        </tr>
-                        <!-- Data will be dynamically appended here by jQuery -->
-                    </tbody>
-                </table>
+                            ?>
+                            <tr>
+                                <th class="h5 "><b>Total Cost of Claim:</b></th>
+                                <td class="h5 text-right"><b><span id="InitialCost"> Rs 0.00</span></b></td>
+                            </tr>
+                            <!-- Data will be dynamically appended here by jQuery -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
     </div>
     </div>
     <!-- Bootstrap JS, Popper.js, MDB UI Kit, and SweetAlert2 CDN Scripts -->
