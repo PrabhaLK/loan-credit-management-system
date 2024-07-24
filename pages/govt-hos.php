@@ -270,7 +270,7 @@
                     console.log("AJAX request data:", requestData);
 
                     $.ajax({
-                        url: '../functions/sample.php',
+                        url: '../functions/ClaimSubmit.php',
                         method: 'post',
                         data: requestData,
                         success: function(response) {
