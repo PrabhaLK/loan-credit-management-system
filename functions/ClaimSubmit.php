@@ -11,6 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Retrieve POST data safely
     $numberOfDates = isset($_POST['number_of_dates']) ? $_POST['number_of_dates'] : null;
     $totalMedicalCost = isset($_POST['total_medical_cost']) ? $_POST['total_medical_cost'] : null;
+    $totalConsultantFees = isset($_POST['consultant_Fees']) ? $_POST['consultant_Fees'] : null;
     $totalTestCost = isset($_POST['total_test_cost']) ? $_POST['total_test_cost'] : null;
     $roomCharges = isset($_POST['room_charges']) ? $_POST['room_charges'] : null;
     $totalSum = isset($_POST['total_sum']) ? $_POST['total_sum'] : null;
@@ -36,9 +37,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Sanitize input data
     $numberOfDates = intval($numberOfDates);
     $totalMedicalCost = floatval($totalMedicalCost);
+    $totalConsultantFees = floatval($totalMedicalCost);
     $totalTestCost = floatval($totalTestCost);
     $roomCharges = floatval($roomCharges);
     $totalSum = floatval($totalSum);
+
 
     // Log sanitized data
     error_log("Sanitized Data: " . print_r([
@@ -52,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     ], true));
 
     // Insert data into the database
-    $query = "INSERT INTO temp (`nic`, `type`, `total_room_charges`, `total_treatments`, `total_tests`,`total_cost`) VALUES (?, ?, ?, ?, ?, ?)";
+    $query = "INSERT INTO `user-claims` (`nic`, `type`, `total_room_charges`, `total_treatments`,`consultant_fee`, `total_tests`,`total_cost`) VALUES (?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($query);
 
     if ($stmt === false) {
@@ -60,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         die("Prepare failed: " . $conn->error);
     }
 
-    $stmt->bind_param("ssdddd", $nic, $type, $roomCharges, $totalMedicalCost, $totalTestCost, $totalSum);
+    $stmt->bind_param("ssddddd", $nic, $type, $roomCharges, $totalMedicalCost, $totalConsultantFees, $totalTestCost, $totalSum);
 
     if ($stmt->execute()) {
         echo "Data inserted successfully";
