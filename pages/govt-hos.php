@@ -75,11 +75,11 @@
     <script>
         $(document).ready(function() {
             // Variables
-            const perDayRoomCharge = parseFloat(<?php echo $PerDay; ?>);
-            const maxRoomCharge = parseFloat(<?php echo $PerIncident; ?>);
-            const maxMedicalCharges = parseFloat(<?php echo $IncidentPrice; ?>);
-            const maxTestCharges = parseFloat(<?php echo $TestIncident; ?>);
-            const maxConsultantFees = parseFloat(<?php echo  $consultantPrice; ?>);
+            const perDayRoomCharge = parseFloat(<?php echo isset($PerDay) ? $PerDay : 'null'; ?>);
+            const maxRoomCharge = parseFloat(<?php echo isset($PerIncident) ? $PerIncident : 'null'; ?>);
+            const maxMedicalCharges = parseFloat(<?php echo isset($IncidentPrice) ? $IncidentPrice : 'null'; ?>);
+            const maxTestCharges = parseFloat(<?php echo isset($TestIncident) ? $TestIncident : 'null'; ?>);
+            const maxConsultantFees = parseFloat(<?php echo isset($consultantPrice) ? $consultantPrice : 'null'; ?>);
 
             // Function to calculate days between two dates
             function calculateDaysBetweenDates(startDate, endDate) {
@@ -114,6 +114,15 @@
                     consultantTotal += parseFloat($(this).val()) || 0;
                 });
                 return consultantTotal.toFixed(2);
+            }
+
+            // Function for calculate Incident Prices
+            function CalculateIncident() {
+                let incidentTotal = 0;
+                $("input[name='oneTimeIncident[]']").each(function() {
+                    incidentTotal += parseFloat($(this).val()) || 0;
+                });
+                return incidentTotal.toFixed(2);
             }
 
             // Function to calculate room charges
@@ -177,6 +186,10 @@
                     return false;
                 }
                 return true;
+            }
+            // function to validate single incidents
+            function validateIncidentCharges(totalIncidentCost) {
+                // if(totalIncidentCost > )
             }
 
             // Function to update the totals in the table
@@ -329,6 +342,7 @@
                 $("#add_btn").val('Adding....');
                 const numberOfDates = parseInt($("input[name='number_of_dates[]']").val(), 10) || 0;
                 const totalMedicalCost = parseFloat(calculateTotal());
+                const totalIncidentCost = parseFloat(CalculateIncident())
                 const totalTestCost = parseFloat(calculateTestTotal());
                 const totalConsultantCost = parseFloat(calculateConsultantFee());
                 const roomCharges = parseFloat(calculateRoomCharges(numberOfDates));
@@ -401,7 +415,6 @@
             updateTable();
         });
     </script>
-
 
     <!-- NITF logo added -->
     <div class="logo-container">
@@ -572,6 +585,125 @@
                                     </div>
                                 <?php endif; ?>
                                 <!-- section for adding Private Hospitalization end -->
+
+                                <!-- Section for adding Private Ayurvedic  Bill Cost -->
+                                <?php if ($SubCategory1Name == "Private Ayuvedic Hospitalization") : ?>
+                                    <div class="form-section row">
+                                        <div class="col-md-8">
+                                            <p>Number of Dates</p>
+
+                                            <!-- Input for number of dates (readonly) -->
+                                            <input type="number" name="number_of_dates[]" class="form-control" placeholder="Number of Dates" max="10" required readonly>
+                                        </div>
+                                        <!-- Date Pickers for selecting date period -->
+                                        <div class="row">
+                                            <div class="col-md-6 mb-4">
+                                                <div class="md-form">
+                                                    <input placeholder="Select starting date" type="date" id="startingDate" name="startingDate">
+                                                    <label for="startingDate">Start Date</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-4">
+                                                <div class="md-form">
+                                                    <input placeholder="Select ending date" type="date" id="endingDate" name="endingDate">
+                                                    <label for="endingDate">End Date</label>
+                                                </div>
+                                            </div>
+
+                                            <!-- Section for adding medical items -->
+                                            <div id="show_item">
+                                                <div class="form-section row">
+                                                    <div class="col-md-8">
+                                                        <p>Surgical and Medical Treatments</p>
+                                                        <input type="number" name="medical_price[]" class="form-control" placeholder="Treatment price" required>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <button type="button" class="btn btn-success add_item_btn">Add More</button>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Section for adding test items -->
+                                                <div id="show_test">
+                                                    <div class="form-section row">
+                                                        <div class="col-md-8">
+                                                            <p>Medical tests</p>
+                                                            <input type="number" name="test_price[]" class="form-control" placeholder="Test price" required>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <button type="button" class="btn btn-success add_test_btn">Add More</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Section for adding medical items -->
+                                                <div id="show_item">
+                                                    <div class="form-section row">
+                                                        <div class="col-md-8">
+                                                            <p>Consultant Fee</p>
+                                                            <input type="number" name="consultant_price[]" class="form-control" placeholder="Consultant price" required>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <button type="button" class="btn btn-success add_item_btn">Add More</button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Submit Button -->
+                                        <div class="row my-4">
+                                            <div class="col-md-12">
+                                                <button type="submit" class="btn btn-primary" id="add_btn">Send Details</button>
+                                            </div>
+                                        </div>
+                                        <!-- Total Costs Section -->
+                                        <div class="total-costs row">
+                                            <div class="col-md-12">
+                                                <h4>Total Cost of Treatments: Rs <span id="total_cost">0.00</span></h4>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <h4>Total Cost of Tests: Rs <span id="test_total_cost">0.00</span></h4>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <h4>Total Consultant Fees: Rs <span id="consultant_total_cost">0.00</span></h4>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <h4>Total Room Charges: Rs <span id="room_charges">0.00</span></h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </form>
+                                <?php endif ?>
+
+                                <!-- section for adding heart surgery dependant start  -->
+                                <!-- Section for adding Hip Cost -->
+                                <?php if ($SubCategory1Name == "Heart Surgery - Depenadant") :
+                                ?>
+
+                                    <form method="POST" id="add_form">
+
+                                        <!-- Section for adding Hearing Aid bill -->
+                                        <div id="show_test">
+                                            <div class="form-section row">
+                                                <div class="col-md-8">
+                                                    <p>Costs for heart surgery: Dependant</p>
+                                                    <input type="number" name="oneTimeIncident[]" class="form-control validate-number" placeholder="Enter costs here" required>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <button type="button" class="btn btn-success add_test_btn">Add More</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Submit Button -->
+                                        <div class="row my-4">
+                                            <div class="col-md-12">
+                                                <button type="submit" class="btn btn-primary" id="add_btn">Send Details</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                <?php endif ?>
+                                <!-- section for adding heart surgery dependant end  -->
+
                                 <!-- Section for adding Heart Surgery - Guarantee Bill Cost -->
                                 <?php if ($SubCategory1Name == "Heart Surgery - Guarantee") : ?>
                                     <div class="form-section row">
@@ -688,7 +820,6 @@
                                             <h4>Total Cost of Tests: Rs <span id="test_total_cost">0.00</span></h4>
                                         </div>
                                     </div>
-
                                     </form>
 
                                 <?php endif ?>
@@ -755,91 +886,6 @@
                                         </div>
                                     </div>
 
-                                    </form>
-                                <?php endif ?>
-
-                                <!-- Section for adding Private Ayurvedic  Bill Cost -->
-                                <?php if ($SubCategory1Name == "Private Ayuvedic Hospitalization") : ?>
-                                    <div class="form-section row">
-                                        <div class="col-md-8">
-                                            <p>Number of Dates</p>
-
-                                            <!-- Input for number of dates (readonly) -->
-                                            <input type="number" name="number_of_dates[]" class="form-control" placeholder="Number of Dates" max="10" required readonly>
-                                        </div>
-                                        <!-- Date Pickers for selecting date period -->
-                                        <div class="row">
-                                            <div class="col-md-6 mb-4">
-                                                <div class="md-form">
-                                                    <input placeholder="Select starting date" type="date" id="startingDate" name="startingDate">
-                                                    <label for="startingDate">Start Date</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 mb-4">
-                                                <div class="md-form">
-                                                    <input placeholder="Select ending date" type="date" id="endingDate" name="endingDate">
-                                                    <label for="endingDate">End Date</label>
-                                                </div>
-                                            </div>
-
-                                            <!-- Section for adding medical items -->
-                                            <div id="show_item">
-                                                <div class="form-section row">
-                                                    <div class="col-md-8">
-                                                        <p>Surgical and Medical Treatments</p>
-                                                        <input type="number" name="medical_price[]" class="form-control" placeholder="Treatment price" required>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <button type="button" class="btn btn-success add_item_btn">Add More</button>
-                                                    </div>
-                                                </div>
-
-                                                <!-- Section for adding test items -->
-                                                <div id="show_test">
-                                                    <div class="form-section row">
-                                                        <div class="col-md-8">
-                                                            <p>Medical tests</p>
-                                                            <input type="number" name="test_price[]" class="form-control" placeholder="Test price" required>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <button type="button" class="btn btn-success add_test_btn">Add More</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <!-- Section for adding medical items -->
-                                                <div id="show_item">
-                                                    <div class="form-section row">
-                                                        <div class="col-md-8">
-                                                            <p>Consultant Fee</p>
-                                                            <input type="number" name="consultant_price[]" class="form-control" placeholder="Consultant price" required>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <button type="button" class="btn btn-success add_item_btn">Add More</button>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <!-- Submit Button -->
-                                        <div class="row my-4">
-                                            <div class="col-md-12">
-                                                <button type="submit" class="btn btn-primary" id="add_btn">Send Details</button>
-                                            </div>
-                                        </div>
-                                        <!-- Total Costs Section -->
-                                        <div class="total-costs row">
-                                            <div class="col-md-12">
-                                                <h4>Total Cost of Treatments: Rs <span id="total_cost">0.00</span></h4>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <h4>Total Cost of Tests: Rs <span id="test_total_cost">0.00</span></h4>
-                                            </div>
-                                        </div>
-
-                                    </div>
                                     </form>
                                 <?php endif ?>
 

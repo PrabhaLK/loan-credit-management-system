@@ -47,13 +47,22 @@ if (!empty($type)) {
     //calculate consultant fee charges for the hospitals. 
     $consultant = "SELECT * FROM `claim_info` WHERE `SubCategory 1 Name` = '$type' AND `SubCategory 2 Name` = 'ConsultantFee'";
     $consultant_res = mysqli_query($conn, $consultant);
-    $consultant_res = mysqli_query($conn, $sql);
     if ($consultant_res && mysqli_num_rows($consultant_res) > 0) {
         $row = mysqli_fetch_assoc($consultant_res); // Fetch the result row
         $consultantPrice = $row['PerIncident'];
     } else {
         $consultantPrice = 0;
     }
+
+    // get the Per incident Price for One Time Items. 
+    $incidentCost = "SELECT * FROM `claim_info` WHERE `SubCategory 1 Name` = '$type' AND `SubCategory 2 Name` = 'PerIncident'";
+    $incident_res = mysqli_query($conn, $incidentCost);
+    if($incident_res && mysqli_num_rows($consultant_res) > 0) {
+        $row =mysqli_fetch_assoc($incident_res)
+        // error here make this right ... 
+    }
+
+
 
 
 
