@@ -76,6 +76,7 @@
         $(document).ready(function() {
             // Variables
             const perDayRoomCharge = parseFloat(<?php echo isset($PerDay) ? $PerDay : 'null'; ?>);
+            const incidentCostLimit = parseFloat(<?php echo isset($incident_cost) ? $incident_cost : 3000; ?>); // Changed variable name to be more descriptive
             const maxRoomCharge = parseFloat(<?php echo isset($PerIncident) ? $PerIncident : 'null'; ?>);
             const maxMedicalCharges = parseFloat(<?php echo isset($IncidentPrice) ? $IncidentPrice : 'null'; ?>);
             const maxTestCharges = parseFloat(<?php echo isset($TestIncident) ? $TestIncident : 'null'; ?>);
@@ -116,8 +117,8 @@
                 return consultantTotal.toFixed(2);
             }
 
-            // Function for calculate Incident Prices
-            function CalculateIncident() {
+            // Function to calculate total incident costs
+            function calculateIncidentTotal() { // Changed function name to be more descriptive
                 let incidentTotal = 0;
                 $("input[name='oneTimeIncident[]']").each(function() {
                     incidentTotal += parseFloat($(this).val()) || 0;
@@ -136,7 +137,7 @@
                 if (roomCharges > maxRoomCharge) {
                     Swal.fire({
                         title: "Room Charges Limit Exceeded",
-                        text: "Room charges cannot be more than Rs " + maxRoomCharge.toFixed(2) + " Please adjust the dates.",
+                        text: "Room charges cannot be more than Rs " + maxRoomCharge.toFixed(2) + ". Please adjust the dates.",
                         icon: "error"
                     });
                     $("#startingDate, #endingDate").val('');
@@ -187,9 +188,19 @@
                 }
                 return true;
             }
-            // function to validate single incidents
-            function validateIncidentCharges(totalIncidentCost) {
-                // if(totalIncidentCost > )
+
+            // Function to validate incident charges
+            function validateIncidentCharges(totalIncidentCost) { // Changed function name to be more descriptive
+                if (totalIncidentCost > incidentCostLimit) { // Changed variable name to match the new one
+                    Swal.fire({
+                        title: "Incident Charge Limit Exceeded",
+                        text: "Total cost for incidents cannot exceed Rs " + incidentCostLimit.toFixed(2), // Changed variable name to match the new one
+                        icon: "error"
+                    });
+                    $("input[name='oneTimeIncident[]']").val('');
+                    return false;
+                }
+                return true;
             }
 
             // Function to update the totals in the table
@@ -197,20 +208,23 @@
                 const totalCost = parseFloat(calculateTotal());
                 const testTotalCost = parseFloat(calculateTestTotal());
                 const consultantTotalCost = parseFloat(calculateConsultantFee());
+                const totalIncidentCost = parseFloat(calculateIncidentTotal()); // Changed function call to match the new one
                 const numberOfDays = parseInt($("input[name='number_of_dates[]']").val(), 10) || 0;
                 const roomCharges = parseFloat(calculateRoomCharges(numberOfDays));
-                const totalSum = totalCost + testTotalCost + consultantTotalCost + roomCharges;
+                const totalSum = totalCost + testTotalCost + consultantTotalCost + roomCharges + totalIncidentCost; // Added totalIncidentCost to the sum
 
                 // Log values to debug
                 console.log("Total Cost:", totalCost);
                 console.log("Test Total Cost:", testTotalCost);
                 console.log("Consultant Fee:", consultantTotalCost);
                 console.log("Room Charges:", roomCharges);
+                console.log("Total Incident Cost:", totalIncidentCost); // New log for incident cost
                 console.log("Total Sum:", totalSum);
 
                 // Validate and update costs
-                if (validateMedicalCharges(totalCost) && validateTestCharges(testTotalCost) && validateConsultantFees(consultantTotalCost)) {
+                if (validateMedicalCharges(totalCost) && validateTestCharges(testTotalCost) && validateConsultantFees(consultantTotalCost) && validateIncidentCharges(totalIncidentCost)) { // Added validateIncidentCharges to the condition
                     $("#total_cost").text(totalCost.toFixed(2));
+                    $("#incident_cost").text(totalIncidentCost.toFixed(2)); // New update for incident cost
                     $("#test_total_cost").text(testTotalCost.toFixed(2));
                     $("#consultant_total_cost").text(consultantTotalCost.toFixed(2));
                     $("#room_charges").text(roomCharges.toFixed(2));
@@ -219,7 +233,8 @@
                     $("input[name='total_room_charges']").val(roomCharges);
                     $("input[name='total_treatments']").val(totalCost);
                     $("input[name='total_tests']").val(testTotalCost);
-                    $("input[name='total_consultant_fees']").val(consultantTotalCost); // New input field for consultant fees
+                    $("input[name='total_consultant_fees']").val(consultantTotalCost);
+                    $("input[name='total_incident_cost']").val(totalIncidentCost); // New input field for incident cost
                 } else {
                     console.error("One or more values exceed the allowed limits.");
                 }
@@ -237,7 +252,7 @@
                     if (start > end) {
                         Swal.fire({
                             title: "Start Date cannot be ahead of end date.",
-                            text: "Please Check Date setup again.",
+                            text: "Please check the date setup again.",
                             icon: "error"
                         });
                         $("#startingDate, #endingDate").val('');
@@ -302,6 +317,21 @@
                 updateTable();
             });
 
+            // Add new incident item (NEW)
+            $(".add_incident_btn").click(function(e) {
+                e.preventDefault();
+                $("#show_incident").append(`
+            <div class="form-section row">
+                <div class="col-md-8">
+                    <input type="number" name="oneTimeIncident[]" class="form-control" placeholder="Incident cost" required>
+                </div>
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-danger remove_incident_btn">Remove</button>
+                </div>
+            </div>`);
+                updateTable();
+            });
+
             // Remove medical treatment item
             $(document).on('click', '.remove_item_btn', function(e) {
                 e.preventDefault();
@@ -323,6 +353,13 @@
                 updateTable();
             });
 
+            // Remove incident item (NEW)
+            $(document).on('click', '.remove_incident_btn', function(e) {
+                e.preventDefault();
+                $(this).closest('.form-section').remove();
+                updateTable();
+            });
+
             // Update totals on input change
             $(document).on('input', "input[name='medical_price[]']", function() {
                 updateTable();
@@ -336,35 +373,43 @@
                 updateTable();
             });
 
+            // Update totals on incident input change (NEW)
+            $(document).on('input', "input[name='oneTimeIncident[]']", function() {
+                updateTable();
+            });
+
             // Form submission
             $("#add_form").submit(function(e) {
                 e.preventDefault();
                 $("#add_btn").val('Adding....');
                 const numberOfDates = parseInt($("input[name='number_of_dates[]']").val(), 10) || 0;
                 const totalMedicalCost = parseFloat(calculateTotal());
-                const totalIncidentCost = parseFloat(CalculateIncident())
+                const totalIncidentCost = parseFloat(calculateIncidentTotal()); // Changed function call to match the new one
                 const totalTestCost = parseFloat(calculateTestTotal());
                 const totalConsultantCost = parseFloat(calculateConsultantFee());
                 const roomCharges = parseFloat(calculateRoomCharges(numberOfDates));
-                const totalSum = totalMedicalCost + totalTestCost + totalConsultantCost + roomCharges;
+                const totalSum = totalMedicalCost + totalTestCost + totalConsultantCost + roomCharges + totalIncidentCost; // Added totalIncidentCost to the sum
 
                 // Log values to debug
                 console.log("Submit - Number of Dates:", numberOfDates);
                 console.log("Submit - Total Medical Cost:", totalMedicalCost);
+                console.log("Submit - Total Incident Cost:", totalIncidentCost); // New log for incident cost
                 console.log("Submit - Total Test Cost:", totalTestCost);
                 console.log("Submit - Total Consultant Cost:", totalConsultantCost);
                 console.log("Submit - Room Charges:", roomCharges);
                 console.log("Submit - Total Sum:", totalSum);
 
-                if (validateMedicalCharges(totalMedicalCost) && validateTestCharges(totalTestCost) && validateConsultantFees(totalConsultantCost)) {
+                if (validateMedicalCharges(totalMedicalCost) && validateTestCharges(totalTestCost) && validateConsultantFees(totalConsultantCost) && validateIncidentCharges(totalIncidentCost)) { // Added validateIncidentCharges to the condition
                     $("input[name='total_room_charges']").val(roomCharges);
                     $("input[name='total_treatments']").val(totalMedicalCost);
                     $("input[name='total_tests']").val(totalTestCost);
-                    $("input[name='total_consultant_fees']").val(totalConsultantCost); // New field for consultant fees
+                    $("input[name='total_consultant_fees']").val(totalConsultantCost);
+                    $("input[name='total_incident_cost']").val(totalIncidentCost); // New field for incident cost
 
                     const requestData = {
                         number_of_dates: numberOfDates,
                         total_medical_cost: totalMedicalCost.toFixed(2),
+                        total_incident_cost: totalIncidentCost.toFixed(2), // Added incident cost to requestData
                         consultant_Fees: totalConsultantCost.toFixed(2),
                         total_test_cost: totalTestCost.toFixed(2),
                         room_charges: roomCharges.toFixed(2),
@@ -391,9 +436,9 @@
                                 timerProgressBar: true,
                                 showConfirmButton: false
                             });
-                            setTimeout(function() {
-                                window.location.reload();
-                            }, 4000); // Reloads page after the data entry.
+                            // setTimeout(function() {
+                            //     // window.location.reload();
+                            // }, 4000); // Reloads page after the data entry.
                         }
                     });
                 } else {
@@ -415,6 +460,7 @@
             updateTable();
         });
     </script>
+
 
     <!-- NITF logo added -->
     <div class="logo-container">

@@ -57,14 +57,10 @@ if (!empty($type)) {
     // get the Per incident Price for One Time Items. 
     $incidentCost = "SELECT * FROM `claim_info` WHERE `SubCategory 1 Name` = '$type' AND `SubCategory 2 Name` = 'PerIncident'";
     $incident_res = mysqli_query($conn, $incidentCost);
-    if($incident_res && mysqli_num_rows($consultant_res) > 0) {
-        $row =mysqli_fetch_assoc($incident_res)
-        // error here make this right ... 
+    if ($incident_res && mysqli_num_rows($incident_res) > 0) {
+        $row = mysqli_fetch_assoc($incident_res);
+        $incident_cost = $row['PerIncident'];
     }
-
-
-
-
 
     // Get user info from the database according to the session
     // $sql_usr = "SELECT * FROM `user_details` WHERE `NIC` = '{$_SESSION['nic']}'";
