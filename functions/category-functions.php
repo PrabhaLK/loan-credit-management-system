@@ -41,8 +41,6 @@ if (!empty($type)) {
         $row = mysqli_fetch_assoc($result); // Fetch the result row
         $TestIncident = $row['PerIncident'];
     }
-    $sql = "SELECT * FROM `claim_info` WHERE `SubCategory 1 Name` = '$type' OR `CategoryName`= '$type'";
-    $result = mysqli_query($conn, $sql);
 
     //calculate consultant fee charges for the hospitals. 
     $consultant = "SELECT * FROM `claim_info` WHERE `SubCategory 1 Name` = '$type' AND `SubCategory 2 Name` = 'ConsultantFee'";
@@ -70,4 +68,6 @@ if (!empty($type)) {
     //     $usr_NIC = $row_usr['NIC'];
     //     $usr_Name = $row_usr['Name'];
     // }
+    $sql = "SELECT * FROM `claim_info` WHERE `SubCategory 1 Name` = '$type' OR `CategoryName`= '$type'";
+    $result = mysqli_query($conn, $sql);
 }

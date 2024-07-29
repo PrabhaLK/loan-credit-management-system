@@ -76,7 +76,7 @@
         $(document).ready(function() {
             // Variables
             const perDayRoomCharge = parseFloat(<?php echo isset($PerDay) ? $PerDay : 'null'; ?>);
-            const incidentCostLimit = parseFloat(<?php echo isset($incident_cost) ? $incident_cost : 3000; ?>); // Changed variable name to be more descriptive
+            const incidentCostLimit = parseFloat(<?php echo isset($incident_cost) ? $incident_cost : 'null'; ?>); // Changed variable name to be more descriptive
             const maxRoomCharge = parseFloat(<?php echo isset($PerIncident) ? $PerIncident : 'null'; ?>);
             const maxMedicalCharges = parseFloat(<?php echo isset($IncidentPrice) ? $IncidentPrice : 'null'; ?>);
             const maxTestCharges = parseFloat(<?php echo isset($TestIncident) ? $TestIncident : 'null'; ?>);
@@ -118,7 +118,7 @@
             }
 
             // Function to calculate total incident costs
-            function calculateIncidentTotal() { // Changed function name to be more descriptive
+            function calculateIncidentTotal() {
                 let incidentTotal = 0;
                 $("input[name='oneTimeIncident[]']").each(function() {
                     incidentTotal += parseFloat($(this).val()) || 0;
@@ -134,7 +134,7 @@
 
             // Function to validate room charges
             function validateRoomCharges(roomCharges) {
-                if (roomCharges > maxRoomCharge) {
+                if (roomCharges >= maxRoomCharge) {
                     Swal.fire({
                         title: "Room Charges Limit Exceeded",
                         text: "Room charges cannot be more than Rs " + maxRoomCharge.toFixed(2) + ". Please adjust the dates.",
@@ -190,11 +190,11 @@
             }
 
             // Function to validate incident charges
-            function validateIncidentCharges(totalIncidentCost) { // Changed function name to be more descriptive
-                if (totalIncidentCost > incidentCostLimit) { // Changed variable name to match the new one
+            function validateIncidentCharges(totalIncidentCost) {
+                if (totalIncidentCost > incidentCostLimit) {
                     Swal.fire({
                         title: "Incident Charge Limit Exceeded",
-                        text: "Total cost for incidents cannot exceed Rs " + incidentCostLimit.toFixed(2), // Changed variable name to match the new one
+                        text: "Total cost for incidents cannot exceed Rs " + incidentCostLimit.toFixed(2),
                         icon: "error"
                     });
                     $("input[name='oneTimeIncident[]']").val('');
@@ -203,15 +203,17 @@
                 return true;
             }
 
+
             // Function to update the totals in the table
+
             function updateTable() {
-                const totalCost = parseFloat(calculateTotal());
-                const testTotalCost = parseFloat(calculateTestTotal());
-                const consultantTotalCost = parseFloat(calculateConsultantFee());
-                const totalIncidentCost = parseFloat(calculateIncidentTotal()); // Changed function call to match the new one
+                const totalCost = parseFloat(calculateTotal()) || 0;
+                const testTotalCost = parseFloat(calculateTestTotal()) || 0;
+                const consultantTotalCost = parseFloat(calculateConsultantFee()) || 0;
+                const totalIncidentCost = parseFloat(calculateIncidentTotal()) || 0; // Updated to include incident cost
                 const numberOfDays = parseInt($("input[name='number_of_dates[]']").val(), 10) || 0;
-                const roomCharges = parseFloat(calculateRoomCharges(numberOfDays));
-                const totalSum = totalCost + testTotalCost + consultantTotalCost + roomCharges + totalIncidentCost; // Added totalIncidentCost to the sum
+                const roomCharges = parseFloat(calculateRoomCharges(numberOfDays)) || 0;
+                const totalSum = totalCost + testTotalCost + consultantTotalCost + roomCharges + totalIncidentCost; // Included incident cost
 
                 // Log values to debug
                 console.log("Total Cost:", totalCost);
@@ -222,7 +224,7 @@
                 console.log("Total Sum:", totalSum);
 
                 // Validate and update costs
-                if (validateMedicalCharges(totalCost) && validateTestCharges(testTotalCost) && validateConsultantFees(consultantTotalCost) && validateIncidentCharges(totalIncidentCost)) { // Added validateIncidentCharges to the condition
+                if (validateMedicalCharges(totalCost) && validateTestCharges(testTotalCost) && validateConsultantFees(consultantTotalCost) && validateIncidentCharges(totalIncidentCost)) { // Added validateIncidentCharges
                     $("#total_cost").text(totalCost.toFixed(2));
                     $("#incident_cost").text(totalIncidentCost.toFixed(2)); // New update for incident cost
                     $("#test_total_cost").text(testTotalCost.toFixed(2));
@@ -239,6 +241,7 @@
                     console.error("One or more values exceed the allowed limits.");
                 }
             }
+
 
             // Event listener for date change
             $("#startingDate, #endingDate").on('change', function() {
@@ -383,12 +386,12 @@
                 e.preventDefault();
                 $("#add_btn").val('Adding....');
                 const numberOfDates = parseInt($("input[name='number_of_dates[]']").val(), 10) || 0;
-                const totalMedicalCost = parseFloat(calculateTotal());
-                const totalIncidentCost = parseFloat(calculateIncidentTotal()); // Changed function call to match the new one
+                const totalMedicalCost = parseFloat(calculateTotal()) || 0;
+                const totalIncidentCost = parseFloat(calculateIncidentTotal()); // Added incident cost
                 const totalTestCost = parseFloat(calculateTestTotal());
                 const totalConsultantCost = parseFloat(calculateConsultantFee());
-                const roomCharges = parseFloat(calculateRoomCharges(numberOfDates));
-                const totalSum = totalMedicalCost + totalTestCost + totalConsultantCost + roomCharges + totalIncidentCost; // Added totalIncidentCost to the sum
+                const roomCharges = parseFloat(calculateRoomCharges(numberOfDates)) || 0;
+                const totalSum = totalMedicalCost + totalTestCost + totalConsultantCost + roomCharges + totalIncidentCost; // Included incident cost
 
                 // Log values to debug
                 console.log("Submit - Number of Dates:", numberOfDates);
@@ -399,7 +402,7 @@
                 console.log("Submit - Room Charges:", roomCharges);
                 console.log("Submit - Total Sum:", totalSum);
 
-                if (validateMedicalCharges(totalMedicalCost) && validateTestCharges(totalTestCost) && validateConsultantFees(totalConsultantCost) && validateIncidentCharges(totalIncidentCost)) { // Added validateIncidentCharges to the condition
+                if (validateMedicalCharges(totalMedicalCost) && validateTestCharges(totalTestCost) && validateConsultantFees(totalConsultantCost) && validateIncidentCharges(totalIncidentCost)) { // Added validateIncidentCharges
                     $("input[name='total_room_charges']").val(roomCharges);
                     $("input[name='total_treatments']").val(totalMedicalCost);
                     $("input[name='total_tests']").val(totalTestCost);
@@ -722,13 +725,8 @@
                                 <?php endif ?>
 
                                 <!-- section for adding heart surgery dependant start  -->
-                                <!-- Section for adding Hip Cost -->
-                                <?php if ($SubCategory1Name == "Heart Surgery - Depenadant") :
-                                ?>
-
+                                <?php if ($SubCategory1Name == "Heart Surgery - Dependant") : ?>
                                     <form method="POST" id="add_form">
-
-                                        <!-- Section for adding Hearing Aid bill -->
                                         <div id="show_test">
                                             <div class="form-section row">
                                                 <div class="col-md-8">
@@ -1313,7 +1311,7 @@
                             }
                             ?>
                             <tr>
-                                <th class="h5 "><b>Total Cost of Claim:</b></th>
+                                <th class="h5"><b>Total Cost of Claim:</b></th>
                                 <td class="h5 text-right"><b><span id="InitialCost"> Rs 0.00</span></b></td>
                             </tr>
                             <!-- Data will be dynamically appended here by jQuery -->

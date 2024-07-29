@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     ], true));
 
     // Insert data into the database
-    $query = "INSERT INTO `user-claims` (`nic`, `type`, `total_room_charges`, `total_treatments`, `consultant_fee`, `total_tests`, `total_incident_cost`, `total_cost`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"; // Modified query
+    $query = "INSERT INTO `user-claims` (`nic`, `type`, `total_room_charges`, `total_treatments`, `consultant_fee`, `total_tests`, `IncidentPrice`, `total_cost`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"; // Modified query
     $stmt = $conn->prepare($query);
 
     if ($stmt === false) {

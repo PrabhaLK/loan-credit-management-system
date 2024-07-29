@@ -13,7 +13,7 @@ session_start()
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <link href="../asset/css/index/main.css" rel="stylesheet" />
-    
+
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
     <!-- custom stylesheet -->
@@ -60,7 +60,7 @@ session_start()
                             <li><a href="./govt-hos.php?type=Government Ayuvedic Hospitalization">Government Ayurvedic Hospitalization</a></li>
                             <li><a href="./govt-hos.php?type=Private Hospitalization">Private Hospitalization</a></li>
                             <li><a href="./govt-hos.php?type=Private Ayuvedic Hospitalization">Private Ayurvedic Hospitalization</a></li>
-                            <li><a href="./govt-hos.php?type=Heart Surgery - Depenadant">Heart Surgery - Dependent</a></li>
+                            <li><a href="./govt-hos.php?type=Heart Surgery - Dependant">Heart Surgery - Dependent</a></li>
                         </ul>
                     </li>
 
