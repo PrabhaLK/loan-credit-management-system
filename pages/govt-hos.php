@@ -281,7 +281,7 @@
                 $("#show_item").append(`
             <div class="form-section row">
                 <div class="col-md-8">
-                    <input type="number" name="medical_price[]" class="form-control" placeholder="Add More" required>
+                    <input type="number" name="medical_price[]" class="form-control" placeholder="Add More" required min="0">
                 </div>
                 <div class="col-md-4">
                     <button type="button" class="btn btn-danger remove_item_btn">Remove</button>
@@ -296,7 +296,7 @@
                 $("#show_test").append(`
             <div class="form-section row">
                 <div class="col-md-8">
-                    <input type="number" name="test_price[]" class="form-control" placeholder="Test price" required>
+                    <input type="number" name="test_price[]" class="form-control" placeholder="Test price" required min="0">
                 </div>
                 <div class="col-md-4">
                     <button type="button" class="btn btn-danger remove_test_btn">Remove</button>
@@ -311,7 +311,7 @@
                 $("#show_consultant").append(`
             <div class="form-section row">
                 <div class="col-md-8">
-                    <input type="number" name="consultant_price[]" class="form-control" placeholder="Consultant price" required>
+                    <input type="number" name="consultant_price[]" class="form-control" placeholder="Consultant price" required min="0">
                 </div>
                 <div class="col-md-4">
                     <button type="button" class="btn btn-danger remove_consultant_btn">Remove</button>
@@ -326,7 +326,7 @@
                 $("#show_incident").append(`
             <div class="form-section row">
                 <div class="col-md-8">
-                    <input type="number" name="oneTimeIncident[]" class="form-control" placeholder="Incident cost" required>
+                    <input type="number" name="oneTimeIncident[]" class="form-control" placeholder="Incident cost" required min="0">
                 </div>
                 <div class="col-md-4">
                     <button type="button" class="btn btn-danger remove_incident_btn">Remove</button>
@@ -496,7 +496,7 @@
                                                     <div class="col-md-8">
                                                         <p>Number of Dates</p>
                                                         <!-- Input for number of dates (readonly) -->
-                                                        <input type="number" name="number_of_dates[]" class="form-control" placeholder="Number of Dates" required readonly>
+                                                        <input type="number" name="number_of_dates[]" class="form-control" placeholder="Number of Dates" readonly required min="0">
                                                     </div>
                                                     <!-- Date Pickers for selecting date period -->
                                                     <div class="row">
@@ -519,7 +519,7 @@
                                                     <div class="form-section row">
                                                         <div class="col-md-8">
                                                             <p>Surgical and Medical Treatments</p>
-                                                            <input type="number" name="medical_price[]" class="form-control validate-number" placeholder="Cost for surgical and medical treatments" required>
+                                                            <input type="number" name="medical_price[]" class="form-control validate-number" placeholder="Cost for surgical and medical treatments" required min="0">
                                                         </div>
                                                         <div class="col-md-4">
                                                             <button type="button" class="btn btn-success add_item_btn">Add More</button>
@@ -531,7 +531,7 @@
                                                     <div class="form-section row">
                                                         <div class="col-md-8">
                                                             <p>Medical tests</p>
-                                                            <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for medical tests" required>
+                                                            <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for medical tests" required min="0">
                                                         </div>
                                                         <div class="col-md-4">
                                                             <button type="button" class="btn btn-success add_test_btn">Add More</button>
@@ -563,7 +563,7 @@
                                     <div class="form-section row">
                                         <div class="col-md-8">
                                             <p>Number of Dates</p>
-                                            <input type="number" name="number_of_dates[]" class="form-control" placeholder="Number of Dates" max="10" required readonly>
+                                            <input type="number" name="number_of_dates[]" class="form-control" placeholder="Number of Dates" max="10" required readonly required min="0">
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6 mb-4">
@@ -582,7 +582,7 @@
                                                 <div class="form-section row">
                                                     <div class="col-md-8">
                                                         <p>Surgical and Medical Treatments</p>
-                                                        <input type="number" name="medical_price[]" class="form-control" placeholder="Treatment price" required>
+                                                        <input type="number" name="medical_price[]" class="form-control" placeholder="Treatment price" required min="0">
                                                     </div>
                                                     <div class="col-md-4">
                                                         <button type="button" class="btn btn-success add_item_btn">Add More</button>
@@ -593,7 +593,7 @@
                                                 <div class="form-section row">
                                                     <div class="col-md-8">
                                                         <p>Medical tests</p>
-                                                        <input type="number" name="test_price[]" class="form-control" placeholder="Test price" required>
+                                                        <input type="number" name="test_price[]" class="form-control" placeholder="Test price" required min="0">
                                                     </div>
                                                     <div class="col-md-4">
                                                         <button type="button" class="btn btn-success add_test_btn">Add More</button>
@@ -604,7 +604,7 @@
                                                 <div class="form-section row">
                                                     <div class="col-md-8">
                                                         <p>Consultant Fee</p>
-                                                        <input type="number" name="consultant_price[]" class="form-control" placeholder="Consultant price" required>
+                                                        <input type="number" name="consultant_price[]" class="form-control" placeholder="Consultant price" required min="0">
                                                     </div>
                                                     <div class="col-md-4">
                                                         <button type="button" class="btn btn-success add_consultant_btn">Add More</button>
@@ -642,7 +642,7 @@
                                             <p>Number of Dates</p>
 
                                             <!-- Input for number of dates (readonly) -->
-                                            <input type="number" name="number_of_dates[]" class="form-control" placeholder="Number of Dates" max="10" required readonly>
+                                            <input type="number" name="number_of_dates[]" class="form-control" placeholder="Number of Dates" max="10" required readonly required min="0">
                                         </div>
                                         <!-- Date Pickers for selecting date period -->
                                         <div class="row">
@@ -664,7 +664,7 @@
                                                 <div class="form-section row">
                                                     <div class="col-md-8">
                                                         <p>Surgical and Medical Treatments</p>
-                                                        <input type="number" name="medical_price[]" class="form-control" placeholder="Treatment price" required>
+                                                        <input type="number" name="medical_price[]" class="form-control" placeholder="Treatment price" required min="0">
                                                     </div>
                                                     <div class="col-md-4">
                                                         <button type="button" class="btn btn-success add_item_btn">Add More</button>
@@ -676,7 +676,7 @@
                                                     <div class="form-section row">
                                                         <div class="col-md-8">
                                                             <p>Medical tests</p>
-                                                            <input type="number" name="test_price[]" class="form-control" placeholder="Test price" required>
+                                                            <input type="number" name="test_price[]" class="form-control" placeholder="Test price" required min="0">
                                                         </div>
                                                         <div class="col-md-4">
                                                             <button type="button" class="btn btn-success add_test_btn">Add More</button>
@@ -689,7 +689,7 @@
                                                     <div class="form-section row">
                                                         <div class="col-md-8">
                                                             <p>Consultant Fee</p>
-                                                            <input type="number" name="consultant_price[]" class="form-control" placeholder="Consultant price" required>
+                                                            <input type="number" name="consultant_price[]" class="form-control" placeholder="Consultant price" required min="0">
                                                         </div>
                                                         <div class="col-md-4">
                                                             <button type="button" class="btn btn-success add_item_btn">Add More</button>
@@ -731,7 +731,7 @@
                                             <div class="form-section row">
                                                 <div class="col-md-8">
                                                     <p>Costs for heart surgery: Dependant</p>
-                                                    <input type="number" name="oneTimeIncident[]" class="form-control validate-number" placeholder="Enter costs here" required>
+                                                    <input type="number" name="oneTimeIncident[]" class="form-control validate-number" placeholder="Enter costs here" required min="0">
                                                 </div>
                                                 <div class="col-md-4">
                                                     <button type="button" class="btn btn-success add_test_btn">Add More</button>
@@ -748,6 +748,55 @@
                                 <?php endif ?>
                                 <!-- section for adding heart surgery dependant end  -->
 
+                                <!-- section for Child Birth Goovernment Hospital Start -->.
+                                <?php if ($SubCategory1Name == "Child Birth - Government Hospital") : ?>
+                                    <form method="POST" id="add_form">
+                                        <div id="show_test">
+                                            <div class="form-section row">
+                                                <div class="col-md-8">
+                                                    <p>Costs for heart surgery: Dependant</p>
+                                                    <input type="number" name="oneTimeIncident[]" class="form-control validate-number" placeholder="Enter costs here" required min="0">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <button type="button" class="btn btn-success add_test_btn">Add More</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Submit Button -->
+                                        <div class="row my-4">
+                                            <div class="col-md-12">
+                                                <button type="submit" class="btn btn-primary" id="add_btn">Send Details</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                <?php endif ?>
+
+                                <!-- section for Child Birth Goovernment Hospital end -->
+
+                                <?php if ($SubCategory1Name == "Child Birth- Private Hospital (Normal)") : ?>
+                                    <form method="POST" id="add_form">
+                                        <div id="show_test">
+                                            <div class="form-section row">
+                                                <div class="col-md-8">
+                                                    <p>Costs for heart surgery: Dependant</p>
+                                                    <input type="number" name="oneTimeIncident[]" class="form-control validate-number" placeholder="Enter costs here" required min="0">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <button type="button" class="btn btn-success add_test_btn">Add More</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Submit Button -->
+                                        <div class="row my-4">
+                                            <div class="col-md-12">
+                                                <button type="submit" class="btn btn-primary" id="add_btn">Send Details</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                <?php endif ?>
+
+                                <!-- section for Child Birth Goovernment Hospital end -->
+
                                 <!-- Section for adding Heart Surgery - Guarantee Bill Cost -->
                                 <?php if ($SubCategory1Name == "Heart Surgery - Guarantee") : ?>
                                     <div class="form-section row">
@@ -756,7 +805,7 @@
                                             <div class="form-section row">
                                                 <div class="col-md-8">
                                                     <p>Surgery Bill Cost</p>
-                                                    <input type="number" name="Surgery_price[]" class="form-control" placeholder="Surgery Treatment price" required>
+                                                    <input type="number" name="Surgery_price[]" class="form-control" placeholder="Surgery Treatment price" required min="0">
                                                 </div>
                                                 <div class="col-md-4">
                                                     <button type="button" class="btn btn-success add_item_btn">Add More</button>
@@ -768,7 +817,7 @@
                                             <div class="form-section row">
                                                 <div class="col-md-8">
                                                     <p>RF Ablation Treatments Cost</p>
-                                                    <input type="number" name="RF_Ablation[]" class="form-control" placeholder="RF Ablation  Treatment price" required>
+                                                    <input type="number" name="RF_Ablation[]" class="form-control" placeholder="RF Ablation  Treatment price" required min="0">
                                                 </div>
                                                 <div class="col-md-4">
                                                     <button type="button" class="btn btn-success add_item_btn">Add More</button>
@@ -802,7 +851,7 @@
                                             <p>Number of Dates</p>
 
                                             <!-- Input for number of dates (readonly) -->
-                                            <input type="number" name="number_of_dates[]" class="form-control" placeholder="Number of Dates" max="10" required readonly>
+                                            <input type="number" name="number_of_dates[]" class="form-control" placeholder="Number of Dates" max="10" required min="0" readonly>
                                         </div>
                                         <!-- Date Pickers for selecting date period -->
                                         <div class="row">
@@ -842,7 +891,7 @@
                                         <div class="form-section row">
                                             <div class="col-md-8">
                                                 <p>Kidney Surgery</p>
-                                                <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for Kidney Surgery Bill Cost" required>
+                                                <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for Kidney Surgery Bill Cost" required min="0">
                                             </div>
                                             <div class="col-md-4">
                                                 <button type="button" class="btn btn-success add_test_btn">Add More</button>
@@ -874,7 +923,7 @@
                                         <div class="form-section row">
                                             <div class="col-md-8">
                                                 <p>Kidney Surgery - Guarantee</p>
-                                                <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for Kidney Surgery - Guarantee Bill Cost" required>
+                                                <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for Kidney Surgery - Guarantee Bill Cost" required min="0">
                                             </div>
                                             <div class="col-md-4">
                                                 <button type="button" class="btn btn-success add_test_btn">Add More</button>
@@ -907,7 +956,7 @@
                                         <div class="form-section row">
                                             <div class="col-md-8">
                                                 <p>Natural Death</p>
-                                                <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for Natural Death" required>
+                                                <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for Natural Death" required min="0">
                                             </div>
                                             <div class="col-md-4">
                                                 <button type="button" class="btn btn-success add_test_btn">Add More</button>
@@ -945,7 +994,7 @@
                                             <div class="form-section row">
                                                 <div class="col-md-8">
                                                     <p>Cancer Hospital Bill</p>
-                                                    <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for Cancer hospital Bill" required>
+                                                    <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for Cancer hospital Bill" required min="0">
                                                 </div>
                                                 <div class="col-md-4">
                                                     <button type="button" class="btn btn-success add_test_btn">Add More</button>
@@ -984,7 +1033,7 @@
                                             <div class="form-section row">
                                                 <div class="col-md-8">
                                                     <p>Knee Hospital Bill</p>
-                                                    <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for Knee hospital Bill" required>
+                                                    <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for Knee hospital Bill" required min="0">
                                                 </div>
                                                 <div class="col-md-4">
                                                     <button type="button" class="btn btn-success add_test_btn">Add More</button>
@@ -1023,7 +1072,7 @@
                                             <div class="form-section row">
                                                 <div class="col-md-8">
                                                     <p>Accident Bill</p>
-                                                    <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for Accident " required>
+                                                    <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for Accident " required min="0">
                                                 </div>
                                                 <div class="col-md-4">
                                                     <button type="button" class="btn btn-success add_test_btn">Add More</button>
@@ -1062,7 +1111,7 @@
                                             <div class="form-section row">
                                                 <div class="col-md-8">
                                                     <p>Accidental Death Bill</p>
-                                                    <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for Accidental Death" required>
+                                                    <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for Accidental Death" required min="0">
                                                 </div>
                                                 <div class="col-md-4">
                                                     <button type="button" class="btn btn-success add_test_btn">Add More</button>
@@ -1101,7 +1150,7 @@
                                             <div class="form-section row">
                                                 <div class="col-md-8">
                                                     <p>Hip Bill</p>
-                                                    <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for Hip" required>
+                                                    <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for Hip" required min="0">
                                                 </div>
                                                 <div class="col-md-4">
                                                     <button type="button" class="btn btn-success add_test_btn">Add More</button>
@@ -1140,7 +1189,7 @@
                                             <div class="form-section row">
                                                 <div class="col-md-8">
                                                     <p>RF Ablation Bill</p>
-                                                    <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for RF Ablation" required>
+                                                    <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for RF Ablation" required min="0">
                                                 </div>
                                                 <div class="col-md-4">
                                                     <button type="button" class="btn btn-success add_test_btn">Add More</button>
@@ -1179,7 +1228,7 @@
                                             <div class="form-section row">
                                                 <div class="col-md-8">
                                                     <p>Hearing Aid Bill</p>
-                                                    <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for Hearing Aid" required>
+                                                    <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter costs for Hearing Aid" required min="0">
                                                 </div>
                                                 <div class="col-md-4">
                                                     <button type="button" class="btn btn-success add_test_btn">Add More</button>
@@ -1215,7 +1264,7 @@
                                             <div class="form-section row">
                                                 <div class="col-md-8">
                                                     <p>Sectacels Bill Cost</p>
-                                                    <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter Spectacles Bill Cost" required>
+                                                    <input type="number" name="test_price[]" class="form-control validate-number" placeholder="Enter Spectacles Bill Cost" required min="0">
                                                 </div>
                                                 <div class="col-md-4">
                                                     <button type="button" class="btn btn-success add_test_btn">Add More</button>
@@ -1269,7 +1318,6 @@
         </div>
         <!-- Right Section for Displaying Results -->
         <div class="col-md-6 right-sec">
-
             <!-- Display Current Date                                -->
             <div>
                 <b>The date : <?php echo date("m/d/y"); ?></b>

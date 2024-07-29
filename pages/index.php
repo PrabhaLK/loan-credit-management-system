@@ -67,8 +67,8 @@ session_start()
                     <li class="second-list">
                         <a href="govt-hos.php" class="dropdown-toggle" data-toggle="dropdown">Child Birth * 2<b class="caret"></b></a>
                         <ul>
-                            <li><a href="./govt-hos.php?type=Government Hospital">Government Hospital</a></li>
-                            <li><a href="./govt-hos.phpt?ype=Private Hospital - Normal">Private Hospital-Normal</a></li>
+                            <li><a href="./govt-hos.php?type=Child Birth - Government Hospital">Government Hospital</a></li>
+                            <li><a href="./govt-hos.php?type=Child Birth- Private Hospital (Normal)">Private Hospital-Normal</a></li>
                             <li><a href="govt-hos.php?ype=Private Hospital - Ceasar">Private Hospital-Ceaser</a></li>
                         </ul>
                     </li>
