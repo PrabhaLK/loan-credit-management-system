@@ -69,14 +69,14 @@ session_start()
                         <ul>
                             <li><a href="./govt-hos.php?type=Child Birth - Government Hospital">Government Hospital</a></li>
                             <li><a href="./govt-hos.php?type=Child Birth- Private Hospital (Normal)">Private Hospital-Normal</a></li>
-                            <li><a href="govt-hos.php?ype=Private Hospital - Ceasar">Private Hospital-Ceaser</a></li>
+                            <li><a href="./govt-hos.php?type=Child Birth- Private Hospital (Ceaser)">Private Hospital-Ceaser</a></li>
                         </ul>
                     </li>
 
                     <li class="third-list">
                         <a href="govt-hos.php" class="dropdown-toggle" data-toggle="dropdown">Heart<b class="caret"></b></a>
                         <ul>
-                            <li><a href=".govt-hos.php?type=Heart Surgery">Surgery</a></li>
+                            <li><a href="./govt-hos.php?type=Heart Surgery">Surgery</a></li>
                             <li><a href="govt-hos.php?type=Heart Surgery - Guarantee">Surgery Guarantee</a></li>
                             <li><a href="govt-hos.php?type=RF Ablation">RF Ablation</a></li>
                         </ul>
@@ -89,6 +89,13 @@ session_start()
                         <ul>
                             <li><a href="govt-hos.php?type=Kidney Surgery">Surgery</a></li>
                             <li><a href="govt-hos.php?type=Kidney Surgery - Guarantee">Surgery Guarantee</a></li>
+                        </ul>
+                    </li>
+                    <li class="fifth-list">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown">Brain<b class="caret"></b></a>
+                        <ul>
+                            <li><a href="govt-hos.php?type=Brain Surgery"> Brain Surgery</a></li>
+                            <li><a href="govt-hos.php?type=Brain Surgery - Guarantee">Surgery Guarantee</a></li>
                         </ul>
                     </li>
 

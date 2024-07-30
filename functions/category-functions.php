@@ -60,6 +60,14 @@ if (!empty($type)) {
         $incident_cost = $row['PerIncident'];
     }
 
+    // get the Per Life Price for One Time Items. 
+    $PerLifeCost = "SELECT * FROM `claim_info` WHERE `SubCategory 1 Name` = '$type' AND `SubCategory 2 Name` = 'PerLife'";
+    $PerLife_res = mysqli_query($conn, $PerLifeCost);
+    if ($PerLife_res && mysqli_num_rows($PerLife_res) > 0) {
+        $row = mysqli_fetch_assoc($PerLife_res);
+        $per_life_cost = $row['PerLife'];
+    }
+
     // Get user info from the database according to the session
     // $sql_usr = "SELECT * FROM `user_details` WHERE `NIC` = '{$_SESSION['nic']}'";
     // $result_usr = mysqli_query($conn, $sql_usr);
