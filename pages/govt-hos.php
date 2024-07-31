@@ -82,6 +82,19 @@
             const maxMedicalCharges = parseFloat(<?php echo isset($IncidentPrice) ? $IncidentPrice : 'null'; ?>);
             const maxTestCharges = parseFloat(<?php echo isset($TestIncident) ? $TestIncident : 'null'; ?>);
             const maxConsultantFees = parseFloat(<?php echo isset($consultantPrice) ? $consultantPrice : 'null'; ?>);
+            const PreviousClaimAmount = parseFloat(<?php echo isset($previous_claim_amount) ? $previous_claim_amount : 'null'; ?>) || 0;
+            const PerYearLimit = parseFloat(<?php echo isset($PerYear) ? $PerYear : 'null'; ?>) || 0;
+
+            if (PreviousClaimAmount >= PerYearLimit) {
+                Swal.fire({
+                    title: "Limit Exeeded",
+                    text: "You have already Claimed The Maximum Allowed Limit.",
+                    icon: "error"
+                });
+                setTimeout(function() {
+                    window.location.href = './index.php';
+                }, 4000);
+            }
 
             // Function to calculate days between two dates
             function calculateDaysBetweenDates(startDate, endDate) {
@@ -135,7 +148,7 @@
 
             // Function to validate room charges
             function validateRoomCharges(roomCharges) {
-                if (roomCharges >= maxRoomCharge) {
+                if (roomCharges > maxRoomCharge) {
                     Swal.fire({
                         title: "Room Charges Limit Exceeded",
                         text: "Room charges cannot be more than Rs " + maxRoomCharge.toFixed(2) + " Please adjust the dates.",
@@ -473,6 +486,7 @@
             <div class="col-md-6 left-sec">
                 <div class="Header">
                     <?php echo ($type); ?>
+                    <?php echo ($previous_claim_amount); ?>
                 </div>
                 <div class="left-up">
                     <div class="container">
