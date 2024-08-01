@@ -20,6 +20,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Retrieve additional data from session or POST
     $nic = isset($_SESSION['nic']) ? $_SESSION['nic'] : null;
     $type = isset($_POST['type']) ? $_POST['type'] : null;
+    if($type == "Government Hospitalization"|| $type == ""){
+ $DNA = "SS";
+    }
 
     // Check for null values and handle appropriately
     if (is_null($numberOfDates) || is_null($totalMedicalCost) || is_null($totalTestCost) || is_null($roomCharges) || is_null($totalSum) || is_null($totalIncidentCost) || is_null($nic) || is_null($type)) { // Added totalIncidentCost check
@@ -80,4 +83,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->close();
     $conn->close();
 }
-?>
