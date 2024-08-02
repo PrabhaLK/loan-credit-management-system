@@ -83,8 +83,7 @@
             const maxTestCharges = parseFloat(<?php echo isset($TestIncident) ? $TestIncident : 'null'; ?>);
             const maxConsultantFees = parseFloat(<?php echo isset($consultantPrice) ? $consultantPrice : 'null'; ?>);
             const PreviousClaimAmount = parseFloat(<?php echo isset($previous_claim_amount) ? $previous_claim_amount : 'null'; ?>) || 0;
-            const PerYearLimit = parseFloat(<?php echo isset($PerYear) ? $PerYear : 'null'; ?>) || 0
-            const SampleLimit = parseFloat(<?php echo isset($limit) ? $limit : 'null'; ?>) || 0
+            const PerYearLimit = parseFloat(<?php echo isset($PerYear) ? $PerYear : 'null'; ?>) || 0;
 
             if (PreviousClaimAmount >= PerYearLimit) {
                 Swal.fire({
@@ -488,7 +487,6 @@
                 <div class="Header">
                     <?php echo ($type); ?>
                     <?php echo ($previous_claim_amount); ?>
-                    <?php echo ($limit); ?>
                 </div>
                 <div class="left-up">
                     <div class="container">
