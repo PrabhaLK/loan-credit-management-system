@@ -80,9 +80,8 @@ if (!empty($type)) {
     $result = mysqli_query($conn, $sql);
 
     // Get Approved Previous claim Details
-    $previous_claims = "SELECT * FROM `user-claims` WHERE `nic` = '$usr_NIC' AND `type` = '$type' AND `Claim_Status` = 'Approved'";
+    $previous_claims = "SELECT * FROM `user-claims` WHERE `nic` = '$usr_NIC' AND `category` = '$CategoryName' AND `Claim_Status` = 'Approved'";
     $previous_claims_result = mysqli_query($conn, $previous_claims);
-
     $previous_claim_amount = 0;
 
     if ($previous_claims_result && mysqli_num_rows($previous_claims_result) > 0) {

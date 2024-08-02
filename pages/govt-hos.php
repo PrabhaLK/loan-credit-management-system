@@ -85,7 +85,7 @@
             const PreviousClaimAmount = parseFloat(<?php echo isset($previous_claim_amount) ? $previous_claim_amount : 'null'; ?>) || 0;
             const PerYearLimit = parseFloat(<?php echo isset($PerYear) ? $PerYear : 'null'; ?>) || 0;
 
-            if (PreviousClaimAmount >= PerYearLimit) {
+            if (PreviousClaimAmount > PerYearLimit) {
                 Swal.fire({
                     title: "Limit Exeeded",
                     text: "You have already Claimed The Maximum Allowed Limit.",

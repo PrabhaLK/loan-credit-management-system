@@ -20,12 +20,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Retrieve additional data from session or POST
     $nic = isset($_SESSION['nic']) ? $_SESSION['nic'] : null;
     $type = isset($_POST['type']) ? $_POST['type'] : null;
-    if($type == "Government Hospitalization"|| $type == ""){
- $DNA = "SS";
+
+    $sql_select_category = "SELECT `CategoryName` FROM claim_info WHERE `SubCategory 1 Name` = '$type'";
+    $sql_select_category_result = mysqli_query($conn, $sql_select_category);
+    if ($sql_select_category_result) {
+        $row = mysqli_fetch_assoc($sql_select_category_result);
+        $category_name = $row['CategoryName'];
     }
 
     // Check for null values and handle appropriately
-    if (is_null($numberOfDates) || is_null($totalMedicalCost) || is_null($totalTestCost) || is_null($roomCharges) || is_null($totalSum) || is_null($totalIncidentCost) || is_null($nic) || is_null($type)) { // Added totalIncidentCost check
+    if (is_null($numberOfDates) || is_null($totalMedicalCost) || is_null($totalTestCost) || is_null($roomCharges) || is_null($totalSum) || is_null($totalIncidentCost) || is_null($nic) || is_null($type) || is_null($category_name)) {
         error_log("Missing data: " . print_r([
             'numberOfDates' => $numberOfDates,
             'totalMedicalCost' => $totalMedicalCost,
@@ -34,7 +38,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             'totalIncidentCost' => $totalIncidentCost, // New field
             'totalSum' => $totalSum,
             'nic' => $nic,
-            'type' => $type
+            'type' => $type,
+            'category' => $category_name
         ], true));
         die("Missing data");
     }
@@ -58,11 +63,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         'totalIncidentCost' => $totalIncidentCost, // New field
         'totalSum' => $totalSum,
         'nic' => $nic,
-        'type' => $type
+        'type' => $type,
+        'category' => $category_name
     ], true));
 
     // Insert data into the database
-    $query = "INSERT INTO `user-claims` (`nic`, `type`, `total_room_charges`, `total_treatments`, `consultant_fee`, `total_tests`, `IncidentPrice`, `total_cost`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"; // Modified query
+    $query = "INSERT INTO `user-claims` (`nic`, `category`, `type`, `total_room_charges`, `total_treatments`, `consultant_fee`, `total_tests`, `IncidentPrice`, `total_cost`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($query);
 
     if ($stmt === false) {
@@ -70,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         die("Prepare failed: " . $conn->error);
     }
 
-    $stmt->bind_param("ssdddddd", $nic, $type, $roomCharges, $totalMedicalCost, $totalConsultantFees, $totalTestCost, $totalIncidentCost, $totalSum); // Added totalIncidentCost
+    $stmt->bind_param("sssdddddd", $nic, $category_name, $type, $roomCharges, $totalMedicalCost, $totalConsultantFees, $totalTestCost, $totalIncidentCost, $totalSum);
 
     if ($stmt->execute()) {
         echo "Data inserted successfully";
