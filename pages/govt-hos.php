@@ -172,7 +172,7 @@
                     $("input[name='medical_price[]']").val('');
                     return false;
                 }
-                return true;
+                return true; 
             }
 
             // Function to validate test charges
