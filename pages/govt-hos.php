@@ -82,10 +82,23 @@
             const maxMedicalCharges = parseFloat(<?php echo isset($IncidentPrice) ? $IncidentPrice : 'null'; ?>);
             const maxTestCharges = parseFloat(<?php echo isset($TestIncident) ? $TestIncident : 'null'; ?>);
             const maxConsultantFees = parseFloat(<?php echo isset($consultantPrice) ? $consultantPrice : 'null'; ?>);
+
             const PreviousClaimAmount = parseFloat(<?php echo isset($previous_claim_amount) ? $previous_claim_amount : 'null'; ?>) || 0;
             const PerYearLimit = parseFloat(<?php echo isset($PerYear) ? $PerYear : 'null'; ?>) || 0;
-
-            if (PreviousClaimAmount > PerYearLimit) {
+            const AyurvedicLimit = parseFloat(<?php echo isset($AyurvedicLimit) ? $AyurvedicLimit : 'null'; ?>) || 0;
+            const AyurvedicMaxLimit = parseFloat(<?php echo isset($previous_ayurvedic_claim_amount) ? $previous_ayurvedic_claim_amount : 'null'; ?>) || 0;
+            if (AyurvedicLimit <= AyurvedicMaxLimit) {
+                if (PreviousClaimAmount > PerYearLimit) {
+                    Swal.fire({
+                        title: "Limit Exeeded",
+                        text: "You have already Claimed The Maximum Allowed Limit.",
+                        icon: "error"
+                    });
+                    setTimeout(function() {
+                        window.location.href = './index.php';
+                    }, 4000);
+                }
+            } else {
                 Swal.fire({
                     title: "Limit Exeeded",
                     text: "You have already Claimed The Maximum Allowed Limit.",
@@ -172,7 +185,7 @@
                     $("input[name='medical_price[]']").val('');
                     return false;
                 }
-                return true; 
+                return true;
             }
 
             // Function to validate test charges
@@ -487,6 +500,7 @@
                 <div class="Header">
                     <?php echo ($type); ?>
                     <?php echo ($previous_claim_amount); ?>
+                    <?php echo ($previous_ayurvedic_claim_amount); ?>
                 </div>
                 <div class="left-up">
                     <div class="container">
