@@ -34,7 +34,7 @@ if (!empty($type)) {
         $row_hospitalization = mysqli_fetch_assoc($result_hospitalization);
         $PerYear = $row_hospitalization['PerYear'];
     }
-    $sql_ayurvedic = "SELECT PerYear FROM `claim_info` WHERE `CategoryName` = '$CategoryName' AND `SubCategory 1 Name` = 'Private Ayurvedic Hospitalization'";
+    $sql_ayurvedic = "SELECT PerYear FROM `claim_info` WHERE `CategoryName` = '$CategoryName' AND `SubCategory 1 Name` = 'Private Ayuvedic Hospitalization'";
     $result_ayurvedic = mysqli_query($conn, $sql_ayurvedic);
 
     if ($result_ayurvedic && mysqli_num_rows($result_ayurvedic) > 0) {
@@ -97,18 +97,23 @@ if (!empty($type)) {
     }
 
     // Get Approved Previous claim Details
-    $previous_claims = "SELECT * FROM `user-claims` WHERE `nic` = '$usr_NIC' AND `category` = '$CategoryName' AND `Claim_Status` = 'Approved'";
-    $previous_claims_result = mysqli_query($conn, $previous_claims);
     $previous_claim_amount = 0;
     $previous_ayurvedic_claim_amount = 0;
 
+    $sql_ayurvedic_claims = "SELECT `total_cost`  FROM `user-claims` WHERE `nic` = '$usr_NIC' AND `type` ='Private Ayuvedic Hospitalization'AND `Claim_Status` = 'Approved'";
+    $res_ayurvedic_claims = mysqli_query($conn, $sql_ayurvedic_claims);
+    if ($res_ayurvedic_claims && mysqli_num_rows($res_ayurvedic_claims) > 0) {
+        while ($row = mysqli_fetch_assoc($res_ayurvedic_claims)) {
+            $previous_ayurvedic_claim_amount += $row['total_cost'];
+        }
+    }
+    $previous_claims = "SELECT * FROM `user-claims` WHERE `nic` = '$usr_NIC' AND `category` = '$CategoryName' AND `Claim_Status` = 'Approved'";
+    $previous_claims_result = mysqli_query($conn, $previous_claims);
+
     if ($previous_claims_result && mysqli_num_rows($previous_claims_result) > 0) {
         while ($row = mysqli_fetch_assoc($previous_claims_result)) {
+            $ClaimSubtype = $row['type'];
             $previous_claim_amount += $row['total_cost'];
-            if ($SubCategory1Name == "Private Aryuvedic Hospitalization") {
-                $previous_ayurvedic_claim_amount += $row['total_cost'];
-                echo "oke bn";
-            }
         }
     }
     $sql = "SELECT * FROM `claim_info` WHERE `SubCategory 1 Name` = '$type' OR `CategoryName`= '$type'";

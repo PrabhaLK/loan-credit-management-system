@@ -49,7 +49,6 @@
         }
 
         .table-responsive {
-            max-height: 50vh;
             overflow-y: auto;
         }
 
@@ -87,8 +86,19 @@
             const PerYearLimit = parseFloat(<?php echo isset($PerYear) ? $PerYear : 'null'; ?>) || 0;
             const AyurvedicLimit = parseFloat(<?php echo isset($AyurvedicLimit) ? $AyurvedicLimit : 'null'; ?>) || 0;
             const AyurvedicMaxLimit = parseFloat(<?php echo isset($previous_ayurvedic_claim_amount) ? $previous_ayurvedic_claim_amount : 'null'; ?>) || 0;
-            if (AyurvedicLimit <= AyurvedicMaxLimit) {
-                if (PreviousClaimAmount > PerYearLimit) {
+
+            //tur
+            if (PreviousClaimAmount > PerYearLimit) {
+                if (AyurvedicLimit <= AyurvedicMaxLimit) {
+                    Swal.fire({
+                        title: "Limit Exeeded",
+                        text: "You have already Claimed The Maximum Allowed Limit.",
+                        icon: "error"
+                    });
+                    setTimeout(function() {
+                        window.location.href = './index.php';
+                    }, 4000);
+                } else {
                     Swal.fire({
                         title: "Limit Exeeded",
                         text: "You have already Claimed The Maximum Allowed Limit.",
@@ -98,15 +108,6 @@
                         window.location.href = './index.php';
                     }, 4000);
                 }
-            } else {
-                Swal.fire({
-                    title: "Limit Exeeded",
-                    text: "You have already Claimed The Maximum Allowed Limit.",
-                    icon: "error"
-                });
-                setTimeout(function() {
-                    window.location.href = './index.php';
-                }, 4000);
             }
 
             // Function to calculate days between two dates
