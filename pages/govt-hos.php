@@ -89,9 +89,7 @@
             const AyurvedicLimit = parseFloat(<?php echo isset($AyurvedicLimit) ? $AyurvedicLimit : 'null'; ?>) || 0; //200000
             const AyurvedicMaxLimit = parseFloat(<?php echo isset($previous_ayurvedic_claim_amount) ? $previous_ayurvedic_claim_amount : 'null'; ?>) || 0;
 
-            //tur
-            console.log(PreviousClaimAmount);
-            console.log(PerYearLimit);
+            //Check Limits 
             if (PreviousClaimAmount > PerYearLimit) {
                 if (AyurvedicLimit <= AyurvedicMaxLimit) {
                     Swal.fire({
