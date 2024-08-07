@@ -93,7 +93,6 @@
             console.log(PreviousClaimAmount);
             console.log(PerYearLimit);
             if (PreviousClaimAmount > PerYearLimit) {
-                console.log("sd1");
                 if (AyurvedicLimit <= AyurvedicMaxLimit) {
                     Swal.fire({
                         title: "Limit Exeeded",
@@ -115,10 +114,7 @@
                 }
             } else {
                 if (Type == "Private Ayuvedic Hospitalization") {
-                    console.log("sd2");
-                    console.log('<?php echo ($type); ?>');
                     if (AyurvedicLimit <= AyurvedicMaxLimit) {
-                        console.log("sd");
                         Swal.fire({
                             title: "Limit Exeeded",
                             text: "You have already Claimed The Maximum Allowed Limit.",
