@@ -73,7 +73,9 @@
     ?>
     <script>
         $(document).ready(function() {
+
             // Variables
+            var Type = <?php echo json_encode($type); ?>;
             const perDayRoomCharge = parseFloat(<?php echo isset($PerDay) ? $PerDay : 'null'; ?>);
             const PerLifeCostLimit = parseFloat(<?php echo isset($per_life_cost) ? $per_life_cost : 'null'; ?>);
             const incidentCostLimit = parseFloat(<?php echo isset($incident_cost) ? $incident_cost : 'null'; ?>) || PerLifeCostLimit;
@@ -84,11 +86,14 @@
 
             const PreviousClaimAmount = parseFloat(<?php echo isset($previous_claim_amount) ? $previous_claim_amount : 'null'; ?>) || 0;
             const PerYearLimit = parseFloat(<?php echo isset($PerYear) ? $PerYear : 'null'; ?>) || 0;
-            const AyurvedicLimit = parseFloat(<?php echo isset($AyurvedicLimit) ? $AyurvedicLimit : 'null'; ?>) || 0;
+            const AyurvedicLimit = parseFloat(<?php echo isset($AyurvedicLimit) ? $AyurvedicLimit : 'null'; ?>) || 0; //200000
             const AyurvedicMaxLimit = parseFloat(<?php echo isset($previous_ayurvedic_claim_amount) ? $previous_ayurvedic_claim_amount : 'null'; ?>) || 0;
 
             //tur
+            console.log(PreviousClaimAmount);
+            console.log(PerYearLimit);
             if (PreviousClaimAmount > PerYearLimit) {
+                console.log("sd1");
                 if (AyurvedicLimit <= AyurvedicMaxLimit) {
                     Swal.fire({
                         title: "Limit Exeeded",
@@ -108,8 +113,21 @@
                         window.location.href = './index.php';
                     }, 4000);
                 }
-            }
+            } else {
+                if (Type == "Private Ayuvedic Hospitalization") {
+                    console.log("sd2");
+                    console.log('<?php echo ($type); ?>');
+                    if (AyurvedicLimit <= AyurvedicMaxLimit) {
+                        console.log("sd");
+                        Swal.fire({
+                            title: "Limit Exeeded",
+                            text: "You have already Claimed The Maximum Allowed Limit.",
+                            icon: "error"
+                        });
+                    }
+                }
 
+            }
             // Function to calculate days between two dates
             function calculateDaysBetweenDates(startDate, endDate) {
                 const oneDay = 24 * 60 * 60 * 1000;
