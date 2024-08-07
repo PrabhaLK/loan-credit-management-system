@@ -1370,25 +1370,6 @@
                                     </form>
 
                                 <?php endif ?>
-
-                                <!-- Submit Button -->
-                                <!-- <div class="row my-4">
-                                            <div class="col-md-12">
-                                                <button type="submit" class="btn btn-primary" id="add_btn">Send Details</button>
-                                            </div>
-                                        </div> -->
-                                <!-- Total Costs Section -->
-                                <!-- <div class="total-costs row">
-                                            <div class="col-md-12">
-                                                <h4>Total Cost of Treatments: Rs <span id="total_cost">0.00</span></h4>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <h4>Total Cost of Tests: Rs <span id="test_total_cost">0.00</span></h4>
-                                            </div>
-                                        </div>
-
-                                        </form> -->
-
                                 </div>
                             </div>
                         </div>
@@ -1453,7 +1434,6 @@
                             </tr>
                         </tbody>
                     </table>
-
                 </div>
             </div>
         </div>
@@ -1466,5 +1446,4 @@
     <!-- SweetAlert2 Notification Framework Script -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
-
 </html>
