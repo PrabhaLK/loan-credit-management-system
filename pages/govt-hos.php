@@ -517,8 +517,6 @@
             <div class="col-md-6 left-sec">
                 <div class="Header">
                     <?php echo ($type); ?>
-                    <?php echo ($previous_claim_amount); ?>
-                    <?php echo ($previous_ayurvedic_claim_amount); ?>
                 </div>
                 <div class="left-up">
                     <div class="container">
