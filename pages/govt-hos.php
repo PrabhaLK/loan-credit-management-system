@@ -124,6 +124,9 @@
                             text: "You have already Claimed The Maximum Allowed Limit.",
                             icon: "error"
                         });
+                        setTimeout(function() {
+                            window.location.href = './index.php';
+                        }, 3000);
                     }
                 }
 
