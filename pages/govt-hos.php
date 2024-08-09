@@ -1379,7 +1379,7 @@
         <div class="col-md-6 right-sec">
             <!-- Display Current Date                                -->
             <div>
-                <b>The date : <?php echo date("m/d/y"); ?></b>
+                <b>The date : <?php echo date("m/d/Y"); ?></b>
             </div>
             <div class="card">
                 <div class="table-responsive">
