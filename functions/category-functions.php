@@ -27,16 +27,15 @@ if (!empty($type)) {
     }
 
     // Fetch limits for subcategories
-
     $sql_hospitalization = "SELECT PerYear FROM `claim_info` WHERE `CategoryName` = 'Hospitalization'";
     $result_hospitalization = mysqli_query($conn, $sql_hospitalization);
     if ($result_hospitalization && mysqli_num_rows($result_hospitalization) > 0) {
         $row_hospitalization = mysqli_fetch_assoc($result_hospitalization);
         $PerYear = $row_hospitalization['PerYear'];
     }
-    $sql_ayurvedic = "SELECT PerYear FROM `claim_info` WHERE `CategoryName` = '$CategoryName' AND `SubCategory 1 Name` = 'Private Ayuvedic Hospitalization'";
-    $result_ayurvedic = mysqli_query($conn, $sql_ayurvedic);
 
+    $sql_ayurvedic = "SELECT PerYear FROM `claim_info` WHERE `CategoryName` = '$CategoryName' AND `SubCategory 1 Name` = 'Private Ayurvedic Hospitalization'";
+    $result_ayurvedic = mysqli_query($conn, $sql_ayurvedic);
     if ($result_ayurvedic && mysqli_num_rows($result_ayurvedic) > 0) {
         $row_ayurvedic = mysqli_fetch_assoc($result_ayurvedic);
         $AyurvedicLimit = $row_ayurvedic['PerYear'];
@@ -47,7 +46,6 @@ if (!empty($type)) {
     // Calculate Medical Treatments charges for the hospitals
     $sql = "SELECT * FROM `claim_info` WHERE `SubCategory 1 Name` = '$type' AND `SubCategory 2 Name` = 'MedicalTreatment'";
     $result = mysqli_query($conn, $sql);
-
     if ($result && mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result); // Fetch the result row
         $IncidentPrice = $row['PerIncident'];
@@ -96,26 +94,60 @@ if (!empty($type)) {
         $usr_Name = $row_usr['Name'];
     }
 
-    // Get Approved Previous claim Details
+    // Initialize claim amounts
     $previous_claim_amount = 0;
     $previous_ayurvedic_claim_amount = 0;
 
-    $sql_ayurvedic_claims = "SELECT `total_cost`  FROM `user-claims` WHERE `nic` = '$usr_NIC' AND `type` ='Private Ayuvedic Hospitalization'AND `Claim_Status` = 'Approved'";
-    $res_ayurvedic_claims = mysqli_query($conn, $sql_ayurvedic_claims);
-    if ($res_ayurvedic_claims && mysqli_num_rows($res_ayurvedic_claims) > 0) {
-        while ($row = mysqli_fetch_assoc($res_ayurvedic_claims)) {
-            $previous_ayurvedic_claim_amount += $row['total_cost'];
-        }
-    }
-    $previous_claims = "SELECT * FROM `user-claims` WHERE `nic` = '$usr_NIC' AND `category` = '$CategoryName' AND `Claim_Status` = 'Approved'";
-    $previous_claims_result = mysqli_query($conn, $previous_claims);
+    // Get the current date
+    $currentDate = date('Y-m-d');
 
-    if ($previous_claims_result && mysqli_num_rows($previous_claims_result) > 0) {
-        while ($row = mysqli_fetch_assoc($previous_claims_result)) {
-            $ClaimSubtype = $row['type'];
-            $previous_claim_amount += $row['total_cost'];
+    // Calculate Previous Claims based on the Category
+    if ($CategoryName == 'Hospitalization') {
+        // Calculate claims within the past year
+        $oneYearAgo = date('Y-m-d', strtotime('-1 year'));
+
+        $sql_claims = "SELECT `total_cost` FROM `user-claims` WHERE `nic` = '$usr_NIC' AND `category` = '$CategoryName' AND `Claim_Status` = 'Approved' AND `claim_date` BETWEEN '$oneYearAgo' AND '$currentDate'";
+        $res_claims = mysqli_query($conn, $sql_claims);
+        if ($res_claims && mysqli_num_rows($res_claims) > 0) {
+            while ($row = mysqli_fetch_assoc($res_claims)) {
+                $previous_claim_amount += $row['total_cost'];
+            }
+        }
+
+        // Calculate Ayurvedic Hospitalization claims within the past year
+        $sql_ayurvedic_claims = "SELECT `total_cost` FROM `user-claims` WHERE `nic` = '$usr_NIC' AND `type` = 'Private Ayurvedic Hospitalization' AND `Claim_Status` = 'Approved' AND `claim_date` BETWEEN '$oneYearAgo' AND '$currentDate'";
+        $res_ayurvedic_claims = mysqli_query($conn, $sql_ayurvedic_claims);
+        if ($res_ayurvedic_claims && mysqli_num_rows($res_ayurvedic_claims) > 0) {
+            while ($row = mysqli_fetch_assoc($res_ayurvedic_claims)) {
+                $previous_ayurvedic_claim_amount += $row['total_cost'];
+            }
+        }
+    } elseif ($CategoryName == 'Spectacles') {
+        // Calculate claims within the past three years
+        $threeYearsAgo = date('Y-m-d', strtotime('-3 years'));
+
+        $sql_claims = "SELECT `total_cost` FROM `user-claims` WHERE `nic` = '$usr_NIC' AND `category` = '$CategoryName' AND `Claim_Status` = 'Approved' AND `claim_date` BETWEEN '$threeYearsAgo' AND '$currentDate'";
+        $res_claims = mysqli_query($conn, $sql_claims);
+        if ($res_claims && mysqli_num_rows($res_claims) > 0) {
+            while ($row = mysqli_fetch_assoc($res_claims)) {
+                $previous_claim_amount += $row['total_cost'];
+            }
         }
     }
+    // $previous_claims = "SELECT * FROM `user-claims` WHERE `nic` = '$usr_NIC' AND `category` = '$CategoryName' AND `Claim_Status` = 'Approved'";
+    // $previous_claims_result = mysqli_query($conn, $previous_claims);
+
+    // if ($previous_claims_result && mysqli_num_rows($previous_claims_result) > 0) {
+    //     while ($row = mysqli_fetch_assoc($previous_claims_result)) {
+    //         $ClaimSubtype = $row['type'];
+    //         $previous_claim_amount += $row['total_cost'];
+    //     }
+    // }
+    // $sql = "SELECT * FROM `claim_info` WHERE `SubCategory 1 Name` = '$type' OR `CategoryName`= '$type'";
+    // $result = mysqli_query($conn, $sql);
     $sql = "SELECT * FROM `claim_info` WHERE `SubCategory 1 Name` = '$type' OR `CategoryName`= '$type'";
     $result = mysqli_query($conn, $sql);
+
+
+    // (Optionally, if you need to do anything further with these calculated amounts, you can add that logic here)
 }
