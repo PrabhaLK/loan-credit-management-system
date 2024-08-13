@@ -136,7 +136,7 @@ if (!empty($type)) {
         return $currentYear;
 
     }
-    function handleClaim($nic, $type, ){
+    function handleClaim($nic, $type,){
 
     }
 }
