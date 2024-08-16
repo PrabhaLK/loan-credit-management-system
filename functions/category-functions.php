@@ -123,8 +123,9 @@ if (!empty($type)) {
                     $previous_ayurvedic_claim_amount += $row['total_cost'];
                 }
             }
+            $currentBalance = $AyurvedicLimit - $previous_ayurvedic_claim_amount;
         }
-
+        
         // Compare the totals with the limits for each subcategory
         if ($previous_claim_amount > $PerYear) {
             echo "<script>alert('Total approved claims for Hospitalization exceeded the yearly limit.');</script>";

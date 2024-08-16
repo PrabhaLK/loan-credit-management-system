@@ -87,7 +87,7 @@
             const PreviousClaimAmount = parseFloat(<?php echo isset($previous_claim_amount) ? $previous_claim_amount : 'null'; ?>) || 0;
             const PerYearLimit = parseFloat(<?php echo isset($PerYear) ? $PerYear : 'null'; ?>) || 0;
             const AyurvedicLimit = parseFloat(<?php echo isset($AyurvedicLimit) ? $AyurvedicLimit : 'null'; ?>) || 0; //200000
-            const AyurvedicMaxLimit = parseFloat(<?php echo isset($previous_ayurvedic_claim_amount) ? $previous_ayurvedic_claim_amount : 'null'; ?>) || 0;
+            const AyurvedicMaxLimit = parseFloat(<?php echo isset($currentBalance) ? $currentBalance : 'null'; ?>) || 0;
             const SpecPreviousClaimAmount = parseFloat(<?php echo isset($claimedAmount) ? $claimedAmount : 'null'; ?>) || 0;
 
             //Check Limits 
