@@ -3,6 +3,7 @@ include('../config/db.php');
 
 // Ensure the type is set
 if (!empty($type)) {
+    $_SESSION['currentBalance'] = 0;
     // Fetch the necessary data based on the type
     $sql = "SELECT * FROM `claim_info` WHERE `SubCategory 1 Name` = '$type' OR `CategoryName` = '$type'";
     $result = mysqli_query($conn, $sql);
@@ -114,6 +115,7 @@ if (!empty($type)) {
         }
 
         // Fetch approved claims for Ayurvedic Hospitalization within the current year
+
         $sql_ayurvedic_claims = "SELECT `total_cost`, `claim_date` FROM `user-claims` WHERE `nic` = '$usr_NIC' AND `type` ='Private Ayuvedic Hospitalization' AND `Claim_Status` = 'Approved'";
         $res_ayurvedic_claims = mysqli_query($conn, $sql_ayurvedic_claims);
         if ($res_ayurvedic_claims && mysqli_num_rows($res_ayurvedic_claims) > 0) {
@@ -123,12 +125,13 @@ if (!empty($type)) {
                     $previous_ayurvedic_claim_amount += $row['total_cost'];
                 }
             }
-            $currentBalance = $AyurvedicLimit - $previous_ayurvedic_claim_amount;
         }
-        
-        // Compare the totals with the limits for each subcategory
-        if ($previous_claim_amount > $PerYear) {
-            echo "<script>alert('Total approved claims for Hospitalization exceeded the yearly limit.');</script>";
+        if ($type == 'Private Ayuvedic Hospitalization') {
+            //current balance of the Private Aryuvedic Hospitalization
+            $_SESSION['currentBalance'] = $currentBalance = $AyurvedicLimit - $previous_ayurvedic_claim_amount;
+        } else {
+            //get current balance for the hospitalization category
+            $_SESSION['currentBalance'] = $currentBalance = $PerYear - $previous_claim_amount;
         }
     } elseif ($CategoryName === 'Spectacles') {
         // Calculate the total approved claims for Spectacles within the last 3 years
@@ -158,6 +161,7 @@ if (!empty($type)) {
         if ($previous_claims_result && mysqli_num_rows($previous_claims_result) > 0) {
             while ($row = mysqli_fetch_assoc($previous_claims_result)) {
                 $previous_claim_amount += $row['total_cost'];
+                $_SESSION['currentBalance'] = $currentBalance = $PerYear - $previous_claim_amount;
             }
         }
     }

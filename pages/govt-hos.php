@@ -97,9 +97,9 @@
                         title: "Limit Exeeded",
                         text: "You have already Claimed The Maximum Allowed Limit.",
                         icon: "error",
-                        allowOutsideClick: true, 
-                        willClose: () => { 
-                            window.location.href = './index.php'; 
+                        allowOutsideClick: true,
+                        willClose: () => {
+                            window.location.href = './index.php';
                         }
                     });
                     setTimeout(function() {
@@ -110,9 +110,9 @@
                         title: "Limit Exeeded",
                         text: "You have already Claimed The Maximum Allowed Limit.",
                         icon: "error",
-                        allowOutsideClick: true, 
-                        willClose: () => { 
-                            window.location.href = './index.php'; 
+                        allowOutsideClick: true,
+                        willClose: () => {
+                            window.location.href = './index.php';
                         }
                     });
                     setTimeout(function() {
@@ -126,9 +126,9 @@
                             title: "Limit Exeeded",
                             text: "You have already Claimed The Maximum Allowed Limit.",
                             icon: "error",
-                            allowOutsideClick: true, 
-                            willClose: () => { 
-                                window.location.href = './index.php'; 
+                            allowOutsideClick: true,
+                            willClose: () => {
+                                window.location.href = './index.php';
                             }
                         });
                         setTimeout(function() {
@@ -152,9 +152,9 @@
                         icon: 'error',
                         title: 'Error',
                         text: 'You have already claimed an amount for Spectacles. You cannot claim again within the next 3 years.',
-                        allowOutsideClick: true, 
-                        willClose: () => { 
-                            window.location.href = './index.php'; 
+                        allowOutsideClick: true,
+                        willClose: () => {
+                            window.location.href = './index.php';
                         }
                     });
                 }
@@ -210,9 +210,9 @@
                         title: "Room Charges Limit Exceeded",
                         text: "Room charges cannot be more than Rs " + maxRoomCharge.toFixed(2) + " Please adjust the dates.",
                         icon: "error",
-                        allowOutsideClick: true, 
-                        willClose: () => { 
-                            window.location.href = './index.php'; 
+                        allowOutsideClick: true,
+                        willClose: () => {
+                            window.location.href = './index.php';
                         }
                     });
                     $("#startingDate, #endingDate").val('');
@@ -229,9 +229,9 @@
                         title: "Medical Charges Limit Exceeded",
                         text: "Total cost for medical treatments cannot exceed Rs " + maxMedicalCharges.toFixed(2),
                         icon: "error",
-                        allowOutsideClick: true, 
-                        willClose: () => { 
-                            window.location.href = './index.php'; 
+                        allowOutsideClick: true,
+                        willClose: () => {
+                            window.location.href = './index.php';
                         }
                     });
                     $("input[name='medical_price[]']").val('');
@@ -247,9 +247,9 @@
                         title: "Test Charges Limit Exceeded",
                         text: "Total cost for medical tests cannot exceed Rs " + maxTestCharges.toFixed(2),
                         icon: "error",
-                        allowOutsideClick: true, 
-                        willClose: () => { 
-                            window.location.href = './index.php'; 
+                        allowOutsideClick: true,
+                        willClose: () => {
+                            window.location.href = './index.php';
                         }
                     });
                     $("input[name='test_price[]']").val('');
@@ -265,9 +265,9 @@
                         title: "Consultant Fees Limit Exceeded",
                         text: "Total cost for consultant fees cannot exceed Rs " + maxConsultantFees.toFixed(2),
                         icon: "error",
-                        allowOutsideClick: true, 
-                        willClose: () => { 
-                            window.location.href = './index.php'; 
+                        allowOutsideClick: true,
+                        willClose: () => {
+                            window.location.href = './index.php';
                         }
                     });
                     $("input[name='consultant_price[]']").val('');
@@ -283,9 +283,9 @@
                         title: "Incident Charge Limit Exceeded",
                         text: "Total cost for incidents cannot exceed Rs " + incidentCostLimit.toFixed(2),
                         icon: "error",
-                        allowOutsideClick: true, 
-                        willClose: () => { 
-                            window.location.href = './index.php'; 
+                        allowOutsideClick: true,
+                        willClose: () => {
+                            window.location.href = './index.php';
                         }
                     });
                     $("input[name='oneTimeIncident[]']").val('');
@@ -346,10 +346,10 @@
                             title: "Start Date cannot be ahead of end date.",
                             text: "Please check the date setup again.",
                             icon: "error",
-                        allowOutsideClick: true, 
-                        willClose: () => { 
-                            window.location.href = './index.php'; 
-                        }
+                            allowOutsideClick: true,
+                            willClose: () => {
+                                window.location.href = './index.php';
+                            }
                         });
                         $("#startingDate, #endingDate").val('');
                         $("input[name='number_of_dates[]']").val('');
@@ -569,6 +569,7 @@
                     <?php echo ($type); ?>
                     <?php echo ($previous_claim_amount); ?>
                     <?php echo ($previous_ayurvedic_claim_amount); ?>
+                    <?php echo ($currentBalance); ?>
                 </div>
                 <div class="left-up">
                     <div class="container">
