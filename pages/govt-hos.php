@@ -83,8 +83,8 @@
             const maxMedicalCharges = parseFloat(<?php echo isset($IncidentPrice) ? $IncidentPrice : 'null'; ?>);
             const maxTestCharges = parseFloat(<?php echo isset($TestIncident) ? $TestIncident : 'null'; ?>);
             const maxConsultantFees = parseFloat(<?php echo isset($consultantPrice) ? $consultantPrice : 'null'; ?>);
-
             const PreviousClaimAmount = parseFloat(<?php echo isset($previous_claim_amount) ? $previous_claim_amount : 'null'; ?>) || 0;
+            const CurrentBalance = parseFloat(<?php echo isset($currentBalance) ? $currentBalance : 'null'; ?>) || 0;
             const PerYearLimit = parseFloat(<?php echo isset($PerYear) ? $PerYear : 'null'; ?>) || 0;
             const AyurvedicLimit = parseFloat(<?php echo isset($AyurvedicLimit) ? $AyurvedicLimit : 'null'; ?>) || 0; //200000
             const AyurvedicMaxLimit = parseFloat(<?php echo isset($currentBalance) ? $currentBalance : 'null'; ?>) || 0;
@@ -211,9 +211,6 @@
                         text: "Room charges cannot be more than Rs " + maxRoomCharge.toFixed(2) + " Please adjust the dates.",
                         icon: "error",
                         allowOutsideClick: true,
-                        willClose: () => {
-                            window.location.href = './index.php';
-                        }
                     });
                     $("#startingDate, #endingDate").val('');
                     $("input[name='number_of_dates[]']").val('');
@@ -230,9 +227,6 @@
                         text: "Total cost for medical treatments cannot exceed Rs " + maxMedicalCharges.toFixed(2),
                         icon: "error",
                         allowOutsideClick: true,
-                        willClose: () => {
-                            window.location.href = './index.php';
-                        }
                     });
                     $("input[name='medical_price[]']").val('');
                     return false;
@@ -248,9 +242,6 @@
                         text: "Total cost for medical tests cannot exceed Rs " + maxTestCharges.toFixed(2),
                         icon: "error",
                         allowOutsideClick: true,
-                        willClose: () => {
-                            window.location.href = './index.php';
-                        }
                     });
                     $("input[name='test_price[]']").val('');
                     return false;
@@ -266,9 +257,6 @@
                         text: "Total cost for consultant fees cannot exceed Rs " + maxConsultantFees.toFixed(2),
                         icon: "error",
                         allowOutsideClick: true,
-                        willClose: () => {
-                            window.location.href = './index.php';
-                        }
                     });
                     $("input[name='consultant_price[]']").val('');
                     return false;
@@ -284,9 +272,6 @@
                         text: "Total cost for incidents cannot exceed Rs " + incidentCostLimit.toFixed(2),
                         icon: "error",
                         allowOutsideClick: true,
-                        willClose: () => {
-                            window.location.href = './index.php';
-                        }
                     });
                     $("input[name='oneTimeIncident[]']").val('');
                     return false;
@@ -347,9 +332,6 @@
                             text: "Please check the date setup again.",
                             icon: "error",
                             allowOutsideClick: true,
-                            willClose: () => {
-                                window.location.href = './index.php';
-                            }
                         });
                         $("#startingDate, #endingDate").val('');
                         $("input[name='number_of_dates[]']").val('');
@@ -485,17 +467,30 @@
                 const totalConsultantCost = parseFloat(calculateConsultantFee());
                 const roomCharges = parseFloat(calculateRoomCharges(numberOfDates)) || 0;
                 const totalSum = totalMedicalCost + totalTestCost + totalConsultantCost + roomCharges + totalIncidentCost; // Included incident cost
+                if (totalSum > CurrentBalance) {
+                    Swal.fire({
+                        title: "Exceeded Limit",
+                        text: "You have exceeded the current allowed maximum limit for this claim. Please check and resubmit the claim.",
+                        icon: "error",
+                        allowOutsideClick: false,
+                    });
+                    $("input[name='medical_price[]']").val('');
+                    $("input[name='oneTimeIncident[]']").val('');
+                    $("input[name='consultant_price[]']").val('');
+                    $("input[name='test_price[]']").val('');
+                    $("input[name='number_of_dates[]']").val('');
+                    return false;
+                } else if (validateMedicalCharges(totalMedicalCost) && validateTestCharges(totalTestCost) && validateConsultantFees(totalConsultantCost) && validateIncidentCharges(totalIncidentCost)) { // Added validateIncidentCharges
 
-                // Log values to debug
-                console.log("Submit - Number of Dates:", numberOfDates);
-                console.log("Submit - Total Medical Cost:", totalMedicalCost);
-                console.log("Submit - Total Incident Cost:", totalIncidentCost); // New log for incident cost
-                console.log("Submit - Total Test Cost:", totalTestCost);
-                console.log("Submit - Total Consultant Cost:", totalConsultantCost);
-                console.log("Submit - Room Charges:", roomCharges);
-                console.log("Submit - Total Sum:", totalSum);
+                    // Log values to debug
+                    console.log("Submit - Number of Dates:", numberOfDates);
+                    console.log("Submit - Total Medical Cost:", totalMedicalCost);
+                    console.log("Submit - Total Incident Cost:", totalIncidentCost); // New log for incident cost
+                    console.log("Submit - Total Test Cost:", totalTestCost);
+                    console.log("Submit - Total Consultant Cost:", totalConsultantCost);
+                    console.log("Submit - Room Charges:", roomCharges);
+                    console.log("Submit - Total Sum:", totalSum);
 
-                if (validateMedicalCharges(totalMedicalCost) && validateTestCharges(totalTestCost) && validateConsultantFees(totalConsultantCost) && validateIncidentCharges(totalIncidentCost)) { // Added validateIncidentCharges
                     $("input[name='total_room_charges']").val(roomCharges);
                     $("input[name='total_treatments']").val(totalMedicalCost);
                     $("input[name='total_tests']").val(totalTestCost);
@@ -570,6 +565,7 @@
                     <?php echo ($previous_claim_amount); ?>
                     <?php echo ($previous_ayurvedic_claim_amount); ?>
                     <?php echo ($currentBalance); ?>
+
                 </div>
                 <div class="left-up">
                     <div class="container">
@@ -585,6 +581,7 @@
                                             <input type="hidden" name="total_room_charges">
                                             <input type="hidden" name="total_treatments">
                                             <input type="hidden" name="total_tests">
+                                            <input type="hidden" name="current_balance" value="<?php echo $currentBalance; ?>">
                                             <!-- Section for adding government host method -->
                                             <?php if ($SubCategory1Name == "Government Hospitalization") : ?>
                                                 <div class="form-section row">
