@@ -91,7 +91,7 @@
             const SpecPreviousClaimAmount = parseFloat(<?php echo isset($claimedAmount) ? $claimedAmount : 'null'; ?>) || 0;
 
             //Check Limits 
-            if (PreviousClaimAmount > PerYearLimit) {
+            if (PreviousClaimAmount >= PerYearLimit) {
                 if (AyurvedicLimit <= AyurvedicMaxLimit) {
                     Swal.fire({
                         title: "Limit Exeeded",
@@ -467,7 +467,7 @@
                 const totalConsultantCost = parseFloat(calculateConsultantFee());
                 const roomCharges = parseFloat(calculateRoomCharges(numberOfDates)) || 0;
                 const totalSum = totalMedicalCost + totalTestCost + totalConsultantCost + roomCharges + totalIncidentCost; // Included incident cost
-                if (totalSum > CurrentBalance) {
+                if (totalSum >= CurrentBalance && totalSum != 0) {
                     Swal.fire({
                         title: "Exceeded Limit",
                         text: "You have exceeded the current allowed maximum limit for this claim. Please check and resubmit the claim.",
@@ -565,7 +565,6 @@
                     <?php echo ($previous_claim_amount); ?>
                     <?php echo ($previous_ayurvedic_claim_amount); ?>
                     <?php echo ($currentBalance); ?>
-
                 </div>
                 <div class="left-up">
                     <div class="container">

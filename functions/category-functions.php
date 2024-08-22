@@ -3,7 +3,7 @@ include('../config/db.php');
 
 // Ensure the type is set
 if (!empty($type)) {
-    $_SESSION['currentBalance'] = 0;
+    $currentBalance = 0;
     // Fetch the necessary data based on the type
     $sql = "SELECT * FROM `claim_info` WHERE `SubCategory 1 Name` = '$type' OR `CategoryName` = '$type'";
     $result = mysqli_query($conn, $sql);
@@ -127,12 +127,15 @@ if (!empty($type)) {
             }
         }
         if ($type == 'Private Ayuvedic Hospitalization') {
-            //current balance of the Private Aryuvedic Hospitalization
-            $_SESSION['currentBalance'] = $currentBalance = $AyurvedicLimit - $previous_ayurvedic_claim_amount;
+            // Calculate current balance for Private Ayurvedic Hospitalization
+            $currentBalance = $AyurvedicLimit - $previous_ayurvedic_claim_amount;
+            $hospitalizationBalance = $PerYear - $previous_claim_amount;
+            if ($currentBalance > $hospitalizationBalance) {
+                $currentBalance = $hospitalizationBalance;
+            }
         } else if ($CategoryName == 'Hospitalization') {
-            //get current balance for the hospitalization category
-            $_SESSION['currentBalance'] = $currentBalance = $PerYear - $previous_claim_amount;
-        } 
+            $currentBalance = $PerYear - $previous_claim_amount;
+        }
     } elseif ($CategoryName === 'Spectacles') {
         // Calculate the total approved claims for Spectacles within the last 3 years
         $threeYearsAgo = date('Y', strtotime('-3 years'));
@@ -161,7 +164,7 @@ if (!empty($type)) {
         if ($previous_claims_result && mysqli_num_rows($previous_claims_result) > 0) {
             while ($row = mysqli_fetch_assoc($previous_claims_result)) {
                 $previous_claim_amount += $row['total_cost'];
-                $_SESSION['currentBalance'] = $currentBalance = $PerLife - $previous_claim_amount;
+                $currentBalance = $PerLife - $previous_claim_amount;
             }
         }
     }
