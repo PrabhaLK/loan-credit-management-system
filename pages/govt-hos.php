@@ -89,6 +89,7 @@
             const AyurvedicLimit = parseFloat(<?php echo isset($AyurvedicLimit) ? $AyurvedicLimit : 'null'; ?>) || 0; //200000
             const AyurvedicMaxLimit = parseFloat(<?php echo isset($currentBalance) ? $currentBalance : 'null'; ?>) || 0;
             const SpecPreviousClaimAmount = parseFloat(<?php echo isset($claimedAmount) ? $claimedAmount : 'null'; ?>) || 0;
+            var childbirthError = "<?php echo isset($_SESSION['childbirth_error']) ? $_SESSION['childbirth_error'] : ''; ?>";
 
             //Check Limits 
             if (PreviousClaimAmount >= PerYearLimit) {
@@ -161,6 +162,24 @@
             }
             checkSpectaclesClaim();
 
+            //function to check that Child Birth can Only claim up to 2 incidents. 
+            if (childbirthError !== '') {
+                // Display the error message using Swal.fire
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: childbirthError,
+                });
+
+                // Prevent the form from being submitted
+                document.getElementById('add_btn').addEventListener('click', function(e) {
+                    e.preventDefault();
+                });
+
+                // Optionally, you can clear the session variable after displaying the message
+                <?php unset($_SESSION['childbirth_error']); // Clear the error after displaying 
+                ?>
+            }
             // Function to calculate total medical cost
             function calculateTotal() {
                 let total = 0;

@@ -3,7 +3,7 @@ include('../config/db.php');
 
 // Ensure the type is set
 if (!empty($type)) {
-    $currentBalance = 0;
+
     // Fetch the necessary data based on the type
     $sql = "SELECT * FROM `claim_info` WHERE `SubCategory 1 Name` = '$type' OR `CategoryName` = '$type'";
     $result = mysqli_query($conn, $sql);
@@ -26,7 +26,7 @@ if (!empty($type)) {
     } else {
         echo "<script>alert('No data found for the specified type');</script>";
     }
-
+    $currentBalance = 0;
     // Fetch limits for subcategories
     $sql_hospitalization = "SELECT PerYear FROM `claim_info` WHERE `CategoryName` = 'Hospitalization'";
     $result_hospitalization = mysqli_query($conn, $sql_hospitalization);
@@ -168,6 +168,26 @@ if (!empty($type)) {
             }
         }
     }
+    $sql_childbirthClaimsCount = "SELECT COUNT(*) as claim_count FROM `user-claims` WHERE `NIC` = ? AND `category` = 'Child Birth' AND `Claim_Status` = 'Approved'";
+    $stmt = $conn->prepare($sql_childbirthClaimsCount);
+    $stmt->bind_param("i", $usr_NIC);
+    $stmt->execute();
+    $childBirthClaimsCount_result = $stmt->get_result();
+    $row = $childBirthClaimsCount_result->fetch_assoc();
+    $claimCount = $row['claim_count'];
+
+    // Check if the claim count is greater than or equal to 2
+    if ($CategoryName == "Child Birth" && $claimCount >= 2) {
+        // Store the error message in the session for use in the HTML/JavaScript
+        $_SESSION['childbirth_error'] = "You have exceeded the maximum allowed claims for Childbirth. You cannot submit more than 2 claims.";
+    } else {
+        // If under the limit, proceed as normal
+        unset($_SESSION['childbirth_error']);
+    }
+
+    // Close the statement
+    $stmt->close();
+
     $sql = "SELECT * FROM `claim_info` WHERE `SubCategory 1 Name` = '$type' OR `CategoryName`= '$type'";
     $result = mysqli_query($conn, $sql);
 }
