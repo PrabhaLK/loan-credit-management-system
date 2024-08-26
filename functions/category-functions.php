@@ -136,6 +136,13 @@ if (!empty($type)) {
         } else if ($CategoryName == 'Hospitalization') {
             $currentBalance = $PerYear - $previous_claim_amount;
         }
+    } else if ($CategoryName !== 'Spectacles') {
+        echo "<script>console.log('gfh');</script>";
+        if ($currentBalance == 0) {
+            $currentBalance = $PerLife;
+        } else {
+            $currentBalance = $PerLife - $previous_claim_amount;
+        }
     } elseif ($CategoryName === 'Spectacles') {
         // Calculate the total approved claims for Spectacles within the last 3 years
         $threeYearsAgo = date('Y', strtotime('-3 years'));
@@ -164,8 +171,9 @@ if (!empty($type)) {
         if ($previous_claims_result && mysqli_num_rows($previous_claims_result) > 0) {
             while ($row = mysqli_fetch_assoc($previous_claims_result)) {
                 $previous_claim_amount += $row['total_cost'];
-                $currentBalance = $PerLife - $previous_claim_amount;
+                echo "<script>console.log('gffh');</script>";
             }
+            $currentBalance = $PerLife - $previous_claim_amount;
         }
     }
     $sql_childbirthClaimsCount = "SELECT COUNT(*) as claim_count FROM `user-claims` WHERE `NIC` = ? AND `category` = 'Child Birth' AND `Claim_Status` = 'Approved'";
