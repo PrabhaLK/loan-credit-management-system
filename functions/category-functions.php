@@ -136,14 +136,7 @@ if (!empty($type)) {
         } else if ($CategoryName == 'Hospitalization') {
             $currentBalance = $PerYear - $previous_claim_amount;
         }
-    } else if ($CategoryName !== 'Spectacles') {
-        echo "<script>console.log('gfh');</script>";
-        if ($currentBalance == 0) {
-            $currentBalance = $PerLife;
-        } else {
-            $currentBalance = $PerLife - $previous_claim_amount;
-        }
-    } elseif ($CategoryName === 'Spectacles') {
+    }  elseif ($CategoryName === 'Spectacles') {
         // Calculate the total approved claims for Spectacles within the last 3 years
         $threeYearsAgo = date('Y', strtotime('-3 years'));
         $previous_claims = "SELECT `total_cost`, `claim_date` FROM `user-claims` WHERE `nic` = '$usr_NIC' AND `category` = '$CategoryName' AND `Claim_Status` = 'Approved'";
@@ -171,8 +164,8 @@ if (!empty($type)) {
         if ($previous_claims_result && mysqli_num_rows($previous_claims_result) > 0) {
             while ($row = mysqli_fetch_assoc($previous_claims_result)) {
                 $previous_claim_amount += $row['total_cost'];
-                echo "<script>console.log('gffh');</script>";
             }
+            
             $currentBalance = $PerLife - $previous_claim_amount;
         }
     }
@@ -199,3 +192,11 @@ if (!empty($type)) {
     $sql = "SELECT * FROM `claim_info` WHERE `SubCategory 1 Name` = '$type' OR `CategoryName`= '$type'";
     $result = mysqli_query($conn, $sql);
 }
+// else if ($CategoryName !== 'Spectacles') {
+//     echo "<script>console.log('gfh');</script>";
+//     if ($currentBalance == 0) {
+//         $currentBalance = $PerLife;
+//     } else {
+//         $currentBalance = $PerLife - $previous_claim_amount;
+//     }
+// }
