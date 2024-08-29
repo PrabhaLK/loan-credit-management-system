@@ -26,7 +26,6 @@ if (!empty($type)) {
     } else {
         echo "<script>alert('No data found for the specified type');</script>";
     }
-    $currentBalance = 0;
     // Fetch limits for subcategories
     $sql_hospitalization = "SELECT PerYear FROM `claim_info` WHERE `CategoryName` = 'Hospitalization'";
     $result_hospitalization = mysqli_query($conn, $sql_hospitalization);
@@ -100,6 +99,7 @@ if (!empty($type)) {
     $previous_claim_amount = 0;
     $previous_ayurvedic_claim_amount = 0;
     $currentYear = date('Y');
+    $currentBalance = 0;
 
     if ($CategoryName === 'Hospitalization') {
         // Calculate the total approved claims for Hospitalization within the current year
@@ -127,30 +127,30 @@ if (!empty($type)) {
             }
         }
         if ($type == 'Private Ayuvedic Hospitalization') {
-            // Calculate current balance for Private Ayurvedic Hospitalization
-            $currentBalance = $AyurvedicLimit - $previous_ayurvedic_claim_amount;
-            $hospitalizationBalance = $PerYear - $previous_claim_amount;
-            if ($currentBalance > $hospitalizationBalance) {
-                $currentBalance = $hospitalizationBalance;
-            }
-        } else if ($CategoryName == 'Hospitalization') {
+            $currentBalance = min(
+                $AyurvedicLimit - $previous_ayurvedic_claim_amount,
+                $PerYear - $previous_claim_amount
+            );
+        } else {
             $currentBalance = $PerYear - $previous_claim_amount;
         }
-    }  elseif ($CategoryName === 'Spectacles') {
+    } elseif ($CategoryName == 'Spectacles') {
         // Calculate the total approved claims for Spectacles within the last 3 years
-        $threeYearsAgo = date('Y', strtotime('-3 years'));
+        $threeYearsAgo = date('Y-m-d', strtotime('-3 years'));
         $previous_claims = "SELECT `total_cost`, `claim_date` FROM `user-claims` WHERE `nic` = '$usr_NIC' AND `category` = '$CategoryName' AND `Claim_Status` = 'Approved'";
         $previous_claims_result = mysqli_query($conn, $previous_claims);
         if ($previous_claims_result && mysqli_num_rows($previous_claims_result) > 0) {
             while ($row = mysqli_fetch_assoc($previous_claims_result)) {
-                $claimYear = date('Y', strtotime($row['claim_date']));
-                if ($claimYear >= $threeYearsAgo) {
+                $claimDate = date('Y-m-d', strtotime($row['claim_date']));
+                if ($claimDate >= $threeYearsAgo) {
                     $previous_claim_amount += $row['total_cost'];
+                } else {
+                    echo "<script>alert('No data found for the specified type');</script>.$claimDate __ $threeYearsAgo";
                 }
             }
         }
         // Query to fetch the claimed amount for "Spectacles"
-        $sql_spectacle_claims = "SELECT total_cost FROM `user-claims` WHERE `nic` = '$usr_NIC' AND `category` = 'Spectacles' AND `Claim_Status` = 'Approved' AND YEAR(claim_date) >= YEAR(NOW()) - 3";
+        $sql_spectacle_claims = "SELECT total_cost FROM `user-claims` WHERE `nic` = '$usr_NIC' AND `category` = 'Spectacles' AND `Claim_Status` = 'Approved' AND  `claim_date` >= '$threeYearsAgo'";
         $result_spectacles = mysqli_query($conn, $sql_spectacle_claims);
 
         if ($result_spectacles && mysqli_num_rows($result_spectacles) > 0) {
@@ -165,8 +165,11 @@ if (!empty($type)) {
             while ($row = mysqli_fetch_assoc($previous_claims_result)) {
                 $previous_claim_amount += $row['total_cost'];
             }
-            
-            $currentBalance = $PerLife - $previous_claim_amount;
+            echo "<script>console.log('gfh');</script>";
+        }
+        $currentBalance = $PerLife - $previous_claim_amount;
+        if ($currentBalance == 0) {
+            $currentBalance = $PerLife;
         }
     }
     $sql_childbirthClaimsCount = "SELECT COUNT(*) as claim_count FROM `user-claims` WHERE `NIC` = ? AND `category` = 'Child Birth' AND `Claim_Status` = 'Approved'";

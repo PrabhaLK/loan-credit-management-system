@@ -169,11 +169,9 @@
                     icon: 'error',
                     title: 'Oops...',
                     text: childbirthError,
-                });
-
-                // Prevent the form from being submitted
-                document.getElementById('add_btn').addEventListener('click', function(e) {
-                    e.preventDefault();
+                    willClose: () => {
+                        window.location.href = './index.php';
+                    }
                 });
 
                 // Optionally, you can clear the session variable after displaying the message
@@ -1208,16 +1206,6 @@
                                                 <button type="submit" class="btn btn-primary" id="add_btn">Send Details</button>
                                             </div>
                                         </div>
-                                        <!-- Total Costs Section -->
-                                        <div class="total-costs row">
-                                            <div class="col-md-12">
-                                                <h4>Total Cost of Treatments: Rs <span id="total_cost">0.00</span></h4>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <h4>Total Cost of Tests: Rs <span id="test_total_cost">0.00</span></h4>
-                                            </div>
-                                        </div>
-
                                     </form>
 
                                 <?php endif ?>
@@ -1370,18 +1358,7 @@
                                                 <button type="submit" class="btn btn-primary" id="add_btn">Send Details</button>
                                             </div>
                                         </div>
-                                        <!-- Total Costs Section -->
-                                        <div class="total-costs row">
-                                            <div class="col-md-12">
-                                                <h4>Total Cost of Treatments: Rs <span id="total_cost">0.00</span></h4>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <h4>Total Cost of Tests: Rs <span id="test_total_cost">0.00</span></h4>
-                                            </div>
-                                        </div>
-
                                     </form>
-
                                 <?php endif ?>
 
                                 <!-- Section for adding Accident Death Cost -->
