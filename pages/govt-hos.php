@@ -1112,15 +1112,6 @@
                                             <button type="submit" class="btn btn-primary" id="add_btn">Send Details</button>
                                         </div>
                                     </div>
-                                    <!-- Total Costs Section -->
-                                    <div class="total-costs row">
-                                        <div class="col-md-12">
-                                            <h4>Total Cost of Treatments: Rs <span id="total_cost">0.00</span></h4>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <h4>Total Cost of Tests: Rs <span id="test_total_cost">0.00</span></h4>
-                                        </div>
-                                    </div>
                                     </form>
                                 <?php endif ?>
                                 <!-- Section for adding Brain Surgery Bill Cost End -->
@@ -1143,16 +1134,6 @@
                                             <button type="submit" class="btn btn-primary" id="add_btn">Send Details</button>
                                         </div>
                                     </div>
-                                    <!-- Total Costs Section -->
-                                    <div class="total-costs row">
-                                        <div class="col-md-12">
-                                            <h4>Total Cost of Treatments: Rs <span id="total_cost">0.00</span></h4>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <h4>Total Cost of Tests: Rs <span id="test_total_cost">0.00</span></h4>
-                                        </div>
-                                    </div>
-
                                     </form>
                                 <?php endif ?>
                                 <!-- Section for adding Brain Surgery - Guarantee Bill Cost end -->
@@ -1365,9 +1346,7 @@
                                 <?php if ($SubCategory1Name == "Hearing Aid") :
                                     // include('./method/cancer-meth.php'); 
                                 ?>
-
                                     <form method="POST" id="add_form">
-
                                         <!-- Section for adding Hearing Aid bill -->
                                         <div id="show_test">
                                             <div class="form-section row">
