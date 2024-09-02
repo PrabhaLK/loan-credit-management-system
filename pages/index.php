@@ -11,9 +11,8 @@ session_start()
     <title>Document</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <link href="../asset/css/index/main.css" rel="stylesheet" />
-
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
     <!-- custom stylesheet -->
@@ -40,6 +39,78 @@ session_start()
 </head>
 
 <body>
+    <script>
+        console.log("document loaded");
+
+        $(document).ready(function() {
+            // Function to handle the click event on each claim type link
+            $(document).on('click', '.dropdown-toggle,  a', function(event) {
+                event.preventDefault(); // Prevent the default link behavior
+
+                var link = $(this).attr('href'); // Get the link's href attribute
+
+                // Ask for the NIC
+                Swal.fire({
+                    title: 'Enter NIC',
+                    input: 'text',
+                    inputPlaceholder: 'Enter your NIC',
+                    showCancelButton: true,
+                    confirmButtonText: 'Submit',
+                    cancelButtonText: 'Cancel',
+                    preConfirm: (nic) => {
+                        if (!nic) {
+                            Swal.showValidationMessage('NIC is required');
+                            return false;
+                        }
+                        return nic;
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var nic = result.value;
+
+                        // AJAX request to check the NIC in the database
+                        $.ajax({
+                            url: '../functions/check_nic.php',
+                            type: 'POST',
+                            dataType: 'json',
+                            data: {
+                                nic: nic
+                            },
+                            success: function(response) {
+                                console.log('Raw response:', response); // Log raw response
+                                console.log('Status:', response.status); // Check the status value
+
+                                // Ensure the response is in the correct format
+                                if (response && response.status === 'success') {
+                                    Swal.fire({
+                                        title: 'User Found',
+                                        text: 'Username: ' + response.username,
+                                        icon: 'success'
+                                    }).then(() => {
+                                        // Redirect to the link's href only if NIC is valid
+                                        window.location.href = link;
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        title: 'Error',
+                                        text: response.message || 'NIC not found',
+                                        icon: 'error'
+                                    });
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                Swal.fire({
+                                    title: 'Error',
+                                    text: 'There was a problem checking the NIC',
+                                    icon: 'error'
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 
     <!-- NITF logo added -->
     <div class="logo-container">
@@ -123,6 +194,8 @@ session_start()
     <div>
         <a href="../functions/logout_funct.php" class="navbar-brand"><- Log in Page</a>
     </div>
+    <!-- SweetAlert2 Notification Framework Script -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
