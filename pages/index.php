@@ -44,7 +44,7 @@ session_start()
 
         $(document).ready(function() {
             // Function to handle the click event on each claim type link
-            $(document).on('click', '.dropdown-toggle,  a', function(event) {
+            $(document).on('click', '.toggle', function(event) {
                 event.preventDefault(); // Prevent the default link behavior
 
                 var link = $(this).attr('href'); // Get the link's href attribute
@@ -127,29 +127,29 @@ session_start()
                     <li class="first-list">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hospitalization <b class="caret"></b></a>
                         <ul>
-                            <li><a href="./govt-hos.php?type=Government Hospitalization">Government Hospitalization</a></li>
-                            <li><a href="./govt-hos.php?type=Government Ayuvedic Hospitalization">Government Ayurvedic Hospitalization</a></li>
-                            <li><a href="./govt-hos.php?type=Private Hospitalization">Private Hospitalization</a></li>
-                            <li><a href="./govt-hos.php?type=Private Ayuvedic Hospitalization">Private Ayurvedic Hospitalization</a></li>
-                            <li><a href="./govt-hos.php?type=Heart Surgery - Dependant">Heart Surgery - Dependent</a></li>
+                            <li><a class="toggle" href="./govt-hos.php?type=Government Hospitalization">Government Hospitalization</a></li>
+                            <li><a class="toggle" href="./govt-hos.php?type=Government Ayuvedic Hospitalization">Government Ayurvedic Hospitalization</a></li>
+                            <li><a class="toggle" href="./govt-hos.php?type=Private Hospitalization">Private Hospitalization</a></li>
+                            <li><a class="toggle" href="./govt-hos.php?type=Private Ayuvedic Hospitalization">Private Ayurvedic Hospitalization</a></li>
+                            <li><a class="toggle" href="./govt-hos.php?type=Heart Surgery - Dependant">Heart Surgery - Dependent</a></li>
                         </ul>
                     </li>
 
                     <li class="second-list">
                         <a href="govt-hos.php" class="dropdown-toggle" data-toggle="dropdown">Child Birth * 2<b class="caret"></b></a>
                         <ul>
-                            <li><a href="./govt-hos.php?type=Child Birth - Government Hospital">Government Hospital</a></li>
-                            <li><a href="./govt-hos.php?type=Child Birth- Private Hospital (Normal)">Private Hospital-Normal</a></li>
-                            <li><a href="./govt-hos.php?type=Child Birth- Private Hospital (Ceaser)">Private Hospital-Ceaser</a></li>
+                            <li><a class="toggle" href="./govt-hos.php?type=Child Birth - Government Hospital">Government Hospital</a></li>
+                            <li><a class="toggle" href="./govt-hos.php?type=Child Birth- Private Hospital (Normal)">Private Hospital-Normal</a></li>
+                            <li><a class="toggle" href="./govt-hos.php?type=Child Birth- Private Hospital (Ceaser)">Private Hospital-Ceaser</a></li>
                         </ul>
                     </li>
 
                     <li class="third-list">
                         <a href="govt-hos.php" class="dropdown-toggle" data-toggle="dropdown">Heart<b class="caret"></b></a>
                         <ul>
-                            <li><a href="./govt-hos.php?type=Heart Surgery">Surgery</a></li>
-                            <li><a href="govt-hos.php?type=Heart Surgery - Guarantee">Surgery Guarantee</a></li>
-                            <li><a href="govt-hos.php?type=RF Ablation">RF Ablation</a></li>
+                            <li><a class="toggle" href="./govt-hos.php?type=Heart Surgery">Surgery</a></li>
+                            <li><a class="toggle" href="govt-hos.php?type=Heart Surgery - Guarantee">Surgery Guarantee</a></li>
+                            <li><a class="toggle" href="govt-hos.php?type=RF Ablation">RF Ablation</a></li>
                         </ul>
                     </li>
 
@@ -158,35 +158,35 @@ session_start()
                     <li class="forth-list">
                         <a href="" class="dropdown-toggle" data-toggle="dropdown">Kidney<b class="caret"></b></a>
                         <ul>
-                            <li><a href="govt-hos.php?type=Kidney Surgery">Surgery</a></li>
-                            <li><a href="govt-hos.php?type=Kidney Surgery - Guarantee">Surgery Guarantee</a></li>
+                            <li><a class="toggle" href="govt-hos.php?type=Kidney Surgery">Surgery</a></li>
+                            <li><a class="toggle" href="govt-hos.php?type=Kidney Surgery - Guarantee">Surgery Guarantee</a></li>
                         </ul>
                     </li>
                     <li class="fifth-list">
                         <a href="" class="dropdown-toggle" data-toggle="dropdown">Brain<b class="caret"></b></a>
                         <ul>
-                            <li><a href="govt-hos.php?type=Brain Surgery"> Brain Surgery</a></li>
-                            <li><a href="govt-hos.php?type=Brain Surgery - Guarantee">Surgery Guarantee</a></li>
+                            <li><a class="toggle" href="govt-hos.php?type=Brain Surgery"> Brain Surgery</a></li>
+                            <li><a class="toggle" href="govt-hos.php?type=Brain Surgery - Guarantee">Surgery Guarantee</a></li>
                         </ul>
                     </li>
 
-                    <li class="active"><a href="govt-hos.php?type=Knee">Knee</a></li>
+                    <li class="active"><a class="toggle" href="govt-hos.php?type=Knee">Knee</a></li>
 
-                    <li class="active"><a href="govt-hos.php?type=Hip">Hip</a></li>
+                    <li class="active"><a class="toggle" href="govt-hos.php?type=Hip">Hip</a></li>
 
-                    <li class="active"><a href="govt-hos.php?type=Hearing Aid">Hearing Aid</a></li>
+                    <li class="active"><a class="toggle" href="govt-hos.php?type=Hearing Aid">Hearing Aid</a></li>
 
-                    <li class="active"><a href="govt-hos.php?type=Spectacles">Spectacles</a></li>
+                    <li class="active"><a class="toggle" href="govt-hos.php?type=Spectacles">Spectacles</a></li>
 
                     <li class="fifth-list">
                         <a href="" class="dropdown-toggle" data-toggle="dropdown">Death<b class="caret"></b></a>
                         <ul>
-                            <li><a href="govt-hos.php?type=Natural Death">Natural Death</a></li>
-                            <li><a href="govt-hos.php?type=Accidental Death">Accident Death</a></li>
+                            <li><a class="toggle" href="govt-hos.php?type=Natural Death">Natural Death</a></li>
+                            <li><a class="toggle" href="govt-hos.php?type=Accidental Death">Accident Death</a></li>
                         </ul>
                     </li>
 
-                    <li class="active"><a href="govt-hos.php?type=Accident">Accident</a></li>
+                    <li class="active"><a class="toggle" href="govt-hos.php?type=Accident">Accident</a></li>
                 </ul>
             </div>
         </nav>
