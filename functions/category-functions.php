@@ -195,11 +195,3 @@ if (!empty($type)) {
     $sql = "SELECT * FROM `claim_info` WHERE `SubCategory 1 Name` = '$type' OR `CategoryName`= '$type'";
     $result = mysqli_query($conn, $sql);
 }
-// else if ($CategoryName !== 'Spectacles') {
-//     echo "<script>console.log('gfh');</script>";
-//     if ($currentBalance == 0) {
-//         $currentBalance = $PerLife;
-//     } else {
-//         $currentBalance = $PerLife - $previous_claim_amount;
-//     }
-// }

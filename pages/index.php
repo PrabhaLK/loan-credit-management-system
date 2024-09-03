@@ -80,21 +80,36 @@ session_start()
                                 console.log('Raw response:', response); // Log raw response
                                 console.log('Status:', response.status); // Check the status value
 
-                                // Ensure the response is in the correct format
                                 if (response && response.status === 'success') {
                                     Swal.fire({
                                         title: 'User Found',
                                         text: 'Username: ' + response.username,
-                                        icon: 'success'
-                                    }).then(() => {
-                                        // Redirect to the link's href only if NIC is valid
-                                        window.location.href = link;
+                                        icon: 'success',
+                                        showCancelButton: true,
+                                        confirmButtonText: 'OK',
+                                        cancelButtonText: 'Re-enter'
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            // Redirect to the link's href only if "OK" is selected
+                                            window.location.href = link;
+                                        } else {
+                                            // If "Re-enter" is selected, show the NIC prompt again
+                                            promptNIC();
+                                        }
                                     });
                                 } else {
                                     Swal.fire({
-                                        title: 'Error',
-                                        text: response.message || 'NIC not found',
-                                        icon: 'error'
+                                        title: 'NIC not found',
+                                        text: 'Please check and re-enter your NIC.',
+                                        icon: 'error',
+                                        showCancelButton: true,
+                                        confirmButtonText: 'Re-enter',
+                                        cancelButtonText: 'Cancel'
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            // Re-enter NIC
+                                            promptNIC();
+                                        } // If Cancel is clicked, do nothing (Swal will close)
                                     });
                                 }
                             },
@@ -108,9 +123,76 @@ session_start()
                         });
                     }
                 });
+
+                // Function to prompt for NIC entry
+                function promptNIC() {
+                    Swal.fire({
+                        title: 'Enter NIC',
+                        input: 'text',
+                        inputPlaceholder: 'Enter your NIC',
+                        showCancelButton: true,
+                        confirmButtonText: 'Submit',
+                        cancelButtonText: 'Cancel',
+                        preConfirm: (nic) => {
+                            if (!nic) {
+                                Swal.showValidationMessage('NIC is required');
+                                return false;
+                            }
+                            return nic;
+                        }
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            var nic = result.value;
+
+                            // AJAX request to check the NIC in the database
+                            $.ajax({
+                                url: '../functions/check_nic.php',
+                                type: 'POST',
+                                dataType: 'json',
+                                data: {
+                                    nic: nic
+                                },
+                                success: function(response) {
+                                    if (response && response.status === 'success') {
+                                        Swal.fire({
+                                            title: 'User Found',
+                                            text: 'Username: ' + response.username,
+                                            icon: 'success',
+                                            confirmButtonText: 'OK'
+                                        }).then(() => {
+                                            window.location.href = link;
+                                        });
+                                    } else {
+                                        Swal.fire({
+                                            title: 'NIC not found',
+                                            text: 'Please check and re-enter your NIC.',
+                                            icon: 'error',
+                                            showCancelButton: true,
+                                            confirmButtonText: 'Re-enter',
+                                            cancelButtonText: 'Cancel'
+                                        }).then((result) => {
+                                            if (result.isConfirmed) {
+                                                // Re-enter NIC
+                                                promptNIC();
+                                            }
+                                        });
+                                    }
+                                },
+                                error: function(xhr, status, error) {
+                                    Swal.fire({
+                                        title: 'Error',
+                                        text: 'There was a problem checking the NIC',
+                                        icon: 'error'
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }
             });
         });
     </script>
+
 
     <!-- NITF logo added -->
     <div class="logo-container">
