@@ -1,4 +1,5 @@
 <?php
+session_start(); // Start the session to use session variables
 include '../config/db.php'; // Ensure the path is correct
 
 // Debugging: Check if the request method is POST
@@ -23,6 +24,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($stmt->num_rows > 0) {
         $stmt->bind_result($username);
         $stmt->fetch();
+
+        // Store the NIC in a session variable
+        $_SESSION['claimholder_nic'] = $nic;
 
         echo json_encode([
             'status' => 'success',

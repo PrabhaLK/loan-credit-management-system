@@ -70,10 +70,54 @@
     <?php
 
     include('../functions/category-functions.php');
+
     ?>
     <script>
-        $(document).ready(function() {
+        window.history.pushState(null, null, window.location.href);
+        window.addEventListener('popstate', function(event) {
+            event.preventDefault();
+            window.history.pushState(null, null, window.location.href);
 
+            // Show SweetAlert2 confirmation
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'Pressing the back button will destroy your session.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, destroy session',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // AJAX request to unset the session variable
+                    $.ajax({
+                        url: '../functions/handle_navigation.php', // Create this PHP file
+                        type: 'POST',
+                        success: function(response) {
+                            window.location.href = 'index.php'; // Redirect to index.php
+                        },
+                        error: function(xhr, status, error) {
+                            Swal.fire({
+                                title: 'Error',
+                                text: 'There was a problem destroying the session',
+                                icon: 'error'
+                            });
+                        }
+                    });
+                } else {
+                    // Cancel action
+                    event.preventDefault();
+                }
+            });
+        });
+
+        // Prevent forward button navigation
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted) {
+                window.location.reload();
+            }
+        });
+
+        $(document).ready(function() {
             // Variables
             var Type = <?php echo json_encode($type); ?>;
             const perDayRoomCharge = parseFloat(<?php echo isset($PerDay) ? $PerDay : 'null'; ?>);
@@ -578,6 +622,13 @@
             <!-- Left Section for Form -->
             <div class="col-md-6 left-sec">
                 <div class="Header">
+                    <?php
+                    if (isset($_SESSION['claimholder_nic'])) {
+                        echo "Claimholder NIC: " . $_SESSION['claimholder_nic'];
+                    } else {
+                        echo "No NIC in session.";
+                    }
+                    ?>
                     <?php echo ($type); ?>
                     <?php echo ($previous_claim_amount); ?>
                     <?php echo ($previous_ayurvedic_claim_amount); ?>

@@ -42,6 +42,8 @@ session_start()
     <script>
         console.log("document loaded");
 
+
+
         $(document).ready(function() {
             // Function to handle the click event on each claim type link
             $(document).on('click', '.toggle', function(event) {
@@ -191,9 +193,8 @@ session_start()
                 }
             });
         });
+
     </script>
-
-
     <!-- NITF logo added -->
     <div class="logo-container">
         <img class="logo" src="../images/logo.png" alt="Logo">
@@ -235,7 +236,7 @@ session_start()
                         </ul>
                     </li>
 
-                    <li class="active"><a href="govt-hos.php?type=Cancer">Cancer</a></li>
+                    <li class="active"><a class="toggle" href="govt-hos.php?type=Cancer">Cancer</a></li>
 
                     <li class="forth-list">
                         <a href="" class="dropdown-toggle" data-toggle="dropdown">Kidney<b class="caret"></b></a>
