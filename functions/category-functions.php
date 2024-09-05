@@ -86,7 +86,7 @@ if (!empty($type)) {
     }
 
     // Get user info from the database according to the session
-    $sql_usr = "SELECT * FROM `user_details` WHERE `NIC` = '{$_SESSION['nic']}'";
+    $sql_usr = "SELECT * FROM `user_details` WHERE `NIC` = '{$_SESSION['claimholder_nic']}'";
     $result_usr = mysqli_query($conn, $sql_usr);
     if ($result_usr && mysqli_num_rows($result_usr) > 0) {
         $row_usr = mysqli_fetch_assoc($result_usr);
@@ -165,7 +165,6 @@ if (!empty($type)) {
             while ($row = mysqli_fetch_assoc($previous_claims_result)) {
                 $previous_claim_amount += $row['total_cost'];
             }
-            echo "<script>console.log('gfh');</script>";
         }
         $currentBalance = $PerLife - $previous_claim_amount;
         if ($currentBalance == 0) {

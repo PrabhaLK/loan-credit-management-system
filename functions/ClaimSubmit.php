@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $totalSum = isset($_POST['total_sum']) ? $_POST['total_sum'] : null;
 
     // Retrieve additional data from session or POST
-    $nic = isset($_SESSION['nic']) ? $_SESSION['nic'] : null;
+    $nic = isset($_SESSION['claimholder_nic']) ? $_SESSION['claimholder_nic'] : null;
     $type = isset($_POST['type']) ? $_POST['type'] : null;
 
     $sql_select_category = "SELECT `CategoryName` FROM claim_info WHERE `SubCategory 1 Name` = '$type'";

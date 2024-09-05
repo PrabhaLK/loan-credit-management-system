@@ -41,8 +41,50 @@ session_start()
 <body>
     <script>
         console.log("document loaded");
+        //prevent forward navigation and back button navigation.
+        window.history.pushState(null, null, window.location.href);
+        window.addEventListener('popstate', function(event) {
+            event.preventDefault();
+            window.history.pushState(null, null, window.location.href);
 
+            // Show SweetAlert2 confirmation
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'Pressing the back button will destroy your session.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, destroy session',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // AJAX request to unset the session variable
+                    $.ajax({
+                        url: '../functions/handle_navigation.php', // Create this PHP file
+                        type: 'POST',
+                        success: function(response) {
+                            window.location.href = '../login.php'; // Redirect to index.php
+                        },
+                        error: function(xhr, status, error) {
+                            Swal.fire({
+                                title: 'Error',
+                                text: 'There was a problem destroying the session',
+                                icon: 'error'
+                            });
+                        }
+                    });
+                } else {
+                    // Cancel action
+                    event.preventDefault();
+                }
+            });
+        });
 
+        // Prevent forward button navigation
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted) {
+                window.location.reload();
+            }
+        });
 
         $(document).ready(function() {
             // Function to handle the click event on each claim type link
@@ -193,7 +235,6 @@ session_start()
                 }
             });
         });
-
     </script>
     <!-- NITF logo added -->
     <div class="logo-container">
