@@ -7,3 +7,4 @@ if (isset($_SESSION['claimholder_nic'])) {
 }
 
 echo json_encode(['status' => 'success']);
+?>

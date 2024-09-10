@@ -3,10 +3,10 @@
 
 <head>
     <?php
+    session_start();
     include('../config/db.php');  // Include database configuration if needed
     include('../functions/login_check.php');
     $type = isset($_GET['type']) ? $_GET['type'] : '';
-    session_start();
     ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -69,9 +69,7 @@
 
 <body>
     <?php
-
     include('../functions/category-functions.php');
-
     ?>
     <script>
         window.history.pushState(null, null, window.location.href);

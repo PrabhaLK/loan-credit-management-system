@@ -15,7 +15,7 @@ include('../functions/login_check.php');
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <link href="../asset/css/index/main.css" rel="stylesheet" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- custom stylesheet -->
     <link rel="stylesheet" href="dropdown.css">
 
@@ -38,6 +38,7 @@ include('../functions/login_check.php');
     </style>
 
 </head>
+<?php include('../functions/validate-login.php'); ?>
 
 <body>
     <script>
@@ -320,7 +321,7 @@ include('../functions/login_check.php');
         <a href="../functions/logout_funct.php" class="navbar-brand"><- Log in Page</a>
     </div>
     <!-- SweetAlert2 Notification Framework Script -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </body>
 
 </html>

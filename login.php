@@ -23,6 +23,7 @@ session_start();
   <link rel="stylesheet" type="text/css" href="./asset/vendor/daterangepicker/daterangepicker.css" />
   <link rel="stylesheet" type="text/css" href="./asset/css/login/util.css" />
   <link rel="stylesheet" type="text/css" href="./asset/css/login/main.css" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <style>
     .txt-login {
@@ -31,7 +32,7 @@ session_start();
     }
   </style>
 </head>
-
+<?php include('./functions/validate-login.php'); ?>
 <body>
   <div class="limiter">
     <div class="container-login100">
