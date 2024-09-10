@@ -4,6 +4,7 @@
 <head>
     <?php
     include('../config/db.php');  // Include database configuration if needed
+    include('../functions/login_check.php');
     $type = isset($_GET['type']) ? $_GET['type'] : '';
     session_start();
     ?>
