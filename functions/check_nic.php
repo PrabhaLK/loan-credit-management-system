@@ -1,6 +1,7 @@
 <?php
 session_start(); // Start the session to use session variables
 include '../config/db.php'; // Ensure the path is correct
+include('../config/headers.php');
 
 // Debugging: Check if the request method is POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

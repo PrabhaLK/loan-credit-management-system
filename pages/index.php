@@ -1,6 +1,10 @@
 <?php
 session_start();
 include('../functions/login_check.php');
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 ?>
 
 <!DOCTYPE html>
@@ -59,7 +63,7 @@ include('../functions/login_check.php');
                 cancelButtonText: 'Cancel'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // AJAX request to unset the session variable
+                    // Synchronous AJAX request to ensure completion
                     $.ajax({
                         url: '../functions/handle_navigation.php', // Create this PHP file
                         type: 'POST',
@@ -83,11 +87,11 @@ include('../functions/login_check.php');
 
         // Prevent forward button navigation
         window.addEventListener('pageshow', function(event) {
-            if (event.persisted) {
+            if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
+                // Force reload if page is coming from cache
                 window.location.reload();
             }
         });
-
         $(document).ready(function() {
             // Function to handle the click event on each claim type link
             $(document).on('click', '.toggle', function(event) {

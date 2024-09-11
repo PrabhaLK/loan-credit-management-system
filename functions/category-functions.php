@@ -1,5 +1,6 @@
 <?php
 include('../config/db.php');
+include('../config/headers.php');
 
 // Ensure the type is set
 if (!empty($type)) {

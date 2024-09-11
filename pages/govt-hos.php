@@ -6,6 +6,7 @@
     session_start();
     include('../config/db.php');  // Include database configuration if needed
     include('../functions/login_check.php');
+    include('../config/headers.php');
     $type = isset($_GET['type']) ? $_GET['type'] : '';
     ?>
     <meta charset="UTF-8">
@@ -15,6 +16,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.min.css" rel="stylesheet" />
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title><?php echo ($type); ?></title>
     <style>
         body {
@@ -111,11 +113,11 @@
 
         // Prevent forward button navigation
         window.addEventListener('pageshow', function(event) {
-            if (event.persisted) {
+            if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
+                // Force reload if page is coming from cache
                 window.location.reload();
             }
         });
-
         $(document).ready(function() {
             // Variables
             var Type = <?php echo json_encode($type); ?>;
@@ -1517,7 +1519,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.umd.min.js"></script>
     <!-- SweetAlert2 Notification Framework Script -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </body>
 
 </html>

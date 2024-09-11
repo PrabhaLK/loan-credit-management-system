@@ -1,5 +1,8 @@
 <?php
 session_start();
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,6 +36,7 @@ session_start();
   </style>
 </head>
 <?php include('./functions/validate-login.php'); ?>
+
 <body>
   <div class="limiter">
     <div class="container-login100">

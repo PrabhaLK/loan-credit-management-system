@@ -1,4 +1,5 @@
 <?php
+include('../config/headers.php');
 
 function redirectWithError($sessionKey, $message, $location)
 {
@@ -20,4 +21,3 @@ if (basename($_SERVER['PHP_SELF']) === 'govt-hos.php') {
         redirectWithError('no_claimholder_NIC', $_SESSION['claimholder-NIC-Status'], './index.php');
     }
 }
-?>
