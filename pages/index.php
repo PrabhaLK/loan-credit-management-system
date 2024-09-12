@@ -1,4 +1,8 @@
 <?php
+ini_set('session.cookie_secure', 1);  // Only send over HTTPS
+ini_set('session.cookie_httponly', 1); // Prevent JavaScript access
+ini_set('session.cookie_samesite', 'Strict'); // SameSite policy
+
 session_start();
 include('../functions/login_check.php');
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
@@ -47,13 +51,13 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 <body>
     <script>
         console.log("document loaded");
-        //prevent forward navigation and back button navigation.
+
+        // Prevent back button navigation
         window.history.pushState(null, null, window.location.href);
         window.addEventListener('popstate', function(event) {
             event.preventDefault();
             window.history.pushState(null, null, window.location.href);
 
-            // Show SweetAlert2 confirmation
             Swal.fire({
                 title: 'Are you sure?',
                 text: 'Pressing the back button will destroy your session.',
@@ -63,12 +67,13 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
                 cancelButtonText: 'Cancel'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Synchronous AJAX request to ensure completion
+                    // Synchronous AJAX request to destroy session
                     $.ajax({
-                        url: '../functions/handle_navigation.php', // Create this PHP file
+                        url: '../functions/handle_navigation.php', // Ensure this PHP exists
                         type: 'POST',
+                        async: false,
                         success: function(response) {
-                            window.location.href = '../login.php'; // Redirect to index.php
+                            window.location.href = '../login.php'; // Redirect after destroying session
                         },
                         error: function(xhr, status, error) {
                             Swal.fire({
@@ -79,13 +84,13 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
                         }
                     });
                 } else {
-                    // Cancel action
+                    // Cancel back button navigation
                     event.preventDefault();
                 }
             });
         });
 
-        // Prevent forward button navigation
+        // Prevent forward button navigation (pageshow for back-forward cache)
         window.addEventListener('pageshow', function(event) {
             if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
                 // Force reload if page is coming from cache
@@ -95,9 +100,9 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
         $(document).ready(function() {
             // Function to handle the click event on each claim type link
             $(document).on('click', '.toggle', function(event) {
-                event.preventDefault(); // Prevent the default link behavior
+                event.preventDefault(); // Prevent default link behavior
 
-                var link = $(this).attr('href'); // Get the link's href attribute
+                var link = $(this).attr('href'); // Get link's href attribute
 
                 // Ask for the NIC
                 Swal.fire({
@@ -118,7 +123,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
                     if (result.isConfirmed) {
                         var nic = result.value;
 
-                        // AJAX request to check the NIC in the database
+                        // AJAX request to check NIC
                         $.ajax({
                             url: '../functions/check_nic.php',
                             type: 'POST',
@@ -127,9 +132,6 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
                                 nic: nic
                             },
                             success: function(response) {
-                                console.log('Raw response:', response); // Log raw response
-                                console.log('Status:', response.status); // Check the status value
-
                                 if (response && response.status === 'success') {
                                     Swal.fire({
                                         title: 'User Found',
@@ -140,10 +142,9 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
                                         cancelButtonText: 'Re-enter'
                                     }).then((result) => {
                                         if (result.isConfirmed) {
-                                            // Redirect to the link's href only if "OK" is selected
+                                            // Redirect only if OK is selected
                                             window.location.href = link;
                                         } else {
-                                            // If "Re-enter" is selected, show the NIC prompt again
                                             promptNIC();
                                         }
                                     });
@@ -157,9 +158,8 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
                                         cancelButtonText: 'Cancel'
                                     }).then((result) => {
                                         if (result.isConfirmed) {
-                                            // Re-enter NIC
                                             promptNIC();
-                                        } // If Cancel is clicked, do nothing (Swal will close)
+                                        }
                                     });
                                 }
                             },
@@ -174,7 +174,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
                     }
                 });
 
-                // Function to prompt for NIC entry
+                // Function to prompt for NIC entry again
                 function promptNIC() {
                     Swal.fire({
                         title: 'Enter NIC',
@@ -194,7 +194,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
                         if (result.isConfirmed) {
                             var nic = result.value;
 
-                            // AJAX request to check the NIC in the database
+                            // AJAX request to check NIC again
                             $.ajax({
                                 url: '../functions/check_nic.php',
                                 type: 'POST',
@@ -222,7 +222,6 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
                                             cancelButtonText: 'Cancel'
                                         }).then((result) => {
                                             if (result.isConfirmed) {
-                                                // Re-enter NIC
                                                 promptNIC();
                                             }
                                         });
@@ -242,6 +241,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
             });
         });
     </script>
+
     <!-- NITF logo added -->
     <div class="logo-container">
         <img class="logo" src="../images/logo.png" alt="Logo">

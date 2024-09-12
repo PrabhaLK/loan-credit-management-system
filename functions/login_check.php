@@ -21,3 +21,13 @@ if (basename($_SERVER['PHP_SELF']) === 'govt-hos.php') {
         redirectWithError('no_claimholder_NIC', $_SESSION['claimholder-NIC-Status'], './index.php');
     }
 }
+
+if (!isset($_SESSION['created'])) {
+    $_SESSION['created'] = time();
+} elseif (time() - $_SESSION['created'] > 300) { // 30 minutes session expiry
+    // Session expired, destroy it
+    session_unset();
+    session_destroy();
+    header('Location: login.php'); // Redirect to login page
+    exit();
+}
