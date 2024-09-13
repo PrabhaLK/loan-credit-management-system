@@ -2,11 +2,19 @@
 ini_set('session.cookie_secure', 1);  // Only send over HTTPS
 ini_set('session.cookie_httponly', 1); // Prevent JavaScript access
 ini_set('session.cookie_samesite', 'Strict'); // SameSite policy
+
 session_start();
+if (isset($_SESSION['claimholder_nic']) || isset($_SESSION['nic'])) {
+  $_SESSION['claimholder_nic'] = null;
+  $_SESSION['nic'] = null;
+  unset($_SESSION['claimholder_nic']);
+  echo '<script>console.log("Session claimholder_nic is unset and set to null.");</script>';
+} else {
+  echo '<script>console.log("Session claimholder_nic does not exist.");</script>';
+}
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
-header("Pragma: no-cache");
-?>
+header("Pragma: no-cache"); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,6 +49,34 @@ header("Pragma: no-cache");
 <?php include('./functions/validate-login.php'); ?>
 
 <body>
+  <Script>
+    function getCookie(name) {
+      let cookieArr = document.cookie.split(";"); // Get all cookies as a string array
+
+      // Loop through the array
+      for (let i = 0; i < cookieArr.length; i++) {
+        let cookiePair = cookieArr[i].split("="); // Split name and value
+
+        // Remove leading whitespace and compare cookie name
+        if (name === cookiePair[0].trim()) {
+          return decodeURIComponent(cookiePair[1]); // Return cookie value
+        }
+      }
+
+      // Return null if the cookie wasn't found
+      return null;
+    }
+    // Example: Read a specific cookie
+    let sessionId = getCookie("PHPSESSID");
+    console.log("PHPSESSID:", sessionId);
+
+    function deleteCookie(name) {
+      document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    }
+
+    // Example: Delete the PHPSESSID cookie
+    deleteCookie("PHPSESSID");
+  </Script>
   <div class="limiter">
     <div class="container-login100">
       <div class="wrap-login100">
