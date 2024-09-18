@@ -46,6 +46,17 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
             width: 300px;
             height: auto;
         }
+
+        .custom-swal-width-lg {
+            width: 450px !important;
+            height: 300px !important;
+            font-size: small;
+            /* Set desired width */
+        }
+
+        .custom-swal-width-sm {
+            font-size: small;
+        }
     </style>
 
 </head>
@@ -67,7 +78,10 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'Yes, destroy session',
-                cancelButtonText: 'Cancel'
+                cancelButtonText: 'Cancel',
+                customClass: {
+                    popup: 'custom-swal-width-lg'
+                }
             }).then((result) => {
                 if (result.isConfirmed) {
                     // Synchronous AJAX request to destroy session
@@ -82,7 +96,10 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
                             Swal.fire({
                                 title: 'Error',
                                 text: 'There was a problem destroying the session',
-                                icon: 'error'
+                                icon: 'error',
+                                customClass: {
+                                    popup: 'custom-swal-width-sm'
+                                }
                             });
                         }
                     });
@@ -115,6 +132,9 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
                     showCancelButton: true,
                     confirmButtonText: 'Submit',
                     cancelButtonText: 'Cancel',
+                    customClass: {
+                        popup: 'custom-swal-width-sm'
+                    },
                     preConfirm: (nic) => {
                         if (!nic) {
                             Swal.showValidationMessage('NIC is required');
@@ -142,7 +162,10 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
                                         icon: 'success',
                                         showCancelButton: true,
                                         confirmButtonText: 'OK',
-                                        cancelButtonText: 'Re-enter'
+                                        cancelButtonText: 'Re-enter',
+                                        customClass: {
+                                            popup: 'custom-swal-width-sm'
+                                        },
                                     }).then((result) => {
                                         if (result.isConfirmed) {
                                             // Redirect only if OK is selected
@@ -158,7 +181,10 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
                                         icon: 'error',
                                         showCancelButton: true,
                                         confirmButtonText: 'Re-enter',
-                                        cancelButtonText: 'Cancel'
+                                        cancelButtonText: 'Cancel',
+                                        customClass: {
+                                            popup: 'custom-swal-width-sm'
+                                        },
                                     }).then((result) => {
                                         if (result.isConfirmed) {
                                             promptNIC();
@@ -170,7 +196,10 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
                                 Swal.fire({
                                     title: 'Error',
                                     text: 'There was a problem checking the NIC',
-                                    icon: 'error'
+                                    icon: 'error',
+                                    customClass: {
+                                        popup: 'custom-swal-width-sm'
+                                    },
                                 });
                             }
                         });
@@ -186,6 +215,9 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
                         showCancelButton: true,
                         confirmButtonText: 'Submit',
                         cancelButtonText: 'Cancel',
+                        customClass: {
+                            popup: 'custom-swal-width-sm'
+                        },
                         preConfirm: (nic) => {
                             if (!nic) {
                                 Swal.showValidationMessage('NIC is required');
@@ -211,7 +243,10 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
                                             title: 'User Found',
                                             text: 'Username: ' + response.username,
                                             icon: 'success',
-                                            confirmButtonText: 'OK'
+                                            confirmButtonText: 'OK',
+                                            customClass: {
+                                                popup: 'custom-swal-width-sm'
+                                            },
                                         }).then(() => {
                                             window.location.href = link;
                                         });
@@ -222,7 +257,10 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
                                             icon: 'error',
                                             showCancelButton: true,
                                             confirmButtonText: 'Re-enter',
-                                            cancelButtonText: 'Cancel'
+                                            cancelButtonText: 'Cancel',
+                                            customClass: {
+                                                popup: 'custom-swal-width-sm'
+                                            },
                                         }).then((result) => {
                                             if (result.isConfirmed) {
                                                 promptNIC();
@@ -234,7 +272,10 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
                                     Swal.fire({
                                         title: 'Error',
                                         text: 'There was a problem checking the NIC',
-                                        icon: 'error'
+                                        icon: 'error',
+                                        customClass: {
+                                            popup: 'custom-swal-width-sm'
+                                        },
                                     });
                                 }
                             });

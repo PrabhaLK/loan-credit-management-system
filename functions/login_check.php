@@ -28,6 +28,5 @@ if (!isset($_SESSION['created'])) {
     // Session expired, destroy it
     session_unset();
     session_destroy();
-    header('Location: login.php'); // Redirect to login page
     exit();
 }
