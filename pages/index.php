@@ -47,6 +47,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
             height: auto;
         }
 
+        /* SweetAlert custom Styling Start */
         .custom-swal-width-lg {
             width: 450px !important;
             height: 300px !important;
@@ -57,6 +58,8 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
         .custom-swal-width-sm {
             font-size: small;
         }
+
+        /* SweetAlert custom Styling End */
     </style>
 
 </head>
@@ -365,11 +368,13 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
             </div>
         </nav>
     </div>
-    <div>
-        <a href="../functions/logout_funct.php" class="navbar-brand"><- Log in Page</a>
+    <div class="ft">
+        <dl>
+            <dd> <a href="../functions/logout_funct.php" class="navbar-brand"><- Log in Page</a></dd>
+            <br><br>
+            <dd><a href="../Pages/index_new.php" class="navbar-brand">New Home Page</a></dd>
+        </dl>
     </div>
-    <!-- SweetAlert2 Notification Framework Script -->
-
 </body>
-
 </html>
+

@@ -589,9 +589,9 @@
                                 timerProgressBar: true,
                                 showConfirmButton: false
                             });
-                            // setTimeout(function() {
-                            //     // window.location.reload();
-                            // }, 4000); // Reloads page after the data entry.
+                            setTimeout(function() {
+                                window.location.reload();
+                            }, 4000); 
                         }
                     });
                 } else {
