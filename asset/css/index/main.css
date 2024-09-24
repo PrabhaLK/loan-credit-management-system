@@ -1,0 +1,82 @@
+body {
+  overflow: hidden;
+}
+
+.logo-container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 10px;
+}
+
+.logo {
+  width: 300px;
+  height: auto;
+}
+
+/* SweetAlert custom Styling Start */
+.custom-swal-width-lg {
+  width: 450px !important;
+  height: 300px !important;
+  font-size: small;
+  /* Set desired width */
+}
+
+.custom-swal-width-sm {
+  font-size: small;
+}
+
+/* SweetAlert custom Styling End */
+
+/* login page button styling start */
+.button-login {
+  background-color: RGB(200, 0, 0);
+  color: white;
+  border: none;
+  text-decoration: none;
+  height: 50px;
+  border-radius: 8%;
+  cursor: pointer;
+  margin-left: 2%;
+  transition: opacity 0.2s, color 0.5s, background-color 0.5s;
+  padding-top: 15;
+  padding-bottom: 15;
+  padding-left: 16;
+  padding-right: 16;
+}
+.button-login:hover {
+  opacity: 0.6;
+  border-radius: 8%;
+  background-color: white;
+  color: red;
+  font-weight: bold;
+  border: 2px solid red;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.2s, background-color 0.5s, box-shadow 0.5s;
+}
+/* login page button styling end */
+
+/* new menu page button stytling start */
+.button-newMenu {
+  background-color: #295f98;
+  color: white;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 8%;
+  margin-left: 2%;
+  transition: opacity 0.2s, background-color 0.5s, box-shadow 0.5s;
+  padding-top: 15;
+  padding-bottom: 15;
+  padding-left: 7;
+  padding-right: 7;
+}
+.button-newMenu:hover {
+  opacity: 0.6;
+  background-color: white;
+  color: #295f98;
+  font-weight: bold;
+  border: 2px solid #295f98;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+}
+/* new page menu button styling end  */

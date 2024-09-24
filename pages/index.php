@@ -22,44 +22,18 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Claim Management System - NITF</title>
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <link href="../asset/css/index/main.css" rel="stylesheet" />
+    <link href="../asset/css/index/bootstrap.min.css" rel="stylesheet" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- custom stylesheet -->
     <link rel="stylesheet" href="dropdown.css">
 
     <style>
-        body {
-            overflow: hidden;
-        }
 
-        .logo-container {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            padding: 10px;
-        }
 
-        .logo {
-            width: 300px;
-            height: auto;
-        }
-
-        /* SweetAlert custom Styling Start */
-        .custom-swal-width-lg {
-            width: 450px !important;
-            height: 300px !important;
-            font-size: small;
-            /* Set desired width */
-        }
-
-        .custom-swal-width-sm {
-            font-size: small;
-        }
-
-        /* SweetAlert custom Styling End */
     </style>
 
 </head>
@@ -369,12 +343,12 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
         </nav>
     </div>
     <div class="ft">
-        <dl>
-            <dd> <a href="../functions/logout_funct.php" class="navbar-brand"><- Log in Page</a></dd>
+        <ul>
+            <li> <a href="../functions/logout_funct.php" class="navbar-brand button-login">Log in Page</a></li>
             <br><br>
-            <dd><a href="../Pages/index_new.php" class="navbar-brand">New Home Page</a></dd>
-        </dl>
+            <li><a href="../Pages/index_new.php" class="navbar-brand button-newMenu">New Home Page</a></li>
+        </ul>
     </div>
 </body>
-</html>
 
+</html>
