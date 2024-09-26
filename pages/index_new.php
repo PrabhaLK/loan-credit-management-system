@@ -4,223 +4,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
+    <title>Improved Home Page</title>
     <style>
         * {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            text-align: center;
             font-family: "Open Sans", sans-serif;
         }
 
         body {
             background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(224, 232, 245, 1) 100%);
+            position: relative;
+            overflow: hidden;
         }
 
         .container {
-            width: 90%;
-            margin: 40px auto;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
+            grid-gap: 15px;
+            padding: 20px;
+            justify-items: center;
+            z-index: 1;
         }
 
         .menu-box {
+            width: 240px;
+            height: 160px;
             background-color: #4f7df5;
-            padding: 30px;
-            border-radius: 8px;
+            border-radius: 10px;
             box-shadow: 0px 7px 30px -12px rgba(0, 0, 0, 0.5);
-            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             position: relative;
             cursor: pointer;
+            color: white;
+            font-size: 1rem;
+            overflow: hidden;
             transition: transform 0.3s ease;
+            z-index: 1;
         }
 
         .menu-box:hover {
-            transform: translateY(-10px);
+            background-color: #365dba;
+            transform: scale(1.05);
         }
 
         .menu-title {
-            color: #fff;
-            font-size: 24px;
+            font-size: 1.1rem;
             font-weight: bold;
+            margin-bottom: 8px;
+            z-index: 2;
+        }
+
+        .icon {
+            width: 40px;
+            height: 40px;
             margin-bottom: 10px;
-        }
-
-        .menu-box img {
-            width: 50px;
-        }
-
-        .menu-circles {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 0;
-        }
-
-        .menu-circle {
-            position: absolute;
-            background-color: #fff;
-            border-radius: 50%;
-            z-index: 0;
-        }
-
-        .menu-circle.circle-1 {
-            width: 64px;
-            height: 64px;
-            opacity: 0.3;
-            animation: pulse 3s infinite alternate;
-        }
-
-        .menu-circle.circle-2 {
-            width: 128px;
-            height: 128px;
-            opacity: 0.2;
-            animation: pulse 3s infinite alternate 0.5s;
-        }
-
-        .menu-circle.circle-3 {
-            width: 192px;
-            height: 192px;
-            opacity: 0.1;
-            animation: pulse 3s infinite alternate 1s;
-        }
-
-        .menu-circle.circle-4 {
-            width: 256px;
-            height: 256px;
-            opacity: 0.1;
-            animation: pulse 3s infinite alternate 1.5s;
-        }
-
-        @keyframes pulse {
-            from {
-                transform: scale(0);
-            }
-            to {
-                transform: scale(1);
-            }
+            fill: white;
+            z-index: 2;
         }
 
         .dropdown-menu {
             display: none;
-            background-color: #fff;
-            padding: 20px;
+            position: absolute;
+            top: 100%;
+            width: 100%;
+            background-color: white;
             box-shadow: 0px 2px 20px -2px rgba(0, 0, 0, 0.3);
-            border-radius: 8px;
-            position: relative;
-            z-index: 1;
+            border-radius: 3px;
+            text-align: left;
+            padding: 10px;
+            z-index: 3;
         }
 
-        .dropdown-menu.active {
+        .menu-box.active .dropdown-menu {
             display: block;
         }
 
         .dropdown-menu ul {
-            list-style: none;
-            padding: 0;
+            list-style-type: none;
         }
 
         .dropdown-menu ul li {
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
-            font-size: 18px;
+            margin: 10px 0;
+            padding-left: 5px;
+            border-left: 5px solid transparent;
+            transition: background-color 0.3s ease, color 0.3s ease, border-left 0.3s ease;
         }
 
         .dropdown-menu ul li:hover {
-            color: #4f7df5;
+            background-color: #4f7df5;
+            color: white;
+            border-left: 5px solid white;
         }
 
         .dropdown-menu ul li a {
             text-decoration: none;
-            color: #c4d0de;
-            transition: color 0.3s;
+            color: #4f7df5;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
         }
 
-        .dropdown-menu ul li a:hover {
-            color: #4f7df5;
+        .dropdown-menu ul li:hover a {
+            color: white;
+        }
+
+        /* Circle animations inside the menu box */
+        .menu-box .circle {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            opacity: 0.15;
+            z-index: 0; /* Lower z-index so that circles are behind clickable elements */
+        }
+
+        .menu-box .circle-1 {
+            width: 80px;
+            height: 80px;
+            top: 10px;
+            left: -20px;
+            animation: animation_circle 6s infinite alternate;
+        }
+
+        .menu-box .circle-2 {
+            width: 120px;
+            height: 120px;
+            top: 60px;
+            right: -40px;
+            animation: animation_circle 8s infinite alternate 0.5s;
+        }
+
+        @keyframes animation_circle {
+            from {
+                transform: scale(0.8);
+            }
+
+            to {
+                transform: scale(1.2);
+            }
         }
     </style>
     <script>
-        function toggleMenu(menuId) {
-            const menu = document.getElementById(menuId);
-            menu.classList.toggle('active');
-        }
+        document.addEventListener("DOMContentLoaded", () => {
+            const menuBoxes = document.querySelectorAll(".menu-box");
+
+            menuBoxes.forEach(box => {
+                box.addEventListener("click", function () {
+                    // Remove 'active' class from all other boxes
+                    menuBoxes.forEach(otherBox => {
+                        if (otherBox !== box) {
+                            otherBox.classList.remove("active");
+                        }
+                    });
+
+                    // Toggle the active class on the clicked box
+                    box.classList.toggle("active");
+                });
+            });
+
+            // Close dropdown if clicking outside of the menu box
+            document.addEventListener("click", function (event) {
+                menuBoxes.forEach(box => {
+                    if (!box.contains(event.target)) {
+                        box.classList.remove("active");
+                    }
+                });
+            });
+        });
     </script>
 </head>
 
 <body>
     <div class="container">
-        <div class="menu-box" onclick="toggleMenu('menu1')">
-            <div class="menu-title">Hospitalization</div>
-            <img src="http://danysantos.hol.es/img/planet.png" alt="Hospitalization">
-            <div class="menu-circles">
-                <div class="menu-circle circle-1"></div>
-                <div class="menu-circle circle-2"></div>
-                <div class="menu-circle circle-3"></div>
-                <div class="menu-circle circle-4"></div>
-            </div>
-            <div id="menu1" class="dropdown-menu">
+        <div class="menu-box" id="menu1">
+            <img src="../asset/icons/hospital.svg" alt="icon" class="icon" style="filter: invert(1);" />
+            <div class="menu-title">HOSPITALIZATION</div>
+            <div class="dropdown-menu">
                 <ul>
                     <li><a href="#">Government Hospitalization</a></li>
                     <li><a href="#">Private Hospitalization</a></li>
+                    <li><a href="#">Ayurvedic Hospitalization</a></li>
                 </ul>
             </div>
+            <!-- Add circles inside the menu box -->
+            <div class="circle circle-1"></div>
+            <div class="circle circle-2"></div>
         </div>
 
-        <div class="menu-box" onclick="toggleMenu('menu2')">
-            <div class="menu-title">Notifications</div>
-            <img src="http://danysantos.hol.es/img/planet.png" alt="Notifications">
-            <div class="menu-circles">
-                <div class="menu-circle circle-1"></div>
-                <div class="menu-circle circle-2"></div>
-                <div class="menu-circle circle-3"></div>
-                <div class="menu-circle circle-4"></div>
-            </div>
-            <div id="menu2" class="dropdown-menu">
+        <div class="menu-box" id="menu2">
+            <img src="../asset/icons/hospital.svg" alt="icon" class="icon" style="filter: invert(1);" />
+            <div class="menu-title">NOTIFICATIONS</div>
+            <div class="dropdown-menu">
                 <ul>
                     <li><a href="#">Notification Settings</a></li>
                     <li><a href="#">View Notifications</a></li>
                 </ul>
             </div>
+            <!-- Add circles inside the menu box -->
+            <div class="circle circle-1"></div>
+            <div class="circle circle-2"></div>
         </div>
 
-        <!-- Additional menu items -->
-        <div class="menu-box" onclick="toggleMenu('menu3')">
-            <div class="menu-title">Spectacles</div>
-            <img src="http://danysantos.hol.es/img/planet.png" alt="Spectacles">
-            <div class="menu-circles">
-                <div class="menu-circle circle-1"></div>
-                <div class="menu-circle circle-2"></div>
-                <div class="menu-circle circle-3"></div>
-                <div class="menu-circle circle-4"></div>
-            </div>
-            <div id="menu3" class="dropdown-menu">
-                <ul>
-                    <li><a href="#">Claim Spectacles</a></li>
-                    <li><a href="#">View Spectacles Limit</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="menu-box" onclick="toggleMenu('menu4')">
-            <div class="menu-title">Childbirth</div>
-            <img src="http://danysantos.hol.es/img/planet.png" alt="Childbirth">
-            <div class="menu-circles">
-                <div class="menu-circle circle-1"></div>
-                <div class="menu-circle circle-2"></div>
-                <div class="menu-circle circle-3"></div>
-                <div class="menu-circle circle-4"></div>
-            </div>
-            <div id="menu4" class="dropdown-menu">
-                <ul>
-                    <li><a href="#">Claim Childbirth</a></li>
-                    <li><a href="#">View Childbirth Claims</a></li>
-                </ul>
-            </div>
-        </div>
+        <!-- Add more menu items similarly -->
     </div>
 </body>
 
 </html>
+

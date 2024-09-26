@@ -27,14 +27,9 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
     <link href="../asset/css/index/main.css" rel="stylesheet" />
     <link href="../asset/css/index/bootstrap.min.css" rel="stylesheet" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../asset/js/sweetalert2@11.js"></script>
     <!-- custom stylesheet -->
     <link rel="stylesheet" href="dropdown.css">
-
-    <style>
-
-
-    </style>
 
 </head>
 <?php include('../functions/validate-login.php'); ?>

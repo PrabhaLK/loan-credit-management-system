@@ -24,7 +24,7 @@ if (basename($_SERVER['PHP_SELF']) === 'govt-hos.php') {
 
 if (!isset($_SESSION['created'])) {
     $_SESSION['created'] = time();
-} elseif (time() - $_SESSION['created'] > 300) { // 30 minutes session expiry
+} elseif (time() - $_SESSION['created'] > 900) { // Session Expire After 15 Mins
     session_unset();
     session_destroy();
     exit();
