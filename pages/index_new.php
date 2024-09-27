@@ -35,16 +35,17 @@
             border-radius: 10px;
             box-shadow: 0px 7px 30px -12px rgba(0, 0, 0, 0.5);
             display: flex;
+            position: relative;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            position: relative;
             cursor: pointer;
             color: white;
             font-size: 1rem;
-            overflow: hidden;
-            transition: transform 0.3s ease;
-            z-index: 1;
+            /* Reduced font size */
+            position: relative;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            z-index: 2;
         }
 
         .menu-box:hover {
@@ -54,9 +55,9 @@
 
         .menu-title {
             font-size: 1.1rem;
+            /* Reduced title size */
             font-weight: bold;
             margin-bottom: 8px;
-            z-index: 2;
         }
 
         .icon {
@@ -64,7 +65,6 @@
             height: 40px;
             margin-bottom: 10px;
             fill: white;
-            z-index: 2;
         }
 
         .dropdown-menu {
@@ -77,7 +77,7 @@
             border-radius: 3px;
             text-align: left;
             padding: 10px;
-            z-index: 3;
+            z-index: 2;
         }
 
         .menu-box.active .dropdown-menu {
@@ -92,49 +92,50 @@
             margin: 10px 0;
             padding-left: 5px;
             border-left: 5px solid transparent;
-            transition: background-color 0.3s ease, color 0.3s ease, border-left 0.3s ease;
         }
 
         .dropdown-menu ul li:hover {
-            background-color: #4f7df5;
-            color: white;
-            border-left: 5px solid white;
+            border-left: 5px solid #6992fe;
         }
 
         .dropdown-menu ul li a {
             text-decoration: none;
             color: #4f7df5;
             font-size: 0.95rem;
-            transition: color 0.3s ease;
+            /* Smaller dropdown font size */
         }
 
-        .dropdown-menu ul li:hover a {
-            color: white;
-        }
-
-        /* Circle animations inside the menu box */
-        .menu-box .circle {
+        /* Circle animations for the background */
+        .circle {
             position: absolute;
-            background-color: white;
+            background-color: #fff;
             border-radius: 50%;
+            z-index: 0;
             opacity: 0.15;
-            z-index: 0; /* Lower z-index so that circles are behind clickable elements */
         }
 
-        .menu-box .circle-1 {
-            width: 80px;
-            height: 80px;
-            top: 10px;
-            left: -20px;
+        .circle-1 {
+            width: 120px;
+            height: 120px;
+            top: 10%;
+            left: 5%;
             animation: animation_circle 6s infinite alternate;
         }
 
-        .menu-box .circle-2 {
-            width: 120px;
-            height: 120px;
-            top: 60px;
-            right: -40px;
+        .circle-2 {
+            width: 200px;
+            height: 200px;
+            top: 70%;
+            left: 70%;
             animation: animation_circle 8s infinite alternate 0.5s;
+        }
+
+        .circle-3 {
+            width: 300px;
+            height: 300px;
+            top: 30%;
+            left: 80%;
+            animation: animation_circle 10s infinite alternate 1s;
         }
 
         @keyframes animation_circle {
@@ -148,39 +149,18 @@
         }
     </style>
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const menuBoxes = document.querySelectorAll(".menu-box");
-
-            menuBoxes.forEach(box => {
-                box.addEventListener("click", function () {
-                    // Remove 'active' class from all other boxes
-                    menuBoxes.forEach(otherBox => {
-                        if (otherBox !== box) {
-                            otherBox.classList.remove("active");
-                        }
-                    });
-
-                    // Toggle the active class on the clicked box
-                    box.classList.toggle("active");
-                });
-            });
-
-            // Close dropdown if clicking outside of the menu box
-            document.addEventListener("click", function (event) {
-                menuBoxes.forEach(box => {
-                    if (!box.contains(event.target)) {
-                        box.classList.remove("active");
-                    }
-                });
-            });
-        });
+        function toggleMenu(menuId) {
+            const menuBox = document.getElementById(menuId);
+            menuBox.classList.toggle('active');
+        }
     </script>
 </head>
 
 <body>
     <div class="container">
-        <div class="menu-box" id="menu1">
+        <div class="menu-box" id="menu1" onclick="toggleMenu('menu1')">
             <img src="../asset/icons/hospital.svg" alt="icon" class="icon" style="filter: invert(1);" />
+            <!-- Applied filter to make SVG white if not inline -->
             <div class="menu-title">HOSPITALIZATION</div>
             <div class="dropdown-menu">
                 <ul>
@@ -189,28 +169,26 @@
                     <li><a href="#">Ayurvedic Hospitalization</a></li>
                 </ul>
             </div>
-            <!-- Add circles inside the menu box -->
-            <div class="circle circle-1"></div>
-            <div class="circle circle-2"></div>
         </div>
 
-        <div class="menu-box" id="menu2">
+        <div class="menu-box" id="menu2" onclick="toggleMenu('menu2')">
             <img src="../asset/icons/hospital.svg" alt="icon" class="icon" style="filter: invert(1);" />
             <div class="menu-title">NOTIFICATIONS</div>
+
             <div class="dropdown-menu">
                 <ul>
                     <li><a href="#">Notification Settings</a></li>
                     <li><a href="#">View Notifications</a></li>
                 </ul>
             </div>
-            <!-- Add circles inside the menu box -->
-            <div class="circle circle-1"></div>
-            <div class="circle circle-2"></div>
         </div>
 
         <!-- Add more menu items similarly -->
     </div>
+
+    <div class="circle circle-1"></div>
+    <div class="circle circle-2"></div>
+    <div class="circle circle-3"></div>
 </body>
 
 </html>
-
