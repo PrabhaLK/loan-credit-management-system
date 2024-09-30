@@ -68,6 +68,7 @@
             margin-bottom: 10px;
             fill: white;
             z-index: 3;
+            filter: brightness(0) invert(1);
         }
 
         .dropdown-menu {
@@ -81,6 +82,7 @@
             text-align: left;
             padding: 10px;
             z-index: 4;
+            border-radius: 5px;
         }
 
         .menu-box.active .dropdown-menu {
@@ -92,19 +94,31 @@
         }
 
         .dropdown-menu ul li {
-            margin: 10px 0;
-            padding-left: 5px;
-            border-left: 5px solid transparent;
+            position: relative;
         }
 
         .dropdown-menu ul li:hover {
-            border-left: 5px solid #6992fe;
+            border-left: 5px solid white;
+            background-color: #6a0dad;
+            text-decoration: none;
         }
 
         .dropdown-menu ul li a {
             text-decoration: none;
             color: #4f7df5;
+            /* Default text color */
             font-size: 0.95rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+            /* Smooth color change and animation */
+            display: block;
+            padding: 10px 15px;
+        }
+
+        .dropdown-menu ul li a:hover {
+            color: white;
+            /* Text color changes to white when hovered */
+            transform: scale(1.05);
+            /* Slightly enlarge the text */
         }
 
         /* Circle styles */
@@ -144,6 +158,10 @@
             left: 50%;
             transform: translate(-50%, -50%);
             animation: animation_circle 10s infinite alternate 1s;
+        }
+
+        .icon {
+            color: white;
         }
 
         @keyframes animation_circle {
@@ -194,8 +212,6 @@
                 </ul>
             </div>
         </div>
-
-        <!-- Add more menu items similarly -->
     </div>
 </body>
 
