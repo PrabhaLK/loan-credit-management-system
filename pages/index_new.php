@@ -22,7 +22,7 @@
         .container {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            grid-gap: 15px;
+            grid-gap: 25px;
             padding: 20px;
             justify-items: center;
             z-index: 1;
@@ -70,7 +70,7 @@
         .dropdown-menu {
             display: none;
             position: absolute;
-            top: 100%;
+            top: calc(100% + 10px);
             width: 100%;
             background-color: white;
             box-shadow: 0px 2px 20px -2px rgba(0, 0, 0, 0.3);
@@ -235,7 +235,7 @@
             <div class="circle circle-1"></div>
             <div class="circle circle-2"></div>
             <div class="circle circle-3"></div>
-            <img src="../asset/icons/heart_organ.svg" alt="icon" class="icon" />
+            <img src="../asset/icons/cancer.svg" alt="icon" class="icon" />
             <div class="menu-title">Cancer</div>
             <div class="dropdown-menu">
                 <ul>
