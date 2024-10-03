@@ -158,9 +158,10 @@
     </style>
     <script>
         // Function to toggle the dropdown menu and slide the below container
-        function toggleMenu(menuId, belowContainerId, type) {
+        function toggleMenu(menuId, belowContainerId, belowContainer2Id, type) {
             const menuBox = document.getElementById(menuId);
             const belowContainer = document.getElementById(belowContainerId);
+            const belowContainer2 = document.getElementById(belowContainer2Id);
             const dropdownMenu = menuBox.querySelector('.dropdown-menu');
 
             const isOpen = menuBox.classList.contains('active');
@@ -168,6 +169,7 @@
             if (isOpen) {
                 menuBox.classList.remove('active');
                 belowContainer.style.transform = 'translateY(0)';
+                belowContainer2.style.transform = 'translateY(0)';
             } else {
                 closeAllMenus(); // Close all open menus
                 menuBox.classList.add('active');
@@ -179,6 +181,7 @@
 
                     // Slide the below container down by the height of the dropdown
                     belowContainer.style.transform = `translateY(${dropdownHeight}px)`;
+                    belowContainer2.style.transform = `translateY(${dropdownHeight}px)`;
                 } else {
                     // Redirect if there's no dropdown
                     window.location.href = `govt-hos.php?type=${type}`;
@@ -212,7 +215,7 @@
 <body>
     <!-- First row of menu items -->
     <div id="row1" class="container-row">
-        <div class="menu-box" id="menu1" onclick="toggleMenu('menu1', 'row2')">
+        <div class="menu-box" id="menu1" onclick="toggleMenu('menu1', 'row2', 'row3')">
             <div class="circle circle-1"></div>
             <div class="circle circle-2"></div>
             <div class="circle circle-3"></div>
@@ -229,7 +232,7 @@
             </div>
         </div>
 
-        <div class="menu-box" id="menu2" onclick="toggleMenu('menu2', 'row2')">
+        <div class="menu-box" id="menu2" onclick="toggleMenu('menu2', 'row2', 'row3')">
             <div class="circle circle-1"></div>
             <div class="circle circle-2"></div>
             <div class="circle circle-3"></div>
@@ -244,7 +247,7 @@
             </div>
         </div>
 
-        <div class="menu-box" id="menu3" onclick="toggleMenu('menu3', 'row2')">
+        <div class="menu-box" id="menu3" onclick="toggleMenu('menu3', 'row2', 'row3')">
             <div class="circle circle-1"></div>
             <div class="circle circle-2"></div>
             <div class="circle circle-3"></div>
@@ -258,7 +261,7 @@
             </div>
         </div>
 
-        <div class="menu-box" id="menu4" onclick="toggleMenu('menu4', 'row2', 'Cancer')">
+        <div class="menu-box" id="menu4" onclick="toggleMenu('menu4', 'row2', 'row3', 'Cancer')">
             <div class="circle circle-1"></div>
             <div class="circle circle-2"></div>
             <div class="circle circle-3"></div>
@@ -268,7 +271,7 @@
     </div>
     <!-- Second row of menu items -->
     <div id="row2" class="container-row">
-        <div class="menu-box" id="menu5" onclick="toggleMenu('menu5', 'row3')">
+        <div class="menu-box" id="menu5" onclick="toggleMenu('menu5', 'row3','row4')">
             <div class="circle circle-1"></div>
             <div class="circle circle-2"></div>
             <div class="circle circle-3"></div>
@@ -281,7 +284,7 @@
                 </ul>
             </div>
         </div>
-        <div class="menu-box" id="menu7" onclick="toggleMenu('menu7', 'row3')">
+        <div class="menu-box" id="menu7" onclick="toggleMenu('menu7', 'row3','row4')">
             <div class="circle circle-1"></div>
             <div class="circle circle-2"></div>
             <div class="circle circle-3"></div>
@@ -294,14 +297,14 @@
                 </ul>
             </div>
         </div>
-        <div class="menu-box" id="menu8" onclick="toggleMenu('menu8', 'row3', 'Knee')">
+        <div class="menu-box" id="menu8" onclick="toggleMenu('menu8', 'row3','row4','Knee')">
             <div class="circle circle-1"></div>
             <div class="circle circle-2"></div>
             <div class="circle circle-3"></div>
             <img src="../asset/icons/knee.svg" alt="icon" class="icon" />
             <div class="menu-title">KNEE</div>
         </div>
-        <div class="menu-box" id="menu9" onclick="toggleMenu('menu9', 'row3', 'Hip')">
+        <div class="menu-box" id="menu9" onclick="toggleMenu('menu9', 'row3','row4', 'Hip')">
             <div class="circle circle-1"></div>
             <div class="circle circle-2"></div>
             <div class="circle circle-3"></div>
@@ -310,21 +313,21 @@
         </div>
     </div>
     <div id="row3" class="container-row">
-        <div class="menu-box" id="menu10" onclick="toggleMenu('menu10', 'row4', 'Hearing Aid')">
+        <div class="menu-box" id="menu10" onclick="toggleMenu('menu10', 'row4','row5', 'Hearing Aid')">
             <div class="circle circle-1"></div>
             <div class="circle circle-2"></div>
             <div class="circle circle-3"></div>
             <img src="../asset/icons/hearingAid.svg" alt="icon" class="icon" />
             <div class="menu-title">HEARING AID</div>
         </div>
-        <div class="menu-box" id="menu11" onclick="toggleMenu('menu11', 'row4', 'Spectacles')">
+        <div class="menu-box" id="menu11" onclick="toggleMenu('menu11', 'row4','row5',  'Spectacles')">
             <div class="circle circle-1"></div>
             <div class="circle circle-2"></div>
             <div class="circle circle-3"></div>
             <img src="../asset/icons/Spectacles.svg" alt="icon" class="icon" />
             <div class="menu-title">SPECTACLES</div>
         </div>
-        <div class="menu-box" id="menu12" onclick="toggleMenu('menu12', 'row4')">
+        <div class="menu-box" id="menu12" onclick="toggleMenu('menu12', 'row4','row5')">
             <div class="circle circle-1"></div>
             <div class="circle circle-2"></div>
             <div class="circle circle-3"></div>
@@ -337,7 +340,7 @@
                 </ul>
             </div>
         </div>
-        <div class="menu-box" id="menu13" onclick="toggleMenu('menu11', 'row4', 'Accident')">
+        <div class="menu-box" id="menu13" onclick="toggleMenu('menu11', 'row4','row5',  'Accident')">
             <div class="circle circle-1"></div>
             <div class="circle circle-2"></div>
             <div class="circle circle-3"></div>
@@ -345,6 +348,9 @@
             <div class="menu-title">ACCIDENT</div>
         </div>
     </div>
+    <!-- dummy div for the function validation -->
+    <div id="row4" class="container-row"></div>
+    <div id="row5" class="container-row"></div>
 </body>
 
 </html>
