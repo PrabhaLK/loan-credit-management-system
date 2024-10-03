@@ -76,7 +76,8 @@
             text-align: left;
             padding: 10px;
             border-radius: 5px;
-            z-index: 10;
+            z-index: 1000;
+            position: absolute;
             transition: opacity 0.3s ease;
         }
 
@@ -223,11 +224,11 @@
             <div class="menu-title">HOSPITALIZATION</div>
             <div class="dropdown-menu">
                 <ul>
-                    <li><a href="./govt-hos.php?type=Government Hospitalization">Government Hospitalization</a></li>
-                    <li><a href="./govt-hos.php?type=Government Ayurvedic Hospitalization">Government Ayurvedic Hospitalization</a></li>
-                    <li><a href="./govt-hos.php?type=Private Hospitalization">Private Hospitalization</a></li>
-                    <li><a href="./govt-hos.php?type=Private Ayurvedic Hospitalization">Private Ayurvedic Hospitalization</a></li>
-                    <li><a href="./govt-hos.php?type=Heart Surgery - Dependant">Heart Surgery - Dependent</a></li>
+                    <li><a class="toggle" href="./govt-hos.php?type=Government Hospitalization">Government Hospitalization</a></li>
+                    <li><a class="toggle" href="./govt-hos.php?type=Government Ayurvedic Hospitalization">Government Ayurvedic Hospitalization</a></li>
+                    <li><a class="toggle" href="./govt-hos.php?type=Private Hospitalization">Private Hospitalization</a></li>
+                    <li><a class="toggle" href="./govt-hos.php?type=Private Ayurvedic Hospitalization">Private Ayurvedic Hospitalization</a></li>
+                    <li><a class="toggle" href="./govt-hos.php?type=Heart Surgery - Dependant">Heart Surgery - Dependent</a></li>
                 </ul>
             </div>
         </div>
@@ -240,9 +241,9 @@
             <div class="menu-title">CHILD BIRTH x2</div>
             <div class="dropdown-menu">
                 <ul>
-                    <li><a href="./govt-hos.php?type=Child Birth - Government Hospital">Government Hospital</a></li>
-                    <li><a href="./govt-hos.php?type=Child Birth- Private Hospital (Normal)">Private Hospital - Normal</a></li>
-                    <li><a href="./govt-hos.php?type=Child Birth- Private Hospital (Ceaser)">Private Hospital - Ceaser</a></li>
+                    <li><a class="toggle" href="./govt-hos.php?type=Child Birth - Government Hospital">Government Hospital</a></li>
+                    <li><a class="toggle" href="./govt-hos.php?type=Child Birth- Private Hospital (Normal)">Private Hospital - Normal</a></li>
+                    <li><a class="toggle" href="./govt-hos.php?type=Child Birth- Private Hospital (Ceaser)">Private Hospital - Ceaser</a></li>
                 </ul>
             </div>
         </div>
@@ -255,8 +256,8 @@
             <div class="menu-title">HEART</div>
             <div class="dropdown-menu">
                 <ul>
-                    <li><a href="./govt-hos.php?type=Heart Surgery - Government">Government</a></li>
-                    <li><a href="./govt-hos.php?type=Heart Surgery - Private">Private</a></li>
+                    <li><a class="toggle" href="./govt-hos.php?type=Heart Surgery - Government">Government</a></li>
+                    <li><a class="toggle" href="./govt-hos.php?type=Heart Surgery - Private">Private</a></li>
                 </ul>
             </div>
         </div>
