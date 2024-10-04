@@ -18,7 +18,7 @@ if (!isset($_SESSION['nic'])) {
 if (basename($_SERVER['PHP_SELF']) === 'govt-hos.php') {
     if (!isset($_SESSION['claimholder_nic'])) {
         $_SESSION['claimholder-NIC-Status'] = 'Please enter NIC'; // Set message for toast
-        redirectWithError('no_claimholder_NIC', $_SESSION['claimholder-NIC-Status'], './index.php');
+        redirectWithError('no_claimholder_NIC', $_SESSION['claimholder-NIC-Status'], './index_new.php');
     }
 }
 

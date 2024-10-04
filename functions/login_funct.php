@@ -27,7 +27,7 @@ if ($result->num_rows == 1) {
     
     // Redirect user based on userType
     if ($row["userType"] == "user") {
-        header("Location: ../pages/index.php");
+        header("Location: ../pages/index_new.php");
         exit();
     } elseif ($row["userType"] == "admin") {
         header("Location: ../pages/claim-table.php");

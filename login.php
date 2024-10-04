@@ -37,7 +37,7 @@ header("Pragma: no-cache"); ?>
   <link rel="stylesheet" type="text/css" href="./asset/vendor/daterangepicker/daterangepicker.css" />
   <link rel="stylesheet" type="text/css" href="./asset/css/login/util.css" />
   <link rel="stylesheet" type="text/css" href="./asset/css/login/main.css" />
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="./asset/js/sweetalert2@11.js"></script>
 
   <style>
     .txt-login {
