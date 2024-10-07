@@ -31,7 +31,7 @@ function test() {
 $(document).ready(function () {
   setTimeout(function () {
     test();
-  });
+  }, 100);
 });
 $(window).on("resize", function () {
   setTimeout(function () {
@@ -47,33 +47,47 @@ $(".navbar-toggler").click(function () {
 
 // --------------add active class-on another-page move----------
 jQuery(document).ready(function ($) {
-  // Get current path and find target link
+  // Get current path from URL and find the matching nav link
   var path = window.location.pathname.split("/").pop();
 
-  // Account for home page with empty path
+  // Default to index_new.html if path is empty (e.g., home page)
   if (path == "") {
-    path = "index_new.html";
+    path = "index_new.php"; // Change this to your default page
   }
 
+  // Select the target link that matches the current path
   var target = $('#navbarSupportedContent ul li a[href="' + path + '"]');
-  // Add active class to target link
+
+  // Add the 'active' class to the matching nav link's parent element
   target.parent().addClass("active");
 });
 
-// Add active class on another page linked
-// ==========================================
-$(window).on('load',function () {
-    var current = location.pathname;
-    console.log(current);
-    $('#navbarSupportedContent ul li a').each(function(){
-        var $this = $(this);
-        // if the current path is like this link, make it active
-        if($this.attr('href').indexOf(current) !== -1){
-            $this.parent().addClass('active');
-            $this.parents('.menu-submenu').addClass('show-dropdown');
-            $this.parents('.menu-submenu').parent().addClass('active');
-        }else{
-            $this.parent().removeClass('active');
-        }
-    })
+// // Optional: Add active class on another page linked
+$(window).on("load", function () {
+  var current = location.pathname;
+  $("#navbarSupportedContent ul li a").each(function () {
+    var $this = $(this);
+    // If the current path matches this link, set it as active
+    if ($this.attr("href").indexOf(current) !== -1) {
+      $this.parent().addClass("active");
+    }
+  });
 });
+
+// // Add active class on another page linked
+// // ==========================================
+// $(window).on('load',function () {
+//     var current = location.pathname;
+//     console.log(current);
+//     $('#navbarSupportedContent ul li a').each(function(){
+//         var $this = $(this);
+//         // if the current path is like this link, make it active
+//         if($this.attr('href').indexOf(current) !== -1){
+//             $this.parent().addClass('active');
+//             $this.parents('.menu-submenu').addClass('show-dropdown');
+//             $this.parents('.menu-submenu').parent().addClass('active');
+//         }else{
+//             $this.parent().removeClass('active');
+//         }
+//     })
+// });

@@ -457,7 +457,7 @@ include('../functions/login_check.php');
 
 
 <body>
-    <nav class="navbar navbar-expand-custom navbar-mainbg">
+<nav class="navbar navbar-expand-custom navbar-mainbg">
         <a class="navbar-brand navbar-logo" href="#">Navbar</a>
         <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fas fa-bars text-white"></i>
@@ -471,20 +471,20 @@ include('../functions/login_check.php');
                 <li class="nav-item">
                     <a class="nav-link" href="#"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="javascript:void(0);"><i class="far fa-address-book"></i>Address Book</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="index_new.php"><i class="far fa-clone"></i>Add a Claim</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="javascript:void(0);"><i class="far fa-clone"></i>Components</a>
+                    <a class="nav-link" href="index_new2.php"><i class="far fa-address-book"></i>Address Book</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="javascript:void(0);"><i class="far fa-calendar-alt"></i>Calendar</a>
+                    <a class="nav-link" href="https://nitf.minthrm.com/Site/Index"><i class="far fa-calendar-alt"></i>Mint HRM</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="javascript:void(0);"><i class="far fa-chart-bar"></i>Charts</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="javascript:void(0);"><i class="far fa-copy"></i>Documents</a>
+                    <a class="nav-link" href="../functions/logout_funct.php"><i class="far fa-copy"></i>Sign out</a>
                 </li>
             </ul>
         </div>
