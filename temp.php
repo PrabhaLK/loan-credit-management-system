@@ -401,6 +401,10 @@ include('../functions/login_check.php');
                 }
             });
         });
+        // Function to trigger the toggle menu manually 
+        function triggerToggleClick() {
+            $('.toggle').click();
+        }
         // Function to toggle the dropdown menu and slide the below container
         function toggleMenu(menuId, belowContainerId, belowContainer2Id, type) {
             const menuBox = document.getElementById(menuId);
@@ -524,7 +528,7 @@ include('../functions/login_check.php');
         </div>
 
         <div class="menu-box" id="menu3" onclick="toggleMenu('menu3', 'row2', 'row3')">
-            <div class="circle circle-1"></div>
+            <div class=" circle circle-1"></div>
             <div class="circle circle-2"></div>
             <div class="circle circle-3"></div>
             <img src="../asset/icons/heart.svg" alt="icon" class="icon" />
@@ -625,7 +629,9 @@ include('../functions/login_check.php');
         </div>
     </div>
     <!-- dummy div for the function validation -->
-    <div id="row4" class="container-row"></div>
+    <div id="row4" class="container-row">
+        <button class="btn btn-primary" onclick="$('.toggle').click();">Test Button</button>
+    </div>
     <div id="row5" class="container-row"></div>
 </body>
 

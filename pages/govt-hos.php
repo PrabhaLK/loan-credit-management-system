@@ -94,7 +94,7 @@
                         url: '../functions/handle_navigation.php', // Create this PHP file
                         type: 'POST',
                         success: function(response) {
-                            window.location.href = 'index.php'; // Redirect to index.php
+                            window.location.href = 'index_new.php'; // Redirect to index_new.php
                         },
                         error: function(xhr, status, error) {
                             Swal.fire({
@@ -145,11 +145,11 @@
                         icon: "error",
                         allowOutsideClick: true,
                         willClose: () => {
-                            window.location.href = './index.php';
+                            window.location.href = './index_new.php';
                         }
                     });
                     setTimeout(function() {
-                        window.location.href = './index.php';
+                        window.location.href = './index_new.php';
                     }, 4000);
                 } else {
                     Swal.fire({
@@ -158,11 +158,11 @@
                         icon: "error",
                         allowOutsideClick: true,
                         willClose: () => {
-                            window.location.href = './index.php';
+                            window.location.href = './index_new.php';
                         }
                     });
                     setTimeout(function() {
-                        window.location.href = './index.php';
+                        window.location.href = './index_new.php';
                     }, 4000);
                 }
             } else {
@@ -174,11 +174,11 @@
                             icon: "error",
                             allowOutsideClick: true,
                             willClose: () => {
-                                window.location.href = './index.php';
+                                window.location.href = './index_new.php';
                             }
                         });
                         setTimeout(function() {
-                            window.location.href = './index.php';
+                            window.location.href = './index_new.php';
                         }, 4000);
                     }
                 }
@@ -200,7 +200,7 @@
                         text: 'You have already claimed an amount for Spectacles. You cannot claim again within the next 3 years.',
                         allowOutsideClick: true,
                         willClose: () => {
-                            window.location.href = './index.php';
+                            window.location.href = './index_new.php';
                         }
                     });
                 }
@@ -215,7 +215,7 @@
                     title: 'Oops...',
                     text: childbirthError,
                     willClose: () => {
-                        window.location.href = './index.php';
+                        window.location.href = './index_new.php';
                     }
                 });
 

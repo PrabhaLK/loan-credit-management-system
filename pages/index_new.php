@@ -3,6 +3,10 @@ session_start();
 if (!isset($_SESSION['nic'])) {
     header("Location: ../functions/logout_funct.php");
 }
+if (!isset($_SESSION['claimholder_nic'])) {
+    $_SESSION['claimholder_nic'] = null;
+}
+
 include('../functions/login_check.php');
 ?>
 <!DOCTYPE html>
@@ -427,8 +431,8 @@ include('../functions/login_check.php');
                     belowContainer.style.transform = `translateY(${dropdownHeight}px)`;
                     belowContainer2.style.transform = `translateY(${dropdownHeight}px)`;
                 } else {
-                    // Redirect if there's no dropdown
-                    window.location.href = `govt-hos.php?type=${type}`;
+                    // triggerToggleClick();
+                    //    window.location.href = `govt-hos.php?type=${type}`;
                 }
             }
         }
@@ -457,7 +461,7 @@ include('../functions/login_check.php');
 
 
 <body>
-<nav class="navbar navbar-expand-custom navbar-mainbg">
+    <nav class="navbar navbar-expand-custom navbar-mainbg">
         <a class="navbar-brand navbar-logo" href="#">Navbar</a>
         <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fas fa-bars text-white"></i>
@@ -524,20 +528,21 @@ include('../functions/login_check.php');
         </div>
 
         <div class="menu-box" id="menu3" onclick="toggleMenu('menu3', 'row2', 'row3')">
-            <div class="circle circle-1"></div>
+            <div class=" circle circle-1"></div>
             <div class="circle circle-2"></div>
             <div class="circle circle-3"></div>
             <img src="../asset/icons/heart.svg" alt="icon" class="icon" />
             <div class="menu-title">HEART</div>
             <div class="dropdown-menu">
                 <ul>
-                    <li><a class="toggle" href="./govt-hos.php?type=Heart Surgery - Government">Government</a></li>
-                    <li><a class="toggle" href="./govt-hos.php?type=Heart Surgery - Private">Private</a></li>
+                    <li><a class="toggle" href="./govt-hos.php?type=Heart Surgery">Surgery</a></li>
+                    <li><a class="toggle" href="govt-hos.php?type=Heart Surgery - Guarantee">Surgery Guarantee</a></li>
+                    <li><a class="toggle" href="govt-hos.php?type=RF Ablation">RF Ablation</a></li>
                 </ul>
             </div>
         </div>
 
-        <div class="menu-box" id="menu4" onclick="toggleMenu('menu4', 'row2', 'row3', 'Cancer')">
+        <div class="menu-box toggle" id="menu4" onclick="toggleMenu('menu4', 'row2', 'row3', 'Cancer')" href="govt-hos.php?type=Cancer">
             <div class="circle circle-1"></div>
             <div class="circle circle-2"></div>
             <div class="circle circle-3"></div>
@@ -560,7 +565,7 @@ include('../functions/login_check.php');
                 </ul>
             </div>
         </div>
-        <div class="menu-box" id="menu7" onclick="toggleMenu('menu7', 'row3','row4')">
+        <div class="menu-box toggle" id="menu7" onclick="toggleMenu('menu7', 'row3','row4')">
             <div class="circle circle-1"></div>
             <div class="circle circle-2"></div>
             <div class="circle circle-3"></div>
@@ -573,14 +578,14 @@ include('../functions/login_check.php');
                 </ul>
             </div>
         </div>
-        <div class="menu-box" id="menu8" onclick="toggleMenu('menu8', 'row3','row4','Knee')">
+        <div class="menu-box toggle" id="menu8" onclick="toggleMenu('menu8', 'row3','row4','Knee')" href="govt-hos.php?type=Knee">
             <div class="circle circle-1"></div>
             <div class="circle circle-2"></div>
             <div class="circle circle-3"></div>
             <img src="../asset/icons/knee.svg" alt="icon" class="icon" />
             <div class="menu-title">KNEE</div>
         </div>
-        <div class="menu-box" id="menu9" onclick="toggleMenu('menu9', 'row3','row4', 'Hip')">
+        <div class="menu-box toggle" id="menu9" onclick="toggleMenu('menu9', 'row3','row4', 'Hip')" href="govt-hos.php?type=Hip">
             <div class="circle circle-1"></div>
             <div class="circle circle-2"></div>
             <div class="circle circle-3"></div>
@@ -589,14 +594,14 @@ include('../functions/login_check.php');
         </div>
     </div>
     <div id="row3" class="container-row">
-        <div class="menu-box" id="menu10" onclick="toggleMenu('menu10', 'row4','row5', 'Hearing Aid')">
+        <div class="menu-box toggle" id="menu10" onclick="toggleMenu('menu10', 'row4','row5', 'Hearing Aid')" href="govt-hos.php?type=Hearing Aid">
             <div class="circle circle-1"></div>
             <div class="circle circle-2"></div>
             <div class="circle circle-3"></div>
             <img src="../asset/icons/hearingAid.svg" alt="icon" class="icon" />
             <div class="menu-title">HEARING AID</div>
         </div>
-        <div class="menu-box" id="menu11" onclick="toggleMenu('menu11', 'row4','row5',  'Spectacles')">
+        <div class="menu-box toggle" id="menu11" onclick="toggleMenu('menu11', 'row4','row5',  'Spectacles')" href="govt-hos.php?type= Spectacles">
             <div class="circle circle-1"></div>
             <div class="circle circle-2"></div>
             <div class="circle circle-3"></div>
@@ -616,7 +621,7 @@ include('../functions/login_check.php');
                 </ul>
             </div>
         </div>
-        <div class="menu-box" id="menu13" onclick="toggleMenu('menu11', 'row4','row5',  'Accident')">
+        <div class="menu-box toggle" id="menu13" onclick="toggleMenu('menu11', 'row4','row5',  'Accident')" href="govt-hos.php?type=accident">
             <div class="circle circle-1"></div>
             <div class="circle circle-2"></div>
             <div class="circle circle-3"></div>
