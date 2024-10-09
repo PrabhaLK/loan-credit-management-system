@@ -24,7 +24,8 @@ if ($result->num_rows == 1) {
     // Login successful
     $row = $result->fetch_assoc();
     $_SESSION["nic"] = $national_id;
-    
+    $_SESSION['username'] = $row['Name'];
+
     // Redirect user based on userType
     if ($row["userType"] == "user") {
         header("Location: ../pages/index_new.php");
@@ -43,4 +44,3 @@ if ($result->num_rows == 1) {
 // Close statement and connection
 $stmt->close();
 $conn->close();
-?>

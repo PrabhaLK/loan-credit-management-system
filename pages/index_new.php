@@ -7,6 +7,7 @@ if (!isset($_SESSION['claimholder_nic'])) {
     $_SESSION['claimholder_nic'] = null;
 }
 
+
 include('../functions/login_check.php');
 ?>
 <!DOCTYPE html>
@@ -456,6 +457,7 @@ include('../functions/login_check.php');
                 closeAllMenus();
             }
         });
+        // console.log('<?php echo $_SESSION['username']; ?>');
     </script>
 </head>
 
@@ -463,6 +465,7 @@ include('../functions/login_check.php');
 <body>
     <nav class="navbar navbar-expand-custom navbar-mainbg">
         <a class="navbar-brand navbar-logo" href="#">Navbar</a>
+        
         <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fas fa-bars text-white"></i>
         </button>
@@ -593,6 +596,7 @@ include('../functions/login_check.php');
             <div class="menu-title">HIP</div>
         </div>
     </div>
+    <!-- third row of menu items -->
     <div id="row3" class="container-row">
         <div class="menu-box toggle" id="menu10" onclick="toggleMenu('menu10', 'row4','row5', 'Hearing Aid')" href="govt-hos.php?type=Hearing Aid">
             <div class="circle circle-1"></div>

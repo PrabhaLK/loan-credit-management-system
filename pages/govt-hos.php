@@ -568,7 +568,8 @@
                         room_charges: roomCharges.toFixed(2),
                         total_sum: totalSum.toFixed(2),
                         type: '<?php echo $type; ?>',
-                        nic: '<?php echo $_SESSION['nic']; ?>'
+                        nic: '<?php echo $_SESSION['nic']; ?>',
+                        name: '<?php echo $_SESSION['username']; ?>',
                     };
 
                     console.log("AJAX request data:", requestData);
@@ -589,9 +590,9 @@
                                 timerProgressBar: true,
                                 showConfirmButton: false
                             });
-                            setTimeout(function() {
-                                window.location.reload();
-                            }, 4000); 
+                            // setTimeout(function() {
+                            //     window.location.reload();
+                            // }, 4000); 
                         }
                     });
                 } else {

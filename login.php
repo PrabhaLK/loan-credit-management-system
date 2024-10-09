@@ -4,9 +4,11 @@ ini_set('session.cookie_httponly', 1); // Prevent JavaScript access
 ini_set('session.cookie_samesite', 'Strict'); // SameSite policy
 
 session_start();
-if (isset($_SESSION['claimholder_nic']) || isset($_SESSION['nic'])) {
+if (isset($_SESSION['claimholder_nic']) || isset($_SESSION['nic']) || isset($_SESSION['name'])) {
   $_SESSION['claimholder_nic'] = null;
-  $_SESSION['nic'] = null;
+  $_SESSION['nic']  = null;
+  $_SESSION['name'] = null;
+
   unset($_SESSION['claimholder_nic']);
   echo '<script>console.log("Session claimholder_nic is unset and set to null.");</script>';
 } else {
