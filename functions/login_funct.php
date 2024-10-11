@@ -25,6 +25,7 @@ if ($result->num_rows == 1) {
     $row = $result->fetch_assoc();
     $_SESSION["nic"] = $national_id;
     $_SESSION['username'] = $row['Name'];
+    $_SESSION['userType'] = $row['userType'];
 
     // Redirect user based on userType
     if ($row["userType"] == "user") {

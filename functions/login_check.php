@@ -13,7 +13,12 @@ if (!isset($_SESSION['nic'])) {
     $_SESSION['NIC-Status'] = 'Please log in to access Admin panel'; // Set message for toast
     redirectWithError('no_login_message', $_SESSION['NIC-Status'], '../login.php');
 }
-
+//verify access control as for the user type 
+if ($_SESSION['userType'] != 'user' && $_SESSION['userType'] != 'admin') {
+    //logout from the system 
+    $_SESSION['NIC-Status'] = 'You Do Not have access for this page.';
+    redirectWithError('no_login_message', $_SESSION['NIC-Status'], '../login.php');
+}
 // Additional check for 'govt-hos.php' or pages that require NIC and login
 if (basename($_SERVER['PHP_SELF']) === 'govt-hos.php') {
     if (!isset($_SESSION['claimholder_nic'])) {
