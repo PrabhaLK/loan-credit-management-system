@@ -194,4 +194,13 @@ if (!empty($type)) {
 
     $sql = "SELECT * FROM `claim_info` WHERE `SubCategory 1 Name` = '$type' OR `CategoryName`= '$type'";
     $result = mysqli_query($conn, $sql);
+
+    //  sql query for selecting drodown menu items 
+    $query_select = "SELECT id, claim_description FROM claim_description";
+    $result_select = mysqli_query($conn, $query_select);
+
+    // Check if the query was successful
+    if (!$result_select) {
+        die("Query Failed: " . mysqli_error($conn));
+    }
 }

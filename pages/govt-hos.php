@@ -12,11 +12,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="../asset/css/govt-hos/bootstrap.min.css" integrity="sha384-Gn5384xQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.min.css" rel="stylesheet" />
     <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../asset/js/jquery-3.6.0.min.js"></script>
+    <script src="../asset/js/sweetalert2@11.js"></script>
     <title><?php echo ($type); ?></title>
     <style>
         body {
@@ -613,8 +613,25 @@
             // Initial update to set the values
             updateTable();
         });
-    </script>
+        // Get the search input and dropdown elements
+        const searchInput = document.getElementById('claim_search');
+        const claimDropdown = document.getElementById('claim_dropdown');
 
+        // Add an event listener to filter the dropdown based on the search input
+        searchInput.addEventListener('input', function() {
+            const filter = searchInput.value.toLowerCase();
+            const options = claimDropdown.options;
+
+            for (let i = 1; i < options.length; i++) { // Start from index 1 to skip the "Select a claim" option
+                const optionText = options[i].text.toLowerCase();
+                if (optionText.includes(filter)) {
+                    options[i].style.display = ''; // Show option if it matches
+                } else {
+                    options[i].style.display = 'none'; // Hide option if it doesn't match
+                }
+            }
+        });
+    </script>
     <!-- NITF logo added -->
     <div class="logo-container">
         <img class="logo" src="../images/logo.png" alt="Logo">
@@ -698,6 +715,23 @@
                                                             <button type="button" class="btn btn-success add_test_btn">Add More</button>
                                                         </div>
                                                     </div>
+                                                </div>
+                                                <div class="form-section row">
+                                                    <div class="col-md-8">
+                                                        <input type="text" class="form-control" id="claim_search" placeholder="Search for a claim...">
+                                                    </div>
+                                                </div>
+                                                <div class="form-section row-my-8">
+                                                    <label for="claim_dropdown">Select Claim:</label>
+                                                    <select name="claim" id="claim_dropdown">
+                                                        <option value="">Select a claim</option>
+                                                        <?php
+                                                        // Loop through the results and populate the dropdown
+                                                        while ($row_select = mysqli_fetch_assoc($result_select)) {
+                                                            echo "<option value='" . $row_select['id'] . "'>" . $row_select['claim_description'] . "</option>";
+                                                        }
+                                                        ?>
+                                                    </select>
                                                 </div>
                                                 <!-- Submit Button -->
                                                 <div class="row my-4">
